@@ -1,3 +1,6 @@
+import { ChainType } from './routescan';
+import { BlockExplorerType } from '../interfaces/BlockExplorer';
+
 export enum Chain {
   NotSpecified = 0,
 
@@ -6,7 +9,7 @@ export enum Chain {
   EthereumSepolia = 11155111,
 
   Optimism = 10,
-  OptimismSepolia = 11155420,
+  OptimismGoerli = 420,
 
   Cronos = 25,
   CronosTestnet = 338,
@@ -38,4 +41,11 @@ export enum Chain {
 
   Palm = 11297108109,
   PalmTestnet = 11297108099
+}
+
+export interface ChainItem {
+  id: Chain;
+  type: ChainType;
+  blockExplorerType: BlockExplorerType;
+  blockExplorerUrl: string;
 }

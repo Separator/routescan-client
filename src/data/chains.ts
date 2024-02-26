@@ -1,104 +1,117 @@
-import { Chain } from '../types/chains';
 import { ChainType } from '../types/routescan';
+import { Chain, ChainItem } from '../types/chains';
 import { BlockExplorerType } from '../interfaces/BlockExplorer';
 
-interface ChainItem {
-  id: Chain;
-  type: ChainType;
-  blockExplorerType: BlockExplorerType;
-}
+const ROUTESCAN_URL = 'https://api.routescan.io/v2/network';
 
 export const chains: ChainItem[] = [
   {
     id: Chain.Ethereum,
     type: ChainType.MainNet,
-    blockExplorerType: BlockExplorerType.Routescan
+    blockExplorerType: BlockExplorerType.Routescan,
+    blockExplorerUrl: ROUTESCAN_URL
   },
   {
     id: Chain.EthereumGoerli,
     type: ChainType.TestNet,
-    blockExplorerType: BlockExplorerType.Routescan
+    blockExplorerType: BlockExplorerType.Routescan,
+    blockExplorerUrl: ROUTESCAN_URL
   },
   {
     id: Chain.EthereumSepolia,
     type: ChainType.TestNet,
-    blockExplorerType: BlockExplorerType.Routescan
+    blockExplorerType: BlockExplorerType.Routescan,
+    blockExplorerUrl: ROUTESCAN_URL
   },
 
   {
     id: Chain.Optimism,
     type: ChainType.MainNet,
-    blockExplorerType: BlockExplorerType.Ethereum
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api-optimistic.etherscan.io/api'
   },
   {
-    id: Chain.OptimismSepolia,
+    id: Chain.OptimismGoerli,
     type: ChainType.TestNet,
-    blockExplorerType: BlockExplorerType.Ethereum
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api-goerli-optimistic.etherscan.io/api'
   },
 
   {
     id: Chain.BinanceSmartChain,
     type: ChainType.MainNet,
-    blockExplorerType: BlockExplorerType.Ethereum
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api.bscscan.com/api'
   },
   {
     id: Chain.BinanceSmartChainTestnet,
     type: ChainType.TestNet,
-    blockExplorerType: BlockExplorerType.Ethereum
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api-testnet.bscscan.com/api'
   },
 
   {
     id: Chain.Polygon,
     type: ChainType.MainNet,
-    blockExplorerType: BlockExplorerType.Ethereum
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api.polygonscan.com/api'
   },
   {
     id: Chain.PolygonMumbai,
     type: ChainType.TestNet,
-    blockExplorerType: BlockExplorerType.Ethereum
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api-testnet.polygonscan.com/api'
   },
 
   {
     id: Chain.Base,
     type: ChainType.MainNet,
-    blockExplorerType: BlockExplorerType.Routescan
+    blockExplorerType: BlockExplorerType.Routescan,
+    blockExplorerUrl: ROUTESCAN_URL
   },
   {
     id: Chain.BaseGoerli,
     type: ChainType.TestNet,
-    blockExplorerType: BlockExplorerType.Ethereum
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api-goerli.basescan.org/api'
   },
   {
     id: Chain.BaseSepolia,
     type: ChainType.TestNet,
-    blockExplorerType: BlockExplorerType.Ethereum
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api-sepolia.basescan.org/api'
   },
 
   {
     id: Chain.Arbitrum,
     type: ChainType.MainNet,
-    blockExplorerType: BlockExplorerType.Ethereum
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api.arbiscan.io/api'
   },
   {
     id: Chain.ArbitrumGoerli,
     type: ChainType.TestNet,
-    blockExplorerType: BlockExplorerType.Ethereum
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api-goerli.arbiscan.io/api'
   },
   {
     id: Chain.ArbitrumSepolia,
     type: ChainType.TestNet,
-    blockExplorerType: BlockExplorerType.Ethereum
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api-sepolia.arbiscan.io/api'
   },
 
   {
     id: Chain.AvalancheCChain,
     type: ChainType.MainNet,
-    blockExplorerType: BlockExplorerType.Routescan
+    blockExplorerType: BlockExplorerType.Routescan,
+    blockExplorerUrl: ROUTESCAN_URL
   },
   {
     id: Chain.AvalancheCChainFuji,
     type: ChainType.TestNet,
-    blockExplorerType: BlockExplorerType.Routescan
+    blockExplorerType: BlockExplorerType.Routescan,
+    blockExplorerUrl: ROUTESCAN_URL
   },
 
   {

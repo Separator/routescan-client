@@ -35,9 +35,9 @@ abstract class BlockExplorerCommon implements BlockExplorer {
     }
   }
 
-  abstract getBlockNumber: (options: GetBlockNumberOptions) => Promise<number>;
-  abstract getAccountBalance: (options: GetAccountBalanceOptions) => Promise<bigint>;
-  abstract getAccountTokenBalance: (options: GetAccountTokenBalanceOptions) => Promise<bigint>;
+  abstract getBlockNumber(options: GetBlockNumberOptions): Promise<number>;
+  abstract getAccountBalance(options: GetAccountBalanceOptions): Promise<bigint>;
+  abstract getAccountTokenBalance(options: GetAccountTokenBalanceOptions): Promise<bigint>;
 
   public static build(options: BlockExplorerOptions): BlockExplorer {
     const { chain } = options;
@@ -67,24 +67,33 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
     super(options);
   }
 
-  public getBlockNumber = async (options: GetBlockNumberOptions) => {
+  public async getBlockNumber(options: GetBlockNumberOptions) {
     return 1;
-  };
+  }
 
-  public getAccountBalance = async (options: GetAccountBalanceOptions) => {
+  public async getAccountBalance(options: GetAccountBalanceOptions) {
     return 1n;
-  };
+  }
 
-  public getAccountTokenBalance = async (options: GetAccountTokenBalanceOptions) => {
+  public async getAccountTokenBalance(options: GetAccountTokenBalanceOptions) {
     return 1n;
-  };
+  }
 
-  public getBlockExplorerUrl(): string {
-    return '';
-    /* const { chain, is_main_net } = this;
+  private getBlockExplorerUrl(chain: Chain = this.chain): string {
+    if (!chain) {
+      throw new Error(`Chain id not specified`);
+    }
+
+    const chainOptions = chains.find(({ id }) => id === chain);
+    if (!chainOptions) {
+      throw new Error(`Chain with id of ${chain} is not supported`);
+    }
+
+    const { type } = chainOptions;
+
     const { url } = this.config;
     const chainType = is_main_net ? ChainType.MainNet : ChainType.TestNet;
-    return `${url}/${chainType}/evm/${chain}/etherscan/api`; */
+    return `${url}/${chainType}/evm/${chain}/etherscan/api`;
   }
 }
 
