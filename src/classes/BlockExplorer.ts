@@ -5,8 +5,7 @@ import {
   GetAccountTokenBalanceOptions,
   GetBlockNumberOptions
 } from '../interfaces/BlockExplorer';
-import { Chain } from '../types/chains';
-import { ChainType } from '../types/routescan';
+import { Chain, ChainItem } from '../types/chains';
 
 import { chains } from '../data/chains';
 
@@ -35,20 +34,14 @@ abstract class BlockExplorerCommon implements BlockExplorer {
     }
   }
 
-  abstract getBlockNumber(options: GetBlockNumberOptions): Promise<number>;
-  abstract getAccountBalance(options: GetAccountBalanceOptions): Promise<bigint>;
-  abstract getAccountTokenBalance(options: GetAccountTokenBalanceOptions): Promise<bigint>;
+  public abstract getBlockNumber(options: GetBlockNumberOptions): Promise<number>;
+  public abstract getAccountBalance(options: GetAccountBalanceOptions): Promise<bigint>;
+  public abstract getAccountTokenBalance(options: GetAccountTokenBalanceOptions): Promise<bigint>;
+  protected abstract getBlockExplorerUrl(chain: Chain): string;
 
   public static build(options: BlockExplorerOptions): BlockExplorer {
     const { chain } = options;
-    if (!chain) {
-      throw new Error('Please specify the chain id');
-    }
-
-    const chainOptions = chains.find(({ id }) => id === chain);
-    if (!chainOptions) {
-      throw new Error(`Chain with id of ${chain} is not supported`);
-    }
+    const chainOptions = BlockExplorerCommon.getChainOptions(chain);
 
     const { blockExplorerType } = chainOptions;
     switch (blockExplorerType) {
@@ -59,6 +52,19 @@ abstract class BlockExplorerCommon implements BlockExplorer {
       case BlockExplorerType.Chainlens:
         return new BlockExplorerChainlens(options);
     }
+  }
+
+  public static getChainOptions(chain?: Chain): ChainItem {
+    if (!chain) {
+      throw new Error(`Chain id not specified`);
+    }
+
+    const chainOptions = chains.find(({ id }) => id === chain);
+    if (!chainOptions) {
+      throw new Error(`Chain with id of ${chain} is not supported`);
+    }
+
+    return chainOptions;
   }
 }
 
@@ -79,24 +85,19 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
     return 1n;
   }
 
-  private getBlockExplorerUrl(chain: Chain = this.chain): string {
-    if (!chain) {
-      throw new Error(`Chain id not specified`);
-    }
-
-    const chainOptions = chains.find(({ id }) => id === chain);
-    if (!chainOptions) {
-      throw new Error(`Chain with id of ${chain} is not supported`);
-    }
-
-    const { type } = chainOptions;
-
-    const { url } = this.config;
-    const chainType = is_main_net ? ChainType.MainNet : ChainType.TestNet;
-    return `${url}/${chainType}/evm/${chain}/etherscan/api`;
+  protected getBlockExplorerUrl(chain: Chain = this.chain): string {
+    const chainOptions = BlockExplorerCommon.getChainOptions(chain);
+    const { blockExplorerUrl, type } = chainOptions;
+    return `${blockExplorerUrl}/${type}/evm/${chain}/etherscan/api`;
   }
 }
 
-export class BlockExplorerEthereum extends BlockExplorerRoutescan {}
+export class BlockExplorerEthereum extends BlockExplorerRoutescan {
+  protected getBlockExplorerUrl(chain: Chain = this.chain): string {
+    const chainOptions = BlockExplorerCommon.getChainOptions(chain);
+    const { blockExplorerUrl } = chainOptions;
+    return blockExplorerUrl;
+  }
+}
 
 export class BlockExplorerChainlens extends BlockExplorerRoutescan {}
