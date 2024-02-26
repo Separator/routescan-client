@@ -45,6 +45,12 @@ export interface GetAccountTokenBalanceOptions extends CommonOptions {
   tag: BlockExplorerTag;
 }
 
+export enum BlockExplorerType {
+  Routescan = 'routescan',
+  Ethereum = 'ethereum',
+  Chainlens = 'chainlens'
+}
+
 export interface BlockExplorer {
   /**
    * Get Block Number
