@@ -117,26 +117,30 @@ export const chains: ChainItem[] = [
   {
     id: Chain.Celo,
     type: ChainType.MainNet,
-    blockExplorerType: BlockExplorerType.Ethereum
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api.celoscan.io/api'
   },
   {
     id: Chain.CeloAlfajores,
     type: ChainType.TestNet,
-    blockExplorerType: BlockExplorerType.Ethereum
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api-alfajores.celoscan.io/api'
   },
 
   {
     id: Chain.Linea,
     type: ChainType.MainNet,
-    blockExplorerType: BlockExplorerType.Ethereum
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api.lineascan.build/api'
   },
   {
     id: Chain.LineaGoerli,
     type: ChainType.TestNet,
-    blockExplorerType: BlockExplorerType.Ethereum
-  },
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api-testnet.lineascan.build/api'
+  }
 
-  {
+  /* {
     id: Chain.Palm,
     type: ChainType.MainNet,
     blockExplorerType: BlockExplorerType.Chainlens
@@ -145,5 +149,5 @@ export const chains: ChainItem[] = [
     id: Chain.PalmTestnet,
     type: ChainType.TestNet,
     blockExplorerType: BlockExplorerType.Chainlens
-  }
+  } */
 ];
