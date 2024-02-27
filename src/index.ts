@@ -5,4 +5,6 @@ import {
   BlockExplorerOptions
 } from './classes/BlockExplorer';
 
-export { BlockExplorerCommon, BlockExplorerEthereum, BlockExplorerRoutescan, BlockExplorerOptions };
+import { Chain } from './types/chains';
+
+export { BlockExplorerCommon, BlockExplorerEthereum, BlockExplorerRoutescan, BlockExplorerOptions, Chain };
