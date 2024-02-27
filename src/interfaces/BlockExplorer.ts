@@ -6,6 +6,10 @@ interface CommonOptions {
    * @description Chain to work with
    */
   chain?: Chain;
+  /**
+   * @description API key to get access to block explorer
+   */
+  apiKey?: string;
 }
 
 export interface GetBlockNumberOptions extends CommonOptions {

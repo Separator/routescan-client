@@ -1,3 +1,12 @@
+import axios from 'axios';
+
+import {
+  BlockExplorerAction,
+  BlockExplorerBlockIdResponse,
+  BlockExplorerClosest,
+  BlockExplorerModule,
+  BlockExplorerStatus
+} from '../types/block-explorer';
 import {
   BlockExplorer,
   BlockExplorerType,
@@ -74,7 +83,25 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
   }
 
   public async getBlockNumber(options: GetBlockNumberOptions) {
-    return 1;
+    let result = -1;
+
+    const { apiKey = this.apiKey, chain = this.chain, closest = BlockExplorerClosest.After, timestamp } = options;
+    const url = this.getBlockExplorerUrl(chain);
+
+    const response = await axios.get<BlockExplorerBlockIdResponse>(url, {
+      params: {
+        action: BlockExplorerAction.GetBlockByTime,
+        apiKey,
+        closest,
+        module: BlockExplorerModule.Block,
+        timestamp
+      }
+    });
+
+    if (response.data.status === BlockExplorerStatus.Success) {
+      result = Number(response.data.result);
+    }
+    return result;
   }
 
   public async getAccountBalance(options: GetAccountBalanceOptions) {
