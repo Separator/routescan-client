@@ -107,8 +107,6 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
       }
     });
 
-    console.log('response', JSON.stringify(response));
-
     if (response.data.status !== BlockExplorerStatus.Success) {
       throw new Error(response.data.message);
     }
@@ -130,8 +128,6 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
       }
     });
 
-    console.log('response', JSON.stringify(response));
-
     if (response.data.status !== BlockExplorerStatus.Success) {
       throw new Error(response.data.message);
     }
@@ -145,15 +141,13 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
 
     const response = await axios.get<GetAccountsBalanceResponse>(url, {
       params: {
-        action: BlockExplorerAction.Balance,
+        action: BlockExplorerAction.BalanceMulti,
         address,
         apiKey,
         module: BlockExplorerModule.Account,
         tag
       }
     });
-
-    console.log('response', JSON.stringify(response));
 
     if (response.data.status !== BlockExplorerStatus.Success) {
       throw new Error(response.data.message);

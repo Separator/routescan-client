@@ -5,6 +5,7 @@ export enum BlockExplorerModule {
 
 export enum BlockExplorerAction {
   Balance = 'balance',
+  BalanceMulti = 'balancemulti',
   GetBlockByTime = 'getblocknobytime',
   TokenBalance = 'tokenbalance',
   TxList = 'txlist',
