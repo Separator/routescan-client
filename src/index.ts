@@ -4,7 +4,7 @@ import {
   BlockExplorerRoutescan,
   BlockExplorerOptions
 } from './classes/BlockExplorer';
-
 import { Chain } from './types/chains';
+import { BlockExplorer } from './interfaces/BlockExplorer';
 
-export { BlockExplorerCommon, BlockExplorerEthereum, BlockExplorerRoutescan, BlockExplorerOptions, Chain };
+export { BlockExplorer, BlockExplorerCommon, BlockExplorerEthereum, BlockExplorerRoutescan, BlockExplorerOptions, Chain };
