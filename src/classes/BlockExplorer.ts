@@ -32,7 +32,7 @@ export interface BlockExplorerOptions {
   apiKey?: string;
 }
 
-abstract class BlockExplorerCommon implements BlockExplorer {
+export abstract class BlockExplorerCommon implements BlockExplorer {
   protected apiKey: string = '';
   protected chain: Chain = Chain.NotSpecified;
 
