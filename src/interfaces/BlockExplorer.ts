@@ -34,6 +34,11 @@ export interface GetAccountBalanceOptions extends CommonOptions {
   tag: BlockExplorerTag;
 }
 
+/**
+ * @description Same as GetAccountBalanceOptions but in address option we can provide multiple addresses delimited by commas
+ */
+export interface GetAccountsBalanceOptions extends GetAccountBalanceOptions {}
+
 export interface GetAccountTokenBalanceOptions extends CommonOptions {
   /**
    * @description The **contract address** of the ERC-20 token

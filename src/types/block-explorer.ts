@@ -164,8 +164,24 @@ export interface BlockExplorerBlockIdResponse extends BlockExplorerResponseCommo
 export interface GetAccountBalanceResponse extends BlockExplorerResponseCommon {
   /**
    * @description Account balance in wei
+   * @example '40891626854930000000999'
    */
   result: string;
+}
+
+export interface GetAccountsBalanceResponse extends BlockExplorerResponseCommon {
+  result: {
+    /**
+     * @description Account address
+     * @example '0xddBd2B932c763bA5b1b7AE3B362eac3e8d40121A'
+     */
+    account: string;
+    /**
+     * @description Account balance in wei
+     * @example '40891626854930000000999'
+     */
+    balance: string;
+  }[];
 }
 
 export interface GetAccountTokenBalanceResponse extends BlockExplorerResponseCommon {

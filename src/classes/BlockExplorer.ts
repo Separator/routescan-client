@@ -8,13 +8,15 @@ import {
   BlockExplorerStatus,
   BlockExplorerTag,
   GetAccountBalanceResponse,
-  GetAccountTokenBalanceResponse
+  GetAccountTokenBalanceResponse,
+  GetAccountsBalanceResponse
 } from '../types/block-explorer';
 import {
   BlockExplorer,
   BlockExplorerType,
   GetAccountBalanceOptions,
   GetAccountTokenBalanceOptions,
+  GetAccountsBalanceOptions,
   GetBlockNumberOptions
 } from '../interfaces/BlockExplorer';
 import { Chain, ChainItem } from '../types/chains';
@@ -49,6 +51,8 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
   public abstract getBlockNumber(options: GetBlockNumberOptions): Promise<number>;
   public abstract getAccountBalance(options: GetAccountBalanceOptions): Promise<bigint>;
   public abstract getAccountTokenBalance(options: GetAccountTokenBalanceOptions): Promise<bigint>;
+  public abstract getAccountsBalances(options: GetAccountsBalanceOptions): Promise<{ account: string; balance: BigInt }[]>;
+
   protected abstract getBlockExplorerUrl(chain: Chain): string;
 
   public static build(options: BlockExplorerOptions): BlockExplorer {
@@ -125,6 +129,30 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
     }
 
     return BigInt(response.data.result);
+  }
+
+  public async getAccountsBalances(options: GetAccountsBalanceOptions) {
+    const { address, apiKey = this.apiKey, chain = this.chain, tag = BlockExplorerTag.Latest } = options;
+    const url = this.getBlockExplorerUrl(chain);
+
+    const response = await axios.get<GetAccountsBalanceResponse>(url, {
+      params: {
+        action: BlockExplorerAction.Balance,
+        address,
+        apiKey,
+        module: BlockExplorerModule.Account,
+        tag
+      }
+    });
+
+    if (response.data.status !== BlockExplorerStatus.Success) {
+      throw new Error(response.data.message);
+    }
+
+    return response.data.result.map(({ account, balance }) => ({
+      account,
+      balance: BigInt(balance)
+    }));
   }
 
   public async getAccountTokenBalance(options: GetAccountTokenBalanceOptions) {
