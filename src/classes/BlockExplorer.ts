@@ -5,7 +5,9 @@ import {
   BlockExplorerBlockIdResponse,
   BlockExplorerClosest,
   BlockExplorerModule,
-  BlockExplorerStatus
+  BlockExplorerStatus,
+  BlockExplorerTag,
+  GetAccountBalanceResponse
 } from '../types/block-explorer';
 import {
   BlockExplorer,
@@ -83,8 +85,6 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
   }
 
   public async getBlockNumber(options: GetBlockNumberOptions) {
-    let result = -1;
-
     const { apiKey = this.apiKey, chain = this.chain, closest = BlockExplorerClosest.After, timestamp } = options;
     const url = this.getBlockExplorerUrl(chain);
 
@@ -98,14 +98,32 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
       }
     });
 
-    if (response.data.status === BlockExplorerStatus.Success) {
-      result = Number(response.data.result);
+    if (response.data.status !== BlockExplorerStatus.Success) {
+      throw new Error(response.data.message);
     }
-    return result;
+
+    return Number(response.data.result);
   }
 
   public async getAccountBalance(options: GetAccountBalanceOptions) {
-    return 1n;
+    const { address, apiKey = this.apiKey, chain = this.chain, tag = BlockExplorerTag.Latest } = options;
+    const url = this.getBlockExplorerUrl(chain);
+
+    const response = await axios.get<GetAccountBalanceResponse>(url, {
+      params: {
+        action: BlockExplorerAction.Balance,
+        address,
+        apiKey,
+        module: BlockExplorerModule.Account,
+        tag
+      }
+    });
+
+    if (response.data.status !== BlockExplorerStatus.Success) {
+      throw new Error(response.data.message);
+    }
+
+    return BigInt(response.data.result);
   }
 
   public async getAccountTokenBalance(options: GetAccountTokenBalanceOptions) {

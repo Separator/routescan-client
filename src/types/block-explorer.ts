@@ -132,7 +132,7 @@ export interface BlockExplorerRequestCommon {
   apikey: string;
 }
 
-export interface BlockExplorerCommonResponse {
+export interface BlockExplorerResponseCommon {
   /**
    * @description Status string (0 - fail, 1 - success)
    */
@@ -154,9 +154,16 @@ export interface BlockExplorerBlockIdRequest extends BlockExplorerRequestCommon 
   closest: BlockExplorerClosest;
 }
 
-export interface BlockExplorerBlockIdResponse extends BlockExplorerCommonResponse {
+export interface BlockExplorerBlockIdResponse extends BlockExplorerResponseCommon {
   /**
    * @description Block id string
+   */
+  result: string;
+}
+
+export interface GetAccountBalanceResponse extends BlockExplorerResponseCommon {
+  /**
+   * @description Account balance in wei
    */
   result: string;
 }
@@ -168,7 +175,7 @@ export interface BlockExplorerTxListRequest extends BlockExplorerRequestCommon, 
   address: string;
 }
 
-export interface BlockExplorerTxListResponse extends BlockExplorerCommonResponse {
+export interface BlockExplorerTxListResponse extends BlockExplorerResponseCommon {
   /**
    * @description List of transaction objects
    */
