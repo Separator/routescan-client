@@ -107,6 +107,8 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
       }
     });
 
+    console.log('response', JSON.stringify(response));
+
     if (response.data.status !== BlockExplorerStatus.Success) {
       throw new Error(response.data.message);
     }
@@ -128,6 +130,8 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
       }
     });
 
+    console.log('response', JSON.stringify(response));
+
     if (response.data.status !== BlockExplorerStatus.Success) {
       throw new Error(response.data.message);
     }
@@ -148,6 +152,8 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
         tag
       }
     });
+
+    console.log('response', JSON.stringify(response));
 
     if (response.data.status !== BlockExplorerStatus.Success) {
       throw new Error(response.data.message);
