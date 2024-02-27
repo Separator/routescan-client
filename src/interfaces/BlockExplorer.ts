@@ -74,9 +74,20 @@ export interface BlockExplorer {
    */
   getAccountBalance: (options: GetAccountBalanceOptions) => Promise<bigint>;
   /**
+   * Get Ether Balance for Multiple Addresses in a Single Call
+   * @param options
+   * @returns Array of accounts balances
+   */
+  getAccountsBalances: (options: GetAccountsBalanceOptions) => Promise<{ account: string; balance: BigInt }[]>;
+  /**
    * Get ERC20-Token Account Balance for TokenContractAddress
    * @param options
    * @returns Account token balance (in wei mostly, but it depends on token params)
    */
   getAccountTokenBalance: (options: GetAccountTokenBalanceOptions) => Promise<bigint>;
+  /**
+   *
+   * @returns Get block explorer current chain id
+   */
+  getChain: () => Chain;
 }
