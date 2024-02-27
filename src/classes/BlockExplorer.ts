@@ -7,7 +7,8 @@ import {
   BlockExplorerModule,
   BlockExplorerStatus,
   BlockExplorerTag,
-  GetAccountBalanceResponse
+  GetAccountBalanceResponse,
+  GetAccountTokenBalanceResponse
 } from '../types/block-explorer';
 import {
   BlockExplorer,
@@ -127,7 +128,25 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
   }
 
   public async getAccountTokenBalance(options: GetAccountTokenBalanceOptions) {
-    return 1n;
+    const { address, apiKey = this.apiKey, chain = this.chain, contractAddress, tag = BlockExplorerTag.Latest } = options;
+    const url = this.getBlockExplorerUrl(chain);
+
+    const response = await axios.get<GetAccountTokenBalanceResponse>(url, {
+      params: {
+        action: BlockExplorerAction.TokenBalance,
+        address,
+        apiKey,
+        contractaddress: contractAddress,
+        module: BlockExplorerModule.Account,
+        tag
+      }
+    });
+
+    if (response.data.status !== BlockExplorerStatus.Success) {
+      throw new Error(response.data.message);
+    }
+
+    return BigInt(response.data.result);
   }
 
   protected getBlockExplorerUrl(chain: Chain = this.chain): string {

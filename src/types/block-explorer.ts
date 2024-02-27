@@ -168,6 +168,13 @@ export interface GetAccountBalanceResponse extends BlockExplorerResponseCommon {
   result: string;
 }
 
+export interface GetAccountTokenBalanceResponse extends BlockExplorerResponseCommon {
+  /**
+   * @description Token balance for specified address in wei (probably, depends on token parameters)
+   */
+  result: string;
+}
+
 export interface BlockExplorerTxListRequest extends BlockExplorerRequestCommon, BlockExplorerPagination {
   /**
    * @description The string representing the addresses to check for txs
