@@ -70,6 +70,10 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
     }
   }
 
+  public getChain(): Chain {
+    return this.chain;
+  }
+
   public static getChainOptions(chain?: Chain): ChainItem {
     if (!chain) {
       throw new Error(`Chain id not specified`);
