@@ -5,21 +5,29 @@ Client for receiving blockchain data through block explorers (in particular, rou
 ```javascript
 import { BlockExplorerCommon, BlockExplorerTag, Chain } from 'routescan-client';
 
-const YOUR_API_KEY_FOR_ROUTESCAN = 'YourApiKey';
+const ROUTESCAN_API_KEY = 'YourApiKey';
+const WALLET = '0x285f5F8Cd290Cff6596337C4eEC14e1a62235854';
 
 async function main() {
   const blockExplorer = BlockExplorerCommon.build({
     chain: Chain.AvalancheCChainFuji,
-    apiKey: YOUR_API_KEY_FOR_ROUTESCAN
+    apiKey: ROUTESCAN_API_KEY
   });
 
-  // Get Ether Balance for a Single Address:
-  const YOUR_AVALANCHE_FUJI_WALLET_ADDRESS = '0x285f5F8Cd290Cff6596337C4eEC14e1a62235854';
+  // Get AVAX balance for a single address:
   const balance = await blockExplorer.getAccountBalance({
-    address: YOUR_AVALANCHE_FUJI_WALLET_ADDRESS,
+    address: WALLET,
     tag: BlockExplorerTag.Latest
   });
-  console.log(`Your avax balance is ${balance.toString()}`);
+
+  // Get AVAX balance for multiple addresses in a single call:
+  const WALLET_SECOND = '0xCD5B8Ea4a848b1c576125f20F9aDe5F58FDf4D4f';
+  const balances = await blockExplorer.getAccountsBalances({
+    address: [WALLET, WALLET_SECOND].join(','),
+    tag: BlockExplorerTag.Latest
+  });
+
+  console.log(balances);
 }
 
 main();
