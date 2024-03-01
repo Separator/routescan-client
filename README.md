@@ -4,7 +4,7 @@ Client for receiving blockchain data through block explorers (in particular, rou
 At the moment, the number of available methods is limited to those indicated in the examples below:
 
 ```javascript
-import { BlockExplorerCommon, BlockExplorerTag, Chain } from 'routescan-client';
+import { BlockExplorerCommon, BlockExplorerTag, BlockExplorerTopicOperation, Chain } from 'routescan-client';
 
 const ROUTESCAN_API_KEY = 'YourApiKey';
 const WALLET = '0x285f5F8Cd290Cff6596337C4eEC14e1a62235854';
