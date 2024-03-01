@@ -7,6 +7,8 @@ import {
   BlockExplorerModule,
   BlockExplorerStatus,
   BlockExplorerTag,
+  BlockExplorerTransaction,
+  BlockExplorerTxListResponse,
   EventLog,
   GetAccountBalanceResponse,
   GetAccountTokenBalanceResponse,
@@ -20,6 +22,7 @@ import {
   GetAccountTokenBalanceOptions,
   GetAccountsBalanceOptions,
   GetBlockNumberOptions,
+  GetNormalTxListByAddressOptions,
   getEventLogsByAddressFilteredOptions
 } from '../interfaces/BlockExplorer';
 import { Chain, ChainItem } from '../types/chains';
@@ -55,6 +58,7 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
   public abstract getAccountBalance(options: GetAccountBalanceOptions): Promise<bigint>;
   public abstract getAccountTokenBalance(options: GetAccountTokenBalanceOptions): Promise<bigint>;
   public abstract getAccountsBalances(options: GetAccountsBalanceOptions): Promise<{ account: string; balance: BigInt }[]>;
+  public abstract GetNormalTxListByAddress(options: GetNormalTxListByAddressOptions): Promise<BlockExplorerTransaction[]>;
   public abstract getEventLogsByAddressFiltered(options: getEventLogsByAddressFilteredOptions): Promise<EventLog[]>;
 
   protected abstract getBlockExplorerUrl(chain: Chain): string;
@@ -103,10 +107,10 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
 
     const response = await axios.get<BlockExplorerBlockIdResponse>(url, {
       params: {
+        module: BlockExplorerModule.Block,
         action: BlockExplorerAction.GetBlockByTime,
         apiKey,
         closest,
-        module: BlockExplorerModule.Block,
         timestamp
       }
     });
@@ -124,10 +128,10 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
 
     const response = await axios.get<GetAccountBalanceResponse>(url, {
       params: {
+        module: BlockExplorerModule.Account,
         action: BlockExplorerAction.Balance,
         address,
         apiKey,
-        module: BlockExplorerModule.Account,
         tag
       }
     });
@@ -145,10 +149,10 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
 
     const response = await axios.get<GetAccountsBalanceResponse>(url, {
       params: {
+        module: BlockExplorerModule.Account,
         action: BlockExplorerAction.BalanceMulti,
         address,
         apiKey,
-        module: BlockExplorerModule.Account,
         tag
       }
     });
@@ -161,6 +165,31 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
       account,
       balance: BigInt(balance)
     }));
+  }
+
+  public async GetNormalTxListByAddress(options: GetNormalTxListByAddressOptions) {
+    const { apiKey = this.apiKey, chain = this.chain, address, startblock, endblock, page, offset, sort } = options;
+    const url = this.getBlockExplorerUrl(chain);
+
+    const response = await axios.get<BlockExplorerTxListResponse>(url, {
+      params: {
+        module: BlockExplorerModule.Account,
+        action: BlockExplorerAction.TxList,
+        address,
+        startblock,
+        endblock,
+        page,
+        offset,
+        sort,
+        apiKey
+      }
+    });
+
+    if (response.data.status !== BlockExplorerStatus.Success) {
+      throw new Error(response.data.message);
+    }
+
+    return response.data.result;
   }
 
   public async getAccountTokenBalance(options: GetAccountTokenBalanceOptions) {

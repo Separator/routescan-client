@@ -1,5 +1,18 @@
 import { Chain } from '../types/chains';
-import { BlockExplorerClosest, BlockExplorerTag, BlockExplorerTopicOperation, EventLog } from '../types/block-explorer';
+import {
+  BlockExplorerClosest,
+  BlockExplorerSort,
+  BlockExplorerTag,
+  BlockExplorerTopicOperation,
+  BlockExplorerTransaction,
+  EventLog
+} from '../types/block-explorer';
+
+export enum BlockExplorerType {
+  Routescan = 'routescan',
+  Ethereum = 'ethereum',
+  Chainlens = 'chainlens'
+}
 
 interface CommonOptions {
   /**
@@ -99,11 +112,39 @@ export interface getEventLogsByAddressFilteredOptions extends CommonOptions {
   offset?: number;
 }
 
-export enum BlockExplorerType {
-  Routescan = 'routescan',
-  Ethereum = 'ethereum',
-  Chainlens = 'chainlens'
+export interface GetNormalTxListByAddressOptions extends CommonOptions {
+  /**
+   * @description The string representing the addresses to get corresponding txs
+   * @example '0x2c1ba59d6f58433fb1eaee7d20b26ed83bda51a3'
+   */
+  address: string;
+  /**
+   * @description The integer block number to start searching for transactions
+   * @example 0
+   */
+  startblock?: number;
+  /**
+   * @description The integer block number to stop searching for transactions
+   * @example 270257
+   */
+  endblock?: number;
+  /**
+   * @description The integer page number, if pagination is enabled
+   * @example 1
+   */
+  page?: number;
+  /**
+   * @description The number of transactions displayed per page
+   * @example 10
+   */
+  offset?: number;
+  /**
+   * @description The sorting preference, use **asc** to sort by ascending and **desc** to sort by descending
+   */
+  sort?: BlockExplorerSort;
 }
+
+// https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=account&action=txlistinternal&sort=asc&apikey=YourApiKeyToken
 
 export interface BlockExplorer {
   /**
@@ -129,6 +170,12 @@ export interface BlockExplorer {
    * @returns Array of accounts balances
    */
   getAccountsBalances: (options: GetAccountsBalanceOptions) => Promise<{ account: string; balance: BigInt }[]>;
+  /**
+   * Get a list of 'Normal' Transactions By Address
+   * @param options
+   * @returns
+   */
+  GetNormalTxListByAddress: (options: GetNormalTxListByAddressOptions) => Promise<BlockExplorerTransaction[]>;
   /**
    * Get ERC20-Token Account Balance for TokenContractAddress
    * @param options

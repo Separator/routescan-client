@@ -34,6 +34,12 @@ async function main() {
   });
   console.log(balances);
 
+  // Get a list of 'Normal' Transactions By Address
+  const normalTxs = await blockExplorer.GetNormalTxListByAddress({
+    address: WALLET
+  });
+  console.log(normalTxs);
+
   // Get ERC20-Token Account Balance for TokenContractAddress:
   const tokenBalance = await blockExplorer.getAccountTokenBalance({
     contractAddress: '0x57d90b64a1a57749b0f932f1a3395792e12e7055',

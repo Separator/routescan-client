@@ -66,62 +66,103 @@ export interface BlockExplorerPagination {
 export interface BlockExplorerTransaction {
   /**
    * @description Block number string
+   * @example '47884'
    */
   blockNumber: string;
   /**
    * @description Block generation timestamp in seconds
+   * @example '1438947953'
    */
   timeStamp: string;
   /**
    * @description Transaction hash
+   * @example '0xad1c27dd8d0329dbc400021d7477b34ac41e84365bd54b45a4019a15deb10c0d'
    */
   hash: string;
   /**
    * @description From address nonce
+   * @example '0'
    */
   nonce: string;
   /**
    * @description Block hash string
+   * @example '0xf2988b9870e092f2898662ccdbc06e0e320a08139e9c6be98d0ce372f8611f22'
    */
   blockHash: string;
+  /**
+   * @description Transaction index
+   * @example '0'
+   */
   transactionIndex: string;
   /**
    * @description From address (transaction initiator)
+   * @example '0xddbd2b932c763ba5b1b7ae3b362eac3e8d40121a'
    */
   from: string;
   /**
    * @description To address
+   * @example '0x2910543af39aba0cd09dbb2d50200b3e800a63d2'
    */
   to: string;
   /**
    * @description Value in wei
+   * @example '5000000000000000000'
    */
   value: string;
   /**
    * @description Gas restriction
+   * @example '23000'
    */
   gas: string;
   /**
    * @description Gas price in wei
+   * @example '400000000000'
    */
   gasPrice: string;
   /**
    * @description Error code ("0" if all ok)
+   * @example '0'
    */
   isError: string;
+  /**
+   * @description Tx receipt status
+   * @example '1'
+   */
   txreceipt_status: string;
+  /**
+   * @description Input
+   * @example '0x454e34354139455138'
+   */
   input: string;
+  /**
+   * @description Contract address
+   * @example ''
+   */
   contractAddress: string;
+  /**
+   * @description Cumulative gas used
+   * @example '21612'
+   */
   cumulativeGasUsed: string;
   /**
    * @description Used gas amount
+   * @example '21612'
    */
   gasUsed: string;
   /**
-   * @description Block confirmations number
+   * @description Block confirmations count
+   * @example '19292464'
    */
   confirmations: string;
+  /**
+   * @description Method id
+   * @example '0x454e3435'
+   */
   methodId: string;
+  /**
+   * @description Function name
+   * @example ''
+   */
   functionName: string;
 }
 
