@@ -1,4 +1,4 @@
-# ![https://routescan.io/](https://raw.githubusercontent.com/Separator/routescan-client/112ae05e0885cc67d3c55ce68e394e93e826c5ea/img/logo.svg) Routescan client
+# ![https://routescan.io/](https://raw.githubusercontent.com/Separator/routescan-client/main/img/logo.svg) Routescan client
 
 Client for receiving blockchain data through block explorers (in particular, routescan).  
 At the moment, the number of available methods is limited to those indicated in the examples below:
