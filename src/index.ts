@@ -15,7 +15,8 @@ import {
   BlockExplorerStatus,
   BlockExplorerSort,
   BlockExplorerPagination,
-  BlockExplorerTransaction
+  BlockExplorerTransaction,
+  EventLog
 } from './types/block-explorer';
 
 export {
@@ -28,6 +29,7 @@ export {
   BlockExplorerTopicOperation,
   BlockExplorerPagination,
   BlockExplorerTransaction,
+  EventLog,
   BlockExplorer,
   BlockExplorerCommon,
   BlockExplorerEthereum,
