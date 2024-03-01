@@ -1,6 +1,7 @@
 # ![https://routescan.io/](https://raw.githubusercontent.com/Separator/routescan-client/112ae05e0885cc67d3c55ce68e394e93e826c5ea/img/logo.svg) Routescan client
 
-Client for receiving blockchain data through block explorers (in particular, routescan).
+Client for receiving blockchain data through block explorers (in particular, routescan).  
+At the moment, the number of available methods is limited to those indicated in the examples below:
 
 ```javascript
 import { BlockExplorerCommon, BlockExplorerTag, Chain } from 'routescan-client';
@@ -39,6 +40,19 @@ async function main() {
     address: WALLET
   });
   console.log(`Balance of ${WALLET} is ${tokenBalance}`);
+
+  // Get Event Logs by Address filtered by Topics:
+  const logs = await blockExplorer.getEventLogsByAddressFiltered({
+    fromBlock: 37000000,
+    toBlock: 37200000,
+    topic0: '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef',
+    topic0_1_opr: BlockExplorerTopicOperation.And,
+    topic1: '0x0000000000000000000000000000000000000000000000000000000000000000',
+    page: 1,
+    offset: 1000,
+    apiKey: 'YourApiKey'
+  });
+  console.log(logs.length);
 }
 
 main();
