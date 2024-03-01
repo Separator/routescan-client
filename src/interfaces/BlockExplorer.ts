@@ -1,5 +1,5 @@
 import { Chain } from '../types/chains';
-import { BlockExplorerClosest, BlockExplorerTag } from '../types/block-explorer';
+import { BlockExplorerClosest, BlockExplorerTag, BlockExplorerTopicOperation, EventLog } from '../types/block-explorer';
 
 interface CommonOptions {
   /**
@@ -54,6 +54,51 @@ export interface GetAccountTokenBalanceOptions extends CommonOptions {
   tag: BlockExplorerTag;
 }
 
+export interface getEventLogsByAddressFilteredOptions extends CommonOptions {
+  /**
+   * @description The integer block number to start searching for logs
+   * @example 37000000
+   */
+  fromBlock?: number;
+  /**
+   * @description The integer block number to stop searching for logs
+   * @example 37200000
+   */
+  toBlock?: number;
+  /**
+   * @description The string representing the address to check for logs
+   */
+  address?: string;
+  /**
+   * @description The topic numbers to search for limited to **topic0**, **topic1**, **topic2**, **topic3**
+   */
+  topic0?: string;
+  /**
+   * @description The topic operator when multiple topic combinations are used limited to **and** or **or**
+   */
+  topic0_1_opr?: BlockExplorerTopicOperation;
+  /**
+   * @description The topic numbers to search for limited to **topic0**, **topic1**, **topic2**, **topic3**
+   */
+  topic1?: string;
+  /**
+   * @description The topic numbers to search for limited to **topic0**, **topic1**, **topic2**, **topic3**
+   */
+  topic2?: string;
+  /**
+   * @description The topic numbers to search for limited to **topic0**, **topic1**, **topic2**, **topic3**
+   */
+  topic3?: string;
+  /**
+   * @description The integer page number, if pagination is enabled
+   */
+  page?: number;
+  /**
+   * @description The number of transactions displayed per page
+   */
+  offset?: number;
+}
+
 export enum BlockExplorerType {
   Routescan = 'routescan',
   Ethereum = 'ethereum',
@@ -61,6 +106,11 @@ export enum BlockExplorerType {
 }
 
 export interface BlockExplorer {
+  /**
+   *
+   * @returns Get block explorer current chain id
+   */
+  getChain: () => Chain;
   /**
    * Get Block Number
    * @param options
@@ -86,8 +136,9 @@ export interface BlockExplorer {
    */
   getAccountTokenBalance: (options: GetAccountTokenBalanceOptions) => Promise<bigint>;
   /**
-   *
-   * @returns Get block explorer current chain id
+   * Get Event Logs by Address filtered by Topics
+   * @param options
+   * @returns Event logs array
    */
-  getChain: () => Chain;
+  getEventLogsByAddressFiltered: (options: getEventLogsByAddressFilteredOptions) => Promise<EventLog[]>;
 }

@@ -1,12 +1,14 @@
 export enum BlockExplorerModule {
   Account = 'account',
-  Block = 'block'
+  Block = 'block',
+  Logs = 'logs'
 }
 
 export enum BlockExplorerAction {
   Balance = 'balance',
   BalanceMulti = 'balancemulti',
   GetBlockByTime = 'getblocknobytime',
+  GetLogs = 'getLogs',
   TokenBalance = 'tokenbalance',
   TxList = 'txlist',
   TokenTxList = 'tokentx'
@@ -31,6 +33,11 @@ export enum BlockExplorerSort {
 export enum BlockExplorerClosest {
   Before = 'before',
   After = 'after'
+}
+
+export enum BlockExplorerTopicOperation {
+  And = 'and',
+  Or = 'or'
 }
 
 export interface BlockExplorerPagination {
@@ -190,6 +197,73 @@ export interface GetAccountTokenBalanceResponse extends BlockExplorerResponseCom
    * @description Token balance for specified address in wei (probably, depends on token parameters)
    */
   result: string;
+}
+
+export interface EventLog {
+  /**
+   * @description Smart-contract address
+   * @example '0x9e66eba102b77fc75cd87b5e60141b85573bc8e8'
+   */
+  address: string;
+  /**
+ * @description Event topics array
+ * @example [
+    "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+    "0x0000000000000000000000000000000000000000000000000000000000000000",
+    "0x0000000000000000000000007d01c6a9f637f7f2a35b9797274d6b98c41e11e7",
+    "0x0000000000000000000000000000000000000000000000000000000000e4e9c7"
+  ]
+ */
+  topics: string[];
+  /**
+   * @description Tx data
+   * @example '0x'
+   */
+  data: string;
+  /**
+   * @description Tx block number
+   * @example '0x2349342'
+   */
+  blockNumber: string;
+  /**
+   * @description Tx block hash
+   * @example '0x45d6a3318d1b7e44525b1058ec6dd3863c71c2dc0dd28e4b326d92964600bae0'
+   */
+  blockHash: string;
+  /**
+   * @description Tx timestamp
+   * @example '0x653c1480'
+   */
+  timeStamp: string;
+  /**
+   * @description Tx gas price in wei
+   * @example '0x6fc23ac00'
+   */
+  gasPrice: string;
+  /**
+   * @description Tx gas used
+   * @example '0x26cee'
+   */
+  gasUsed: string;
+  /**
+   * @description Log index
+   * @example '0x2'
+   */
+  logIndex: string;
+  /**
+   * @description Tx hash
+   * @example '0x08042351a9cb68419d44fc3c905f880bfb005c271773543c2cd80191826f6306'
+   */
+  transactionHash: string;
+  /**
+   * @description Tx index
+   * @example '0x2'
+   */
+  transactionIndex: string;
+}
+
+export interface GetEventLogsByAddressFilteredResponse extends BlockExplorerResponseCommon {
+  result: EventLog[];
 }
 
 export interface BlockExplorerTxListRequest extends BlockExplorerRequestCommon, BlockExplorerPagination {

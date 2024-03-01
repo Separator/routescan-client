@@ -7,9 +7,11 @@ import {
   BlockExplorerModule,
   BlockExplorerStatus,
   BlockExplorerTag,
+  EventLog,
   GetAccountBalanceResponse,
   GetAccountTokenBalanceResponse,
-  GetAccountsBalanceResponse
+  GetAccountsBalanceResponse,
+  GetEventLogsByAddressFilteredResponse
 } from '../types/block-explorer';
 import {
   BlockExplorer,
@@ -17,7 +19,8 @@ import {
   GetAccountBalanceOptions,
   GetAccountTokenBalanceOptions,
   GetAccountsBalanceOptions,
-  GetBlockNumberOptions
+  GetBlockNumberOptions,
+  getEventLogsByAddressFilteredOptions
 } from '../interfaces/BlockExplorer';
 import { Chain, ChainItem } from '../types/chains';
 
@@ -52,6 +55,7 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
   public abstract getAccountBalance(options: GetAccountBalanceOptions): Promise<bigint>;
   public abstract getAccountTokenBalance(options: GetAccountTokenBalanceOptions): Promise<bigint>;
   public abstract getAccountsBalances(options: GetAccountsBalanceOptions): Promise<{ account: string; balance: BigInt }[]>;
+  public abstract getEventLogsByAddressFiltered(options: getEventLogsByAddressFilteredOptions): Promise<EventLog[]>;
 
   protected abstract getBlockExplorerUrl(chain: Chain): string;
 
@@ -93,7 +97,7 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
     super(options);
   }
 
-  public async getBlockNumber(options: GetBlockNumberOptions) {
+  public async getBlockNumber(options: GetBlockNumberOptions = {}) {
     const { apiKey = this.apiKey, chain = this.chain, closest = BlockExplorerClosest.After, timestamp } = options;
     const url = this.getBlockExplorerUrl(chain);
 
@@ -179,6 +183,48 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
     }
 
     return BigInt(response.data.result);
+  }
+
+  public async getEventLogsByAddressFiltered(options: getEventLogsByAddressFilteredOptions) {
+    const {
+      address,
+      chain = this.chain,
+      fromBlock = 0,
+      toBlock = Number.MAX_SAFE_INTEGER,
+      topic0,
+      topic0_1_opr,
+      topic1,
+      topic2,
+      topic3,
+      page,
+      offset,
+      apiKey = this.apiKey
+    } = options;
+    const url = this.getBlockExplorerUrl(chain);
+
+    const response = await axios.get<GetEventLogsByAddressFilteredResponse>(url, {
+      params: {
+        module: BlockExplorerModule.Logs,
+        action: BlockExplorerAction.GetLogs,
+        fromBlock,
+        toBlock,
+        address,
+        topic0_1_opr,
+        topic0,
+        topic1,
+        topic2,
+        topic3,
+        page,
+        offset,
+        apiKey
+      }
+    });
+
+    if (response.data.status !== BlockExplorerStatus.Success) {
+      throw new Error(response.data.message);
+    }
+
+    return response.data.result;
   }
 
   protected getBlockExplorerUrl(chain: Chain = this.chain): string {
