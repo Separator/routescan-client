@@ -1,10 +1,10 @@
-# ![https://routescan.io/](https://raw.githubusercontent.com/Separator/routescan-client/112ae05e0885cc67d3c55ce68e394e93e826c5ea/img/logo.svg) Routescan client
+# ![https://routescan.io/](https://raw.githubusercontent.com/Separator/routescan-client/main/img/logo.svg) Routescan client
 
 Client for receiving blockchain data through block explorers (in particular, routescan).  
 At the moment, the number of available methods is limited to those indicated in the examples below:
 
 ```javascript
-import { BlockExplorerCommon, BlockExplorerTag, Chain } from 'routescan-client';
+import { BlockExplorerCommon, BlockExplorerTag, BlockExplorerTopicOperation, Chain } from 'routescan-client';
 
 const ROUTESCAN_API_KEY = 'YourApiKey';
 const WALLET = '0x285f5F8Cd290Cff6596337C4eEC14e1a62235854';
@@ -33,6 +33,12 @@ async function main() {
     tag: BlockExplorerTag.Latest
   });
   console.log(balances);
+
+  // Get a list of 'Normal' Transactions By Address
+  const normalTxs = await blockExplorer.GetNormalTxListByAddress({
+    address: WALLET
+  });
+  console.log(normalTxs);
 
   // Get ERC20-Token Account Balance for TokenContractAddress:
   const tokenBalance = await blockExplorer.getAccountTokenBalance({

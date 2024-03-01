@@ -6,12 +6,28 @@ import {
 } from './classes/BlockExplorer';
 import { Chain } from './types/chains';
 import { BlockExplorer } from './interfaces/BlockExplorer';
-import { BlockExplorerTag, BlockExplorerAction, BlockExplorerClosest } from './types/block-explorer';
-
-export {
+import {
+  BlockExplorerModule,
   BlockExplorerTag,
   BlockExplorerAction,
   BlockExplorerClosest,
+  BlockExplorerTopicOperation,
+  BlockExplorerStatus,
+  BlockExplorerSort,
+  BlockExplorerPagination,
+  BlockExplorerTransaction
+} from './types/block-explorer';
+
+export {
+  BlockExplorerModule,
+  BlockExplorerAction,
+  BlockExplorerTag,
+  BlockExplorerStatus,
+  BlockExplorerSort,
+  BlockExplorerClosest,
+  BlockExplorerTopicOperation,
+  BlockExplorerPagination,
+  BlockExplorerTransaction,
   BlockExplorer,
   BlockExplorerCommon,
   BlockExplorerEthereum,
