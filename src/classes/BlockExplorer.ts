@@ -93,7 +93,7 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
     super(options);
   }
 
-  public async getBlockNumber(options: GetBlockNumberOptions) {
+  public async getBlockNumber(options: GetBlockNumberOptions = {}) {
     const { apiKey = this.apiKey, chain = this.chain, closest = BlockExplorerClosest.After, timestamp } = options;
     const url = this.getBlockExplorerUrl(chain);
 
