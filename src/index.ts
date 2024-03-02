@@ -16,6 +16,7 @@ import {
   BlockExplorerSort,
   BlockExplorerPagination,
   BlockExplorerTransaction,
+  BlockExplorerTxInternal,
   EventLog
 } from './types/block-explorer';
 
@@ -29,6 +30,7 @@ export {
   BlockExplorerTopicOperation,
   BlockExplorerPagination,
   BlockExplorerTransaction,
+  BlockExplorerTxInternal,
   EventLog,
   BlockExplorer,
   BlockExplorerCommon,

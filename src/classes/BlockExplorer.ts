@@ -4,10 +4,12 @@ import {
   BlockExplorerAction,
   BlockExplorerBlockIdResponse,
   BlockExplorerClosest,
+  BlockExplorerInternalTxListResponse,
   BlockExplorerModule,
   BlockExplorerStatus,
   BlockExplorerTag,
   BlockExplorerTransaction,
+  BlockExplorerTxInternal,
   BlockExplorerTxListResponse,
   EventLog,
   GetAccountBalanceResponse,
@@ -22,6 +24,7 @@ import {
   GetAccountTokenBalanceOptions,
   GetAccountsBalanceOptions,
   GetBlockNumberOptions,
+  GetInternalTxListByAddressOptions,
   GetNormalTxListByAddressOptions,
   getEventLogsByAddressFilteredOptions
 } from '../interfaces/BlockExplorer';
@@ -59,6 +62,7 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
   public abstract getAccountTokenBalance(options: GetAccountTokenBalanceOptions): Promise<bigint>;
   public abstract getAccountsBalances(options: GetAccountsBalanceOptions): Promise<{ account: string; balance: BigInt }[]>;
   public abstract GetNormalTxListByAddress(options: GetNormalTxListByAddressOptions): Promise<BlockExplorerTransaction[]>;
+  public abstract GetInternalTxListByAddress(options: GetInternalTxListByAddressOptions): Promise<BlockExplorerTxInternal[]>;
   public abstract getEventLogsByAddressFiltered(options: getEventLogsByAddressFilteredOptions): Promise<EventLog[]>;
 
   protected abstract getBlockExplorerUrl(chain: Chain): string;
@@ -175,6 +179,31 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
       params: {
         module: BlockExplorerModule.Account,
         action: BlockExplorerAction.TxList,
+        address,
+        startblock,
+        endblock,
+        page,
+        offset,
+        sort,
+        apiKey
+      }
+    });
+
+    if (response.data.status !== BlockExplorerStatus.Success) {
+      throw new Error(response.data.message);
+    }
+
+    return response.data.result;
+  }
+
+  public async GetInternalTxListByAddress(options: GetNormalTxListByAddressOptions): Promise<BlockExplorerTxInternal[]> {
+    const { apiKey = this.apiKey, chain = this.chain, address, startblock, endblock, page, offset, sort } = options;
+    const url = this.getBlockExplorerUrl(chain);
+
+    const response = await axios.get<BlockExplorerInternalTxListResponse>(url, {
+      params: {
+        module: BlockExplorerModule.Account,
+        action: BlockExplorerAction.TxListInternal,
         address,
         startblock,
         endblock,
