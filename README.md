@@ -40,6 +40,11 @@ async function main() {
   });
   console.log(normalTxs);
 
+  const internalTxs = await blockExplorer.GetInternalTxListByAddress({
+    address: WALLET
+  });
+  console.log(internalTxs);
+
   // Get ERC20-Token Account Balance for TokenContractAddress:
   const tokenBalance = await blockExplorer.getAccountTokenBalance({
     contractAddress: '0x57d90b64a1a57749b0f932f1a3395792e12e7055',
