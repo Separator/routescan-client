@@ -11,7 +11,8 @@ export enum BlockExplorerAction {
   GetLogs = 'getLogs',
   TokenBalance = 'tokenbalance',
   TxList = 'txlist',
-  TokenTxList = 'tokentx'
+  TokenTxList = 'tokentx',
+  TxListInternal = 'txlistinternal'
 }
 
 export enum BlockExplorerTag {
@@ -63,7 +64,7 @@ export interface BlockExplorerPagination {
   sort?: BlockExplorerSort;
 }
 
-export interface BlockExplorerTransaction {
+interface BlockExplorerTxCommon {
   /**
    * @description Block number string
    * @example '47884'
@@ -80,21 +81,6 @@ export interface BlockExplorerTransaction {
    */
   hash: string;
   /**
-   * @description From address nonce
-   * @example '0'
-   */
-  nonce: string;
-  /**
-   * @description Block hash string
-   * @example '0xf2988b9870e092f2898662ccdbc06e0e320a08139e9c6be98d0ce372f8611f22'
-   */
-  blockHash: string;
-  /**
-   * @description Transaction index
-   * @example '0'
-   */
-  transactionIndex: string;
-  /**
    * @description From address (transaction initiator)
    * @example '0xddbd2b932c763ba5b1b7ae3b362eac3e8d40121a'
    */
@@ -110,45 +96,63 @@ export interface BlockExplorerTransaction {
    */
   value: string;
   /**
-   * @description Gas restriction
-   * @example '23000'
+   * @description Contract address
+   * @example ''
    */
-  gas: string;
-  /**
-   * @description Gas price in wei
-   * @example '400000000000'
-   */
-  gasPrice: string;
-  /**
-   * @description Error code ("0" if all ok)
-   * @example '0'
-   */
-  isError: string;
-  /**
-   * @description Tx receipt status
-   * @example '1'
-   */
-  txreceipt_status: string;
+  contractAddress: string;
   /**
    * @description Input
    * @example '0x454e34354139455138'
    */
   input: string;
   /**
-   * @description Contract address
-   * @example ''
+   * @description Gas restriction
+   * @example '23000'
    */
-  contractAddress: string;
-  /**
-   * @description Cumulative gas used
-   * @example '21612'
-   */
-  cumulativeGasUsed: string;
+  gas: string;
   /**
    * @description Used gas amount
    * @example '21612'
    */
   gasUsed: string;
+  /**
+   * @description Error code ("0" if all ok)
+   * @example '0'
+   */
+  isError: string;
+}
+
+export interface BlockExplorerTransaction extends BlockExplorerTxCommon {
+  /**
+   * @description From address nonce
+   * @example '0'
+   */
+  nonce: string;
+  /**
+   * @description Block hash string
+   * @example '0xf2988b9870e092f2898662ccdbc06e0e320a08139e9c6be98d0ce372f8611f22'
+   */
+  blockHash: string;
+  /**
+   * @description Transaction index
+   * @example '0'
+   */
+  transactionIndex: string;
+  /**
+   * @description Gas price in wei
+   * @example '400000000000'
+   */
+  gasPrice: string;
+  /**
+   * @description Tx receipt status
+   * @example '1'
+   */
+  txreceipt_status: string;
+  /**
+   * @description Cumulative gas used
+   * @example '21612'
+   */
+  cumulativeGasUsed: string;
   /**
    * @description Block confirmations count
    * @example '19292464'
@@ -164,6 +168,24 @@ export interface BlockExplorerTransaction {
    * @example ''
    */
   functionName: string;
+}
+
+export interface BlockExplorerTxInternal extends BlockExplorerTxCommon {
+  /**
+   * @description Tx type
+   * @example 'call'
+   */
+  type: string;
+  /**
+   * @description Trace id
+   * @example '1'
+   */
+  traceId: string;
+  /**
+   * @description Error code
+   * @example ''
+   */
+  errCode: string;
 }
 
 export interface BlockExplorerRequestCommon {
@@ -316,9 +338,16 @@ export interface BlockExplorerTxListRequest extends BlockExplorerRequestCommon, 
 
 export interface BlockExplorerTxListResponse extends BlockExplorerResponseCommon {
   /**
-   * @description List of transaction objects
+   * @description List of tx objects
    */
   result: BlockExplorerTransaction[];
+}
+
+export interface BlockExplorerInternalTxListResponse extends BlockExplorerResponseCommon {
+  /**
+   * @description List of internal tx objects
+   */
+  result: BlockExplorerTxInternal[];
 }
 
 export interface BlockExplorerTokenTxListRequest extends BlockExplorerTxListRequest {

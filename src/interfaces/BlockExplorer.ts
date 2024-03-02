@@ -5,6 +5,7 @@ import {
   BlockExplorerTag,
   BlockExplorerTopicOperation,
   BlockExplorerTransaction,
+  BlockExplorerTxInternal,
   EventLog
 } from '../types/block-explorer';
 
@@ -144,6 +145,8 @@ export interface GetNormalTxListByAddressOptions extends CommonOptions {
   sort?: BlockExplorerSort;
 }
 
+export type GetInternalTxListByAddressOptions = GetNormalTxListByAddressOptions;
+
 // https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=account&action=txlistinternal&sort=asc&apikey=YourApiKeyToken
 
 export interface BlockExplorer {
@@ -176,6 +179,12 @@ export interface BlockExplorer {
    * @returns
    */
   GetNormalTxListByAddress: (options: GetNormalTxListByAddressOptions) => Promise<BlockExplorerTransaction[]>;
+  /**
+   * Get a list of 'Internal' Transactions by Address
+   * @param options
+   * @returns
+   */
+  GetInternalTxListByAddress: (options: GetInternalTxListByAddressOptions) => Promise<BlockExplorerTxInternal[]>;
   /**
    * Get ERC20-Token Account Balance for TokenContractAddress
    * @param options
