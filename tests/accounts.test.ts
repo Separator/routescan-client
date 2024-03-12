@@ -6,7 +6,7 @@ config();
 
 const TEST_TIMEOUT = 60000;
 const { WALLET = '', ROUTESCAN_API_KEY, CONTRACT = '' } = process.env;
-const blockExplorer = BlockExplorerCommon.build({ chain: Chain.AvalancheCChainFuji, apiKey: ROUTESCAN_API_KEY });
+const blockExplorer = BlockExplorerCommon.build({ chain: Chain.AvalancheCChainFuji, apiKey: ROUTESCAN_API_KEY! });
 
 describe('Check functions from Accounts block', () => {
   test(

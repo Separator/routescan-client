@@ -41,25 +41,23 @@ export interface BlockExplorerOptions {
   /**
    * @description Chain id
    */
-  chain?: Chain;
+  chain: Chain;
   /**
    * @description API key to work with blockchain explorer
    */
-  apiKey?: string;
+  apiKey: string;
 }
 
 export abstract class BlockExplorerCommon implements BlockExplorer {
-  protected apiKey: string = '';
+  protected url: string = '';
+  protected apikey: string = '';
   protected chain: Chain = Chain.NotSpecified;
 
   constructor(options: BlockExplorerOptions) {
     const { apiKey, chain } = options;
-    if (apiKey) {
-      this.apiKey = apiKey;
-    }
-    if (chain) {
-      this.chain = chain;
-    }
+    this.apikey = apiKey;
+    this.chain = chain;
+    this.url = this.getBlockExplorerUrl(chain);
   }
 
   public abstract getBlockCountdownTime(options: GetBlockCountdownTimeOptions): Promise<BlockCountdownTime>;
@@ -111,14 +109,14 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
     super(options);
   }
 
-  public async getBlockCountdownTime(options: GetBlockCountdownTimeOptions): Promise<BlockCountdownTime> {
-    const { blockno, apiKey = this.apiKey, chain = this.chain } = options;
-    const url = this.getBlockExplorerUrl(chain);
+  public async getBlockCountdownTime({ blockno }: GetBlockCountdownTimeOptions): Promise<BlockCountdownTime> {
+    const { apikey, url } = this;
+
     const response = await axios.get<BlockExplorerBlockCountdownTimeResponse>(url, {
       params: {
         module: BlockExplorerModule.Block,
         action: BlockExplorerAction.GetBlockCountdown,
-        apikey: apiKey,
+        apikey,
         blockno
       }
     });
@@ -131,14 +129,14 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
   }
 
   public async getBlockNumberByTimestamp(options: GetBlockNumberByTimestampOptions) {
-    const { apiKey = this.apiKey, chain = this.chain, closest = BlockExplorerClosest.After, timestamp } = options;
-    const url = this.getBlockExplorerUrl(chain);
+    const { apikey, url } = this;
+    const { closest = BlockExplorerClosest.After, timestamp } = options;
 
     const response = await axios.get<BlockExplorerBlockIdResponse>(url, {
       params: {
         module: BlockExplorerModule.Block,
         action: BlockExplorerAction.GetBlockByTime,
-        apikey: apiKey,
+        apikey,
         closest,
         timestamp
       }
@@ -152,15 +150,15 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
   }
 
   public async getAccountBalance(options: GetAccountBalanceOptions) {
-    const { address, apiKey = this.apiKey, chain = this.chain, tag = BlockExplorerTag.Latest } = options;
-    const url = this.getBlockExplorerUrl(chain);
+    const { apikey, url } = this;
+    const { address, tag = BlockExplorerTag.Latest } = options;
 
     const response = await axios.get<GetAccountBalanceResponse>(url, {
       params: {
         module: BlockExplorerModule.Account,
         action: BlockExplorerAction.Balance,
         address,
-        apikey: apiKey,
+        apikey,
         tag
       }
     });
@@ -173,15 +171,15 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
   }
 
   public async getAccountsBalances(options: GetAccountsBalanceOptions) {
-    const { address, apiKey = this.apiKey, chain = this.chain, tag = BlockExplorerTag.Latest } = options;
-    const url = this.getBlockExplorerUrl(chain);
+    const { apikey, url } = this;
+    const { address, tag = BlockExplorerTag.Latest } = options;
 
     const response = await axios.get<GetAccountsBalanceResponse>(url, {
       params: {
         module: BlockExplorerModule.Account,
         action: BlockExplorerAction.BalanceMulti,
         address,
-        apikey: apiKey,
+        apikey,
         tag
       }
     });
@@ -197,8 +195,8 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
   }
 
   public async GetNormalTxListByAddress(options: GetNormalTxListByAddressOptions) {
-    const { apiKey = this.apiKey, chain = this.chain, address, startblock, endblock, page, offset, sort } = options;
-    const url = this.getBlockExplorerUrl(chain);
+    const { apikey, url } = this;
+    const { address, startblock, endblock, page, offset, sort } = options;
 
     const response = await axios.get<BlockExplorerTxListResponse>(url, {
       params: {
@@ -210,7 +208,7 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
         page,
         offset,
         sort,
-        apikey: apiKey
+        apikey
       }
     });
 
@@ -225,8 +223,8 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
   }
 
   public async GetInternalTxListByAddress(options: GetNormalTxListByAddressOptions): Promise<BlockExplorerTxInternal[]> {
-    const { apiKey = this.apiKey, chain = this.chain, address, startblock, endblock, page, offset, sort } = options;
-    const url = this.getBlockExplorerUrl(chain);
+    const { apikey, url } = this;
+    const { address, startblock, endblock, page, offset, sort } = options;
 
     const response = await axios.get<BlockExplorerInternalTxListResponse>(url, {
       params: {
@@ -238,7 +236,7 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
         page,
         offset,
         sort,
-        apikey: apiKey
+        apikey
       }
     });
 
@@ -253,14 +251,14 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
   }
 
   public async getAccountTokenBalance(options: GetAccountTokenBalanceOptions) {
-    const { address, apiKey = this.apiKey, chain = this.chain, contractAddress, tag = BlockExplorerTag.Latest } = options;
-    const url = this.getBlockExplorerUrl(chain);
+    const { apikey, url } = this;
+    const { address, contractAddress, tag = BlockExplorerTag.Latest } = options;
 
     const response = await axios.get<GetAccountTokenBalanceResponse>(url, {
       params: {
         action: BlockExplorerAction.TokenBalance,
         address,
-        apikey: apiKey,
+        apikey,
         contractaddress: contractAddress,
         module: BlockExplorerModule.Account,
         tag
@@ -275,9 +273,9 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
   }
 
   public async getEventLogsByAddressFiltered(options: getEventLogsByAddressFilteredOptions) {
+    const { apikey, url } = this;
     const {
       address,
-      chain = this.chain,
       fromBlock = 0,
       toBlock = Number.MAX_SAFE_INTEGER,
       topic0,
@@ -286,10 +284,8 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
       topic2,
       topic3,
       page,
-      offset,
-      apiKey = this.apiKey
+      offset
     } = options;
-    const url = this.getBlockExplorerUrl(chain);
 
     const response = await axios.get<GetEventLogsByAddressFilteredResponse>(url, {
       params: {
@@ -305,7 +301,7 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
         topic3,
         page,
         offset,
-        apikey: apiKey
+        apikey
       }
     });
 

@@ -16,18 +16,7 @@ export enum BlockExplorerType {
   Chainlens = 'chainlens'
 }
 
-interface CommonOptions {
-  /**
-   * @description Chain to work with
-   */
-  chain?: Chain;
-  /**
-   * @description API key to get access to block explorer
-   */
-  apiKey?: string;
-}
-
-export interface GetBlockCountdownTimeOptions extends CommonOptions {
+export interface GetBlockCountdownTimeOptions {
   /**
    * @description The integer block number to estimate time remaining to be mined
    * @example 16701588000
@@ -35,7 +24,7 @@ export interface GetBlockCountdownTimeOptions extends CommonOptions {
   blockno: number;
 }
 
-export interface GetBlockNumberByTimestampOptions extends CommonOptions {
+export interface GetBlockNumberByTimestampOptions {
   /**
    * @description The closest available block to the provided timestamp, either **before** or **after**
    */
@@ -46,7 +35,7 @@ export interface GetBlockNumberByTimestampOptions extends CommonOptions {
   timestamp: number;
 }
 
-export interface GetAccountBalanceOptions extends CommonOptions {
+export interface GetAccountBalanceOptions {
   /**
    * @description The **string** representing the address to check for balance
    */
@@ -62,7 +51,7 @@ export interface GetAccountBalanceOptions extends CommonOptions {
  */
 export interface GetAccountsBalanceOptions extends GetAccountBalanceOptions {}
 
-export interface GetAccountTokenBalanceOptions extends CommonOptions {
+export interface GetAccountTokenBalanceOptions {
   /**
    * @description The **contract address** of the ERC-20 token
    */
@@ -77,7 +66,7 @@ export interface GetAccountTokenBalanceOptions extends CommonOptions {
   tag: BlockExplorerTag;
 }
 
-export interface getEventLogsByAddressFilteredOptions extends CommonOptions {
+export interface getEventLogsByAddressFilteredOptions {
   /**
    * @description The integer block number to start searching for logs
    * @example 37000000
@@ -122,7 +111,7 @@ export interface getEventLogsByAddressFilteredOptions extends CommonOptions {
   offset?: number;
 }
 
-export interface GetNormalTxListByAddressOptions extends CommonOptions {
+export interface GetNormalTxListByAddressOptions {
   /**
    * @description The string representing the addresses to get corresponding txs
    * @example '0x2c1ba59d6f58433fb1eaee7d20b26ed83bda51a3'

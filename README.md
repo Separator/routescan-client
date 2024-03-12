@@ -52,19 +52,6 @@ async function main() {
     tag: BlockExplorerTag.Latest
   });
   console.log(`Balance of ${WALLET} is ${tokenBalance}`);
-
-  // Get Event Logs by Address filtered by Topics:
-  const logs = await blockExplorer.getEventLogsByAddressFiltered({
-    fromBlock: 37000000,
-    toBlock: 37200000,
-    topic0: '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef',
-    topic0_1_opr: BlockExplorerTopicOperation.And,
-    topic1: '0x0000000000000000000000000000000000000000000000000000000000000000',
-    page: 1,
-    offset: 1000,
-    apiKey: 'YourApiKey'
-  });
-  console.log(logs.length);
 }
 
 main();
@@ -124,8 +111,7 @@ async function main() {
     topic0_1_opr: BlockExplorerTopicOperation.And,
     topic1: '0x0000000000000000000000000000000000000000000000000000000000000000',
     page: 1,
-    offset: 1000,
-    apiKey: 'YourApiKey'
+    offset: 1000
   });
   console.log(logs.length);
 }
