@@ -1,5 +1,6 @@
 import { Chain } from '../types/chains';
 import {
+  BlockCountdownTime,
   BlockExplorerClosest,
   BlockExplorerSort,
   BlockExplorerTag,
@@ -24,6 +25,14 @@ interface CommonOptions {
    * @description API key to get access to block explorer
    */
   apiKey?: string;
+}
+
+export interface GetBlockCountdownTimeOptions extends CommonOptions {
+  /**
+   * @description The integer block number to estimate time remaining to be mined
+   * @example 16701588000
+   */
+  blockno: number;
 }
 
 export interface GetBlockNumberByTimestampOptions extends CommonOptions {
@@ -155,6 +164,12 @@ export interface BlockExplorer {
    * @returns Get block explorer current chain id
    */
   getChain: () => Chain;
+  /**
+   * Get Estimated Block Countdown Time by BlockNo
+   * @param options
+   * @returns Countdown info object
+   */
+  getBlockCountdownTime: (options: GetBlockCountdownTimeOptions) => Promise<BlockCountdownTime>;
   /**
    * Get Block Number
    * @param options

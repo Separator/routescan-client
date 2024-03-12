@@ -21,6 +21,12 @@ async function main() {
     apiKey: ROUTESCAN_API_KEY
   });
 
+  // Get estimated block countdown time by blockNo:
+  const blockCountdown = await blockExplorer.getBlockCountdownTime({
+    blockno: 167015880000
+  });
+  console.log('Block countdown', blockCountdown);
+
   // Get block number by timestamp:
   const timestamp = 1619638524;
   const blockNumberByTimestamp = await blockExplorer.getBlockNumberByTimestamp({

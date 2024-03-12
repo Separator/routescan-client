@@ -1,7 +1,9 @@
 import axios from 'axios';
 
 import {
+  BlockCountdownTime,
   BlockExplorerAction,
+  BlockExplorerBlockCountdownTimeResponse,
   BlockExplorerBlockIdResponse,
   BlockExplorerClosest,
   BlockExplorerInternalTxListResponse,
@@ -23,6 +25,7 @@ import {
   GetAccountBalanceOptions,
   GetAccountTokenBalanceOptions,
   GetAccountsBalanceOptions,
+  GetBlockCountdownTimeOptions,
   GetBlockNumberByTimestampOptions,
   GetInternalTxListByAddressOptions,
   GetNormalTxListByAddressOptions,
@@ -59,6 +62,7 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
     }
   }
 
+  public abstract getBlockCountdownTime(options: GetBlockCountdownTimeOptions): Promise<BlockCountdownTime>;
   public abstract getBlockNumberByTimestamp(options: GetBlockNumberByTimestampOptions): Promise<number>;
   public abstract getAccountBalance(options: GetAccountBalanceOptions): Promise<bigint>;
   public abstract getAccountTokenBalance(options: GetAccountTokenBalanceOptions): Promise<bigint>;
@@ -105,6 +109,25 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
 export class BlockExplorerRoutescan extends BlockExplorerCommon {
   constructor(options: BlockExplorerOptions) {
     super(options);
+  }
+
+  public async getBlockCountdownTime(options: GetBlockCountdownTimeOptions): Promise<BlockCountdownTime> {
+    const { blockno, apiKey = this.apiKey, chain = this.chain } = options;
+    const url = this.getBlockExplorerUrl(chain);
+    const response = await axios.get<BlockExplorerBlockCountdownTimeResponse>(url, {
+      params: {
+        module: BlockExplorerModule.Block,
+        action: BlockExplorerAction.GetBlockCountdown,
+        apikey: apiKey,
+        blockno
+      }
+    });
+
+    if (response.data.status !== BlockExplorerStatus.Success) {
+      throw new Error(response.data.message);
+    }
+
+    return response.data.result;
   }
 
   public async getBlockNumberByTimestamp(options: GetBlockNumberByTimestampOptions) {
