@@ -26,7 +26,7 @@ interface CommonOptions {
   apiKey?: string;
 }
 
-export interface GetBlockNumberOptions extends CommonOptions {
+export interface GetBlockNumberByTimestampOptions extends CommonOptions {
   /**
    * @description The closest available block to the provided timestamp, either **before** or **after**
    */
@@ -34,7 +34,7 @@ export interface GetBlockNumberOptions extends CommonOptions {
   /**
    * @description The integer representing the Unix timestamp in seconds
    */
-  timestamp?: number;
+  timestamp: number;
 }
 
 export interface GetAccountBalanceOptions extends CommonOptions {
@@ -160,7 +160,7 @@ export interface BlockExplorer {
    * @param options
    * @returns Block id
    */
-  getBlockNumber: (options: GetBlockNumberOptions) => Promise<number>;
+  getBlockNumberByTimestamp: (options: GetBlockNumberByTimestampOptions) => Promise<number>;
   /**
    * Get Ether Balance for a Single Address
    * @param options

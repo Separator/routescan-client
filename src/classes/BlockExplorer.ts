@@ -23,7 +23,7 @@ import {
   GetAccountBalanceOptions,
   GetAccountTokenBalanceOptions,
   GetAccountsBalanceOptions,
-  GetBlockNumberOptions,
+  GetBlockNumberByTimestampOptions,
   GetInternalTxListByAddressOptions,
   GetNormalTxListByAddressOptions,
   getEventLogsByAddressFilteredOptions
@@ -31,6 +31,8 @@ import {
 import { Chain, ChainItem } from '../types/chains';
 
 import { chains } from '../data/chains';
+
+const TX_NO_FOUND_MESSAGE = 'No transactions found';
 
 export interface BlockExplorerOptions {
   /**
@@ -57,7 +59,7 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
     }
   }
 
-  public abstract getBlockNumber(options: GetBlockNumberOptions): Promise<number>;
+  public abstract getBlockNumberByTimestamp(options: GetBlockNumberByTimestampOptions): Promise<number>;
   public abstract getAccountBalance(options: GetAccountBalanceOptions): Promise<bigint>;
   public abstract getAccountTokenBalance(options: GetAccountTokenBalanceOptions): Promise<bigint>;
   public abstract getAccountsBalances(options: GetAccountsBalanceOptions): Promise<{ account: string; balance: BigInt }[]>;
@@ -105,7 +107,7 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
     super(options);
   }
 
-  public async getBlockNumber(options: GetBlockNumberOptions = {}) {
+  public async getBlockNumberByTimestamp(options: GetBlockNumberByTimestampOptions) {
     const { apiKey = this.apiKey, chain = this.chain, closest = BlockExplorerClosest.After, timestamp } = options;
     const url = this.getBlockExplorerUrl(chain);
 
@@ -190,6 +192,9 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
     });
 
     if (response.data.status !== BlockExplorerStatus.Success) {
+      if (response.data.message === TX_NO_FOUND_MESSAGE) {
+        return [];
+      }
       throw new Error(response.data.message);
     }
 
@@ -215,6 +220,9 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
     });
 
     if (response.data.status !== BlockExplorerStatus.Success) {
+      if (response.data.message === TX_NO_FOUND_MESSAGE) {
+        return [];
+      }
       throw new Error(response.data.message);
     }
 
