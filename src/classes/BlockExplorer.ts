@@ -104,7 +104,7 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
   }
 }
 
-export class BlockExplorerRoutescan extends BlockExplorerCommon {
+export class BlockExplorerEthereum extends BlockExplorerCommon {
   constructor(options: BlockExplorerOptions) {
     super(options);
   }
@@ -314,16 +314,16 @@ export class BlockExplorerRoutescan extends BlockExplorerCommon {
 
   protected getBlockExplorerUrl(chain: Chain = this.chain): string {
     const chainOptions = BlockExplorerCommon.getChainOptions(chain);
-    const { blockExplorerUrl, type } = chainOptions;
-    return `${blockExplorerUrl}/${type}/evm/${chain}/etherscan/api`;
+    const { blockExplorerUrl } = chainOptions;
+    return blockExplorerUrl;
   }
 }
 
-export class BlockExplorerEthereum extends BlockExplorerRoutescan {
+export class BlockExplorerRoutescan extends BlockExplorerEthereum {
   protected getBlockExplorerUrl(chain: Chain = this.chain): string {
     const chainOptions = BlockExplorerCommon.getChainOptions(chain);
-    const { blockExplorerUrl } = chainOptions;
-    return blockExplorerUrl;
+    const { blockExplorerUrl, type } = chainOptions;
+    return `${blockExplorerUrl}/${type}/evm/${chain}/etherscan/api`;
   }
 }
 
