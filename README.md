@@ -1,6 +1,6 @@
 # ![https://routescan.io/](https://raw.githubusercontent.com/Separator/routescan-client/main/img/logo.svg) Routescan client
 
-[![routescan-client](https://snyk.io/advisor/npm-package/routescan-client/badge.svg)](/advisor/npm-package/routescan-client)
+[![routescan-client](https://snyk.io/advisor/npm-package/routescan-client/badge.svg)](https://snyk.io/advisor/npm-package/routescan-client)
 
 Client for receiving blockchain data through block explorers (in particular, routescan).  
 At the moment, the number of available methods is limited to those indicated in the examples below:
