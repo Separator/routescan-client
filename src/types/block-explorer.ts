@@ -8,6 +8,7 @@ export enum BlockExplorerAction {
   Balance = 'balance',
   BalanceMulti = 'balancemulti',
   GetBlockByTime = 'getblocknobytime',
+  GetBlockCountdown = 'getblockcountdown',
   GetLogs = 'getLogs',
   TokenBalance = 'tokenbalance',
   TxList = 'txlist',
@@ -188,6 +189,29 @@ export interface BlockExplorerTxInternal extends BlockExplorerTxCommon {
   errCode: string;
 }
 
+export interface BlockCountdownTime {
+  /**
+   * @description Current block id
+   * @example '19419956'
+   */
+  CurrentBlock: string;
+  /**
+   * @description Countdown block
+   * @example '167015880000'
+   */
+  CountdownBlock: string;
+  /**
+   * @description Remaining block
+   * @example '166996460044'
+   */
+  RemainingBlock: string;
+  /**
+   * @description Estimate time in sec
+   * @example 2003957520528
+   */
+  EstimateTimeInSec: string;
+}
+
 export interface BlockExplorerRequestCommon {
   /**
    * @description Module name
@@ -212,6 +236,10 @@ export interface BlockExplorerResponseCommon {
    * @description Status message (**OK** if success)
    */
   message: string;
+}
+
+export interface BlockExplorerBlockCountdownTimeResponse extends BlockExplorerResponseCommon {
+  result: BlockCountdownTime;
 }
 
 export interface BlockExplorerBlockIdRequest extends BlockExplorerRequestCommon {
@@ -358,7 +386,3 @@ export interface BlockExplorerTokenTxListRequest extends BlockExplorerTxListRequ
 }
 
 export interface BlockExplorerTokenTxListResponse extends BlockExplorerTxListResponse {}
-
-export type BlockExplorerRequest = BlockExplorerBlockIdRequest | BlockExplorerTxListRequest | BlockExplorerTokenTxListRequest;
-
-export type BlockExplorerResponse = BlockExplorerBlockIdResponse | BlockExplorerTxListResponse | BlockExplorerTokenTxListResponse;

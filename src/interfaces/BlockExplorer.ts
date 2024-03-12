@@ -1,5 +1,6 @@
 import { Chain } from '../types/chains';
 import {
+  BlockCountdownTime,
   BlockExplorerClosest,
   BlockExplorerSort,
   BlockExplorerTag,
@@ -26,7 +27,15 @@ interface CommonOptions {
   apiKey?: string;
 }
 
-export interface GetBlockNumberOptions extends CommonOptions {
+export interface GetBlockCountdownTimeOptions extends CommonOptions {
+  /**
+   * @description The integer block number to estimate time remaining to be mined
+   * @example 16701588000
+   */
+  blockno: number;
+}
+
+export interface GetBlockNumberByTimestampOptions extends CommonOptions {
   /**
    * @description The closest available block to the provided timestamp, either **before** or **after**
    */
@@ -34,7 +43,7 @@ export interface GetBlockNumberOptions extends CommonOptions {
   /**
    * @description The integer representing the Unix timestamp in seconds
    */
-  timestamp?: number;
+  timestamp: number;
 }
 
 export interface GetAccountBalanceOptions extends CommonOptions {
@@ -156,11 +165,17 @@ export interface BlockExplorer {
    */
   getChain: () => Chain;
   /**
+   * Get Estimated Block Countdown Time by BlockNo
+   * @param options
+   * @returns Countdown info object
+   */
+  getBlockCountdownTime: (options: GetBlockCountdownTimeOptions) => Promise<BlockCountdownTime>;
+  /**
    * Get Block Number
    * @param options
    * @returns Block id
    */
-  getBlockNumber: (options: GetBlockNumberOptions) => Promise<number>;
+  getBlockNumberByTimestamp: (options: GetBlockNumberByTimestampOptions) => Promise<number>;
   /**
    * Get Ether Balance for a Single Address
    * @param options

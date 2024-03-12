@@ -1,10 +1,18 @@
 # ![https://routescan.io/](https://raw.githubusercontent.com/Separator/routescan-client/main/img/logo.svg) Routescan client
 
+[![routescan-client](https://snyk.io/advisor/npm-package/routescan-client/badge.svg)](/advisor/npm-package/routescan-client)
+
 Client for receiving blockchain data through block explorers (in particular, routescan).  
 At the moment, the number of available methods is limited to those indicated in the examples below:
 
 ```javascript
-import { BlockExplorerCommon, BlockExplorerTag, BlockExplorerTopicOperation, Chain } from 'routescan-client';
+import {
+  BlockExplorerClosest,
+  BlockExplorerCommon,
+  BlockExplorerTag,
+  BlockExplorerTopicOperation,
+  Chain
+} from 'routescan-client';
 
 const ROUTESCAN_API_KEY = 'YourApiKey';
 const WALLET = '0x285f5F8Cd290Cff6596337C4eEC14e1a62235854';
@@ -15,9 +23,19 @@ async function main() {
     apiKey: ROUTESCAN_API_KEY
   });
 
-  // Get block number:
-  const blockNumber = await blockExplorer.getBlockNumber();
-  console.log(`Current block number is ${blockNumber}`);
+  // Get estimated block countdown time by blockNo:
+  const blockCountdown = await blockExplorer.getBlockCountdownTime({
+    blockno: 167015880000
+  });
+  console.log('Block countdown', blockCountdown);
+
+  // Get block number by timestamp:
+  const timestamp = 1619638524;
+  const blockNumberByTimestamp = await blockExplorer.getBlockNumberByTimestamp({
+    timestamp,
+    closest: BlockExplorerClosest.After
+  });
+  console.log(`Block number after ${timestamp} is ${blockNumberByTimestamp}`);
 
   // Get AVAX balance for a single address:
   const balance = await blockExplorer.getAccountBalance({
@@ -48,7 +66,8 @@ async function main() {
   // Get ERC20-Token Account Balance for TokenContractAddress:
   const tokenBalance = await blockExplorer.getAccountTokenBalance({
     contractAddress: '0x57d90b64a1a57749b0f932f1a3395792e12e7055',
-    address: WALLET
+    address: WALLET,
+    tag: BlockExplorerTag.Latest
   });
   console.log(`Balance of ${WALLET} is ${tokenBalance}`);
 
