@@ -5,7 +5,7 @@
 Client for receiving blockchain data through block explorers (in particular, routescan).  
 At the moment, the number of available methods is limited to those indicated in the examples below:
 
-### Accounts section
+## Accounts section
 
 ```javascript
 import { BlockExplorerCommon, BlockExplorerTag, BlockExplorerTopicOperation, Chain } from 'routescan-client';
@@ -70,7 +70,7 @@ async function main() {
 main();
 ```
 
-### Blocks section
+## Blocks section
 
 ```javascript
 import { BlockExplorerClosest, BlockExplorerCommon, Chain } from 'routescan-client';
@@ -102,7 +102,7 @@ async function main() {
 main();
 ```
 
-### Logs section
+## Logs section
 
 ```javascript
 import { BlockExplorerCommon, BlockExplorerTopicOperation, Chain } from 'routescan-client';
@@ -132,3 +132,29 @@ async function main() {
 
 main();
 ```
+
+## Supported networks table
+
+| **ID**   | **Name**                 |
+| -------- | ------------------------ |
+| 1        | Ethereum                 |
+| 5        | EthereumGoerli           |
+| 11155111 | EthereumSepolia          |
+| 10       | Optimism                 |
+| 420      | OptimismGoerli           |
+| 56       | BinanceSmartChain        |
+| 97       | BinanceSmartChainTestnet |
+| 137      | Polygon                  |
+| 80001    | PolygonMumbai            |
+| 8453     | Base                     |
+| 84531    | BaseGoerli               |
+| 84532    | BaseSepolia              |
+| 42161    | Arbitrum                 |
+| 421613   | ArbitrumGoerli           |
+| 421614   | ArbitrumSepolia          |
+| 43114    | AvalancheCChain          |
+| 43113    | AvalancheCChainFuji      |
+| 42220    | Celo                     |
+| 44787    | CeloAlfajores            |
+| 59144    | Linea                    |
+| 59140    | LineaGoerli              |
