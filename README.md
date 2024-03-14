@@ -121,26 +121,30 @@ main();
 
 ## Supported networks table
 
-| **ID**   | **Name**                 |
-| -------- | ------------------------ |
-| 1        | Ethereum                 |
-| 5        | EthereumGoerli           |
-| 11155111 | EthereumSepolia          |
-| 10       | Optimism                 |
-| 420      | OptimismGoerli           |
-| 56       | BinanceSmartChain        |
-| 97       | BinanceSmartChainTestnet |
-| 137      | Polygon                  |
-| 80001    | PolygonMumbai            |
-| 8453     | Base                     |
-| 84531    | BaseGoerli               |
-| 84532    | BaseSepolia              |
-| 42161    | Arbitrum                 |
-| 421613   | ArbitrumGoerli           |
-| 421614   | ArbitrumSepolia          |
-| 43114    | AvalancheCChain          |
-| 43113    | AvalancheCChainFuji      |
-| 42220    | Celo                     |
-| 44787    | CeloAlfajores            |
-| 59144    | Linea                    |
-| 59140    | LineaGoerli              |
+**You must use the API key of the corresponding block explorer!!!**  
+Just register an account on corresponding site and generate an API key.
+
+| **ID**   | **Name**                 | **Block explorer**              |
+| -------- | ------------------------ | ------------------------------- |
+| 1        | Ethereum                 | https://routescan.io            |
+| 5        | EthereumGoerli           | https://routescan.io            |
+| 11155111 | EthereumSepolia          | https://routescan.io            |
+| 10       | Optimism                 | https://optimistic.etherscan.io |
+| 420      | OptimismGoerli           | https://optimistic.etherscan.io |
+| 11155420 | OptimismSepolia          | https://optimistic.etherscan.io |
+| 56       | BinanceSmartChain        | https://bscscan.com             |
+| 97       | BinanceSmartChainTestnet | https://bscscan.com             |
+| 137      | Polygon                  | https://polygonscan.com         |
+| 80001    | PolygonMumbai            | https://polygonscan.com         |
+| 8453     | Base                     | https://routescan.io            |
+| 84531    | BaseGoerli               | https://basescan.org            |
+| 84532    | BaseSepolia              | https://basescan.org            |
+| 42161    | Arbitrum                 | https://arbiscan.io             |
+| 421613   | ArbitrumGoerli           | https://arbiscan.io             |
+| 421614   | ArbitrumSepolia          | https://arbiscan.io             |
+| 43114    | AvalancheCChain          | https://routescan.io            |
+| 43113    | AvalancheCChainFuji      | https://routescan.io            |
+| 42220    | Celo                     | https://celoscan.io             |
+| 44787    | CeloAlfajores            | https://celoscan.io             |
+| 59144    | Linea                    | https://lineascan.build         |
+| 59140    | LineaGoerli              | https://lineascan.build         |

@@ -36,6 +36,12 @@ export const chains: ChainItem[] = [
     blockExplorerType: BlockExplorerType.Ethereum,
     blockExplorerUrl: 'https://api-goerli-optimistic.etherscan.io/api'
   },
+  {
+    id: Chain.OptimismSepolia,
+    type: ChainType.TestNet,
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api-sepolia-optimistic.etherscan.io/api'
+  },
 
   {
     id: Chain.BinanceSmartChain,
