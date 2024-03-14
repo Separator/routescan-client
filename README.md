@@ -128,6 +128,7 @@ main();
 | 11155111 | EthereumSepolia          |
 | 10       | Optimism                 |
 | 420      | OptimismGoerli           |
+| 11155420 | OptimismSepolia          |
 | 56       | BinanceSmartChain        |
 | 97       | BinanceSmartChainTestnet |
 | 137      | Polygon                  |

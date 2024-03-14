@@ -10,6 +10,7 @@ export enum Chain {
 
   Optimism = 10,
   OptimismGoerli = 420,
+  OptimismSepolia = 11155420,
 
   Cronos = 25,
   CronosTestnet = 338,
