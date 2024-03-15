@@ -16,6 +16,8 @@ export enum BlockExplorerType {
   Chainlens = 'chainlens'
 }
 
+interface PaginationOptions {}
+
 export interface GetBlockCountdownTimeOptions {
   /**
    * @description The integer block number to estimate time remaining to be mined
@@ -66,27 +68,25 @@ export interface GetAccountTokenBalanceOptions {
   tag: BlockExplorerTag;
 }
 
-export interface getEventLogsByAddressFilteredOptions {
+export interface GetEventLogsByTopicsOptions {
   /**
-   * @description The integer block number to start searching for logs
+   * @description The integer block number to start searching for logs eg. 37000000
    * @example 37000000
    */
-  fromBlock?: number;
+  fromBlock: number;
   /**
-   * @description The integer block number to stop searching for logs
+   * @description The integer block number to stop searching for logs eg. 37200000
    * @example 37200000
    */
-  toBlock?: number;
-  /**
-   * @description The string representing the address to check for logs
-   */
-  address?: string;
+  toBlock: number;
   /**
    * @description The topic numbers to search for limited to **topic0**, **topic1**, **topic2**, **topic3**
+   * @example '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'
    */
   topic0?: string;
   /**
    * @description The topic operator when multiple topic combinations are used limited to **and** or **or**
+   * @example 'and'
    */
   topic0_1_opr?: BlockExplorerTopicOperation;
   /**
@@ -109,6 +109,14 @@ export interface getEventLogsByAddressFilteredOptions {
    * @description The number of transactions displayed per page
    */
   offset?: number;
+}
+
+export interface GetEventLogsByAddressFilteredOptions extends GetEventLogsByTopicsOptions {
+  /**
+   * @description The string representing the address to check for logs
+   * @example '0x9e66eba102b77fc75cd87b5e60141b85573bc8e8'
+   */
+  address?: string;
 }
 
 export interface GetNormalTxListByAddressOptions {
@@ -196,9 +204,15 @@ export interface BlockExplorer {
    */
   getAccountTokenBalance: (options: GetAccountTokenBalanceOptions) => Promise<bigint>;
   /**
-   * Get Event Logs by Address filtered by Topics
+   * Get event logs by topics
    * @param options
    * @returns Event logs array
    */
-  getEventLogsByAddressFiltered: (options: getEventLogsByAddressFilteredOptions) => Promise<EventLog[]>;
+  getEventLogsByTopics: (options: GetEventLogsByTopicsOptions) => Promise<EventLog[]>;
+  /**
+   * Get event logs by address filtered by topics
+   * @param options
+   * @returns Event logs array
+   */
+  getEventLogsByAddressFiltered: (options: GetEventLogsByAddressFilteredOptions) => Promise<EventLog[]>;
 }

@@ -353,6 +353,10 @@ export interface EventLog {
   transactionIndex: string;
 }
 
+export interface GetEventLogsByTopicsResponse extends BlockExplorerResponseCommon {
+  result: EventLog[];
+}
+
 export interface GetEventLogsByAddressFilteredResponse extends BlockExplorerResponseCommon {
   result: EventLog[];
 }
