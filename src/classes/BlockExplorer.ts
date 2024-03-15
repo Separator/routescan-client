@@ -17,7 +17,8 @@ import {
   GetAccountBalanceResponse,
   GetAccountTokenBalanceResponse,
   GetAccountsBalanceResponse,
-  GetEventLogsByAddressFilteredResponse
+  GetEventLogsByAddressFilteredResponse,
+  GetEventLogsByTopicsResponse
 } from '../types/block-explorer';
 import {
   BlockExplorer,
@@ -29,7 +30,8 @@ import {
   GetBlockNumberByTimestampOptions,
   GetInternalTxListByAddressOptions,
   GetNormalTxListByAddressOptions,
-  getEventLogsByAddressFilteredOptions
+  GetEventLogsByAddressFilteredOptions,
+  GetEventLogsByTopicsOptions
 } from '../interfaces/BlockExplorer';
 import { Chain, ChainItem } from '../types/chains';
 
@@ -67,7 +69,8 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
   public abstract getAccountsBalances(options: GetAccountsBalanceOptions): Promise<{ account: string; balance: BigInt }[]>;
   public abstract GetNormalTxListByAddress(options: GetNormalTxListByAddressOptions): Promise<BlockExplorerTransaction[]>;
   public abstract GetInternalTxListByAddress(options: GetInternalTxListByAddressOptions): Promise<BlockExplorerTxInternal[]>;
-  public abstract getEventLogsByAddressFiltered(options: getEventLogsByAddressFilteredOptions): Promise<EventLog[]>;
+  public abstract getEventLogsByTopics(options: GetEventLogsByTopicsOptions): Promise<EventLog[]>;
+  public abstract getEventLogsByAddressFiltered(options: GetEventLogsByAddressFilteredOptions): Promise<EventLog[]>;
 
   protected abstract getBlockExplorerUrl(chain: Chain): string;
 
@@ -272,28 +275,45 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
     return BigInt(response.data.result);
   }
 
-  public async getEventLogsByAddressFiltered(options: getEventLogsByAddressFilteredOptions) {
+  public async getEventLogsByTopics(options: GetEventLogsByTopicsOptions) {
     const { apikey, url } = this;
-    const {
-      address,
-      fromBlock = 0,
-      toBlock = Number.MAX_SAFE_INTEGER,
-      topic0,
-      topic0_1_opr,
-      topic1,
-      topic2,
-      topic3,
-      page,
-      offset
-    } = options;
+    const { fromBlock, toBlock, topic0, topic0_1_opr, topic1, topic2, topic3, page, offset } = options;
 
-    const response = await axios.get<GetEventLogsByAddressFilteredResponse>(url, {
+    const response = await axios.get<GetEventLogsByTopicsResponse>(url, {
       params: {
         module: BlockExplorerModule.Logs,
         action: BlockExplorerAction.GetLogs,
         fromBlock,
         toBlock,
+        topic0_1_opr,
+        topic0,
+        topic1,
+        topic2,
+        topic3,
+        page,
+        offset,
+        apikey
+      }
+    });
+
+    if (response.data.status !== BlockExplorerStatus.Success) {
+      throw new Error(response.data.message);
+    }
+
+    return response.data.result;
+  }
+
+  public async getEventLogsByAddressFiltered(options: GetEventLogsByAddressFilteredOptions) {
+    const { apikey, url } = this;
+    const { address, fromBlock, toBlock, topic0, topic0_1_opr, topic1, topic2, topic3, page, offset } = options;
+
+    const response = await axios.get<GetEventLogsByAddressFilteredResponse>(url, {
+      params: {
+        module: BlockExplorerModule.Logs,
+        action: BlockExplorerAction.GetLogs,
         address,
+        fromBlock,
+        toBlock,
         topic0_1_opr,
         topic0,
         topic1,
