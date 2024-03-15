@@ -103,8 +103,8 @@ async function main() {
     apiKey: ROUTESCAN_API_KEY
   });
 
-  // Get Event Logs by Address filtered by Topics:
-  const logs = await blockExplorer.getEventLogsByAddressFiltered({
+  // Get event logs by topics:
+  const topicsLogs = await blockExplorer.getEventLogsByTopics({
     fromBlock: 37000000,
     toBlock: 37200000,
     topic0: '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef',
@@ -113,7 +113,20 @@ async function main() {
     page: 1,
     offset: 1000
   });
-  console.log(logs.length);
+  console.log(topicsLogs.length);
+
+  // Get Event Logs by Address filtered by Topics:
+  const addressLogs = await blockExplorer.getEventLogsByAddressFiltered({
+    address: '0x9e66eba102b77fc75cd87b5e60141b85573bc8e8',
+    fromBlock: 37000000,
+    toBlock: 37200000,
+    topic0: '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef',
+    topic0_1_opr: BlockExplorerTopicOperation.And,
+    topic1: '0x0000000000000000000000000000000000000000000000000000000000000000',
+    page: 1,
+    offset: 1000
+  });
+  console.log(addressLogs.length);
 }
 
 main();
