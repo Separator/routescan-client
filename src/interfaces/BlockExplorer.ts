@@ -16,7 +16,16 @@ export enum BlockExplorerType {
   Chainlens = 'chainlens'
 }
 
-interface PaginationOptions {}
+interface PaginationOptions {
+  /**
+   * @description The integer page number, if pagination is enabled
+   */
+  page?: number;
+  /**
+   * @description The number of records displayed per page
+   */
+  offset?: number;
+}
 
 export interface GetBlockCountdownTimeOptions {
   /**
@@ -68,7 +77,26 @@ export interface GetAccountTokenBalanceOptions {
   tag: BlockExplorerTag;
 }
 
-export interface GetEventLogsByTopicsOptions {
+export interface GetEventLogsByAddressOptions extends PaginationOptions {
+  /**
+   * @description The integer block number to start searching for logs eg. 37000000
+   * @example 37000000
+   */
+  fromBlock: number;
+  /**
+   * @description The integer block number to stop searching for logs eg. 37200000
+   * @example 37200000
+   */
+  toBlock: number;
+
+  /**
+   * @description The string representing the address to check for logs
+   * @example '0x9702230A8Ea53601f5cD2dc00fDBc13d4dF4A8c7'
+   */
+  address?: string;
+}
+
+export interface GetEventLogsByTopicsOptions extends PaginationOptions {
   /**
    * @description The integer block number to start searching for logs eg. 37000000
    * @example 37000000
@@ -101,14 +129,6 @@ export interface GetEventLogsByTopicsOptions {
    * @description The topic numbers to search for limited to **topic0**, **topic1**, **topic2**, **topic3**
    */
   topic3?: string;
-  /**
-   * @description The integer page number, if pagination is enabled
-   */
-  page?: number;
-  /**
-   * @description The number of transactions displayed per page
-   */
-  offset?: number;
 }
 
 export interface GetEventLogsByAddressFilteredOptions extends GetEventLogsByTopicsOptions {
@@ -119,7 +139,7 @@ export interface GetEventLogsByAddressFilteredOptions extends GetEventLogsByTopi
   address?: string;
 }
 
-export interface GetNormalTxListByAddressOptions {
+export interface GetNormalTxListByAddressOptions extends PaginationOptions {
   /**
    * @description The string representing the addresses to get corresponding txs
    * @example '0x2c1ba59d6f58433fb1eaee7d20b26ed83bda51a3'
@@ -135,16 +155,6 @@ export interface GetNormalTxListByAddressOptions {
    * @example 270257
    */
   endblock?: number;
-  /**
-   * @description The integer page number, if pagination is enabled
-   * @example 1
-   */
-  page?: number;
-  /**
-   * @description The number of transactions displayed per page
-   * @example 10
-   */
-  offset?: number;
   /**
    * @description The sorting preference, use **asc** to sort by ascending and **desc** to sort by descending
    */
@@ -162,57 +172,63 @@ export interface BlockExplorer {
    */
   getChain: () => Chain;
   /**
-   * Get Estimated Block Countdown Time by BlockNo
+   * Get estimated block countdown time by BlockNo
    * @param options
    * @returns Countdown info object
    */
-  getBlockCountdownTime: (options: GetBlockCountdownTimeOptions) => Promise<BlockCountdownTime>;
+  getBlockCountdownTime(options: GetBlockCountdownTimeOptions): Promise<BlockCountdownTime>;
   /**
-   * Get Block Number
+   * Get block number
    * @param options
    * @returns Block id
    */
-  getBlockNumberByTimestamp: (options: GetBlockNumberByTimestampOptions) => Promise<number>;
+  getBlockNumberByTimestamp(options: GetBlockNumberByTimestampOptions): Promise<number>;
   /**
-   * Get Ether Balance for a Single Address
+   * Get ether balance for a single address
    * @param options
    * @returns Account balance in wei
    */
-  getAccountBalance: (options: GetAccountBalanceOptions) => Promise<bigint>;
+  getAccountBalance(options: GetAccountBalanceOptions): Promise<bigint>;
   /**
-   * Get Ether Balance for Multiple Addresses in a Single Call
+   * Get ether balance for multiple addresses in a single call
    * @param options
    * @returns Array of accounts balances
    */
-  getAccountsBalances: (options: GetAccountsBalanceOptions) => Promise<{ account: string; balance: BigInt }[]>;
+  getAccountsBalances(options: GetAccountsBalanceOptions): Promise<{ account: string; balance: BigInt }[]>;
   /**
-   * Get a list of 'Normal' Transactions By Address
+   * Get a list of 'Normal' transactions by address
    * @param options
    * @returns
    */
-  GetNormalTxListByAddress: (options: GetNormalTxListByAddressOptions) => Promise<BlockExplorerTransaction[]>;
+  GetNormalTxListByAddress(options: GetNormalTxListByAddressOptions): Promise<BlockExplorerTransaction[]>;
   /**
-   * Get a list of 'Internal' Transactions by Address
+   * Get a list of 'Internal' transactions by address
    * @param options
    * @returns
    */
-  GetInternalTxListByAddress: (options: GetInternalTxListByAddressOptions) => Promise<BlockExplorerTxInternal[]>;
+  GetInternalTxListByAddress(options: GetInternalTxListByAddressOptions): Promise<BlockExplorerTxInternal[]>;
   /**
-   * Get ERC20-Token Account Balance for TokenContractAddress
+   * Get ERC20-Token account balance for TokenContractAddress
    * @param options
    * @returns Account token balance (in wei mostly, but it depends on token params)
    */
-  getAccountTokenBalance: (options: GetAccountTokenBalanceOptions) => Promise<bigint>;
+  getAccountTokenBalance(options: GetAccountTokenBalanceOptions): Promise<bigint>;
+  /**
+   * Get event logs by address
+   * @param options
+   * @returns Event logs array
+   */
+  getEventLogsByAddress(options: GetEventLogsByAddressOptions): Promise<EventLog[]>;
   /**
    * Get event logs by topics
    * @param options
    * @returns Event logs array
    */
-  getEventLogsByTopics: (options: GetEventLogsByTopicsOptions) => Promise<EventLog[]>;
+  getEventLogsByTopics(options: GetEventLogsByTopicsOptions): Promise<EventLog[]>;
   /**
    * Get event logs by address filtered by topics
    * @param options
    * @returns Event logs array
    */
-  getEventLogsByAddressFiltered: (options: GetEventLogsByAddressFilteredOptions) => Promise<EventLog[]>;
+  getEventLogsByAddressFiltered(options: GetEventLogsByAddressFilteredOptions): Promise<EventLog[]>;
 }

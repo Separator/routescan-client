@@ -18,6 +18,7 @@ import {
   GetAccountTokenBalanceResponse,
   GetAccountsBalanceResponse,
   GetEventLogsByAddressFilteredResponse,
+  GetEventLogsByAddressResponse,
   GetEventLogsByTopicsResponse
 } from '../types/block-explorer';
 import {
@@ -31,7 +32,8 @@ import {
   GetInternalTxListByAddressOptions,
   GetNormalTxListByAddressOptions,
   GetEventLogsByAddressFilteredOptions,
-  GetEventLogsByTopicsOptions
+  GetEventLogsByTopicsOptions,
+  GetEventLogsByAddressOptions
 } from '../interfaces/BlockExplorer';
 import { Chain, ChainItem } from '../types/chains';
 
@@ -69,6 +71,7 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
   public abstract getAccountsBalances(options: GetAccountsBalanceOptions): Promise<{ account: string; balance: BigInt }[]>;
   public abstract GetNormalTxListByAddress(options: GetNormalTxListByAddressOptions): Promise<BlockExplorerTransaction[]>;
   public abstract GetInternalTxListByAddress(options: GetInternalTxListByAddressOptions): Promise<BlockExplorerTxInternal[]>;
+  public abstract getEventLogsByAddress(options: GetEventLogsByAddressOptions): Promise<EventLog[]>;
   public abstract getEventLogsByTopics(options: GetEventLogsByTopicsOptions): Promise<EventLog[]>;
   public abstract getEventLogsByAddressFiltered(options: GetEventLogsByAddressFilteredOptions): Promise<EventLog[]>;
 
@@ -273,6 +276,30 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
     }
 
     return BigInt(response.data.result);
+  }
+
+  public async getEventLogsByAddress(options: GetEventLogsByAddressOptions): Promise<EventLog[]> {
+    const { apikey, url } = this;
+    const { fromBlock, toBlock, address, page, offset } = options;
+
+    const response = await axios.get<GetEventLogsByAddressResponse>(url, {
+      params: {
+        module: BlockExplorerModule.Logs,
+        action: BlockExplorerAction.GetLogs,
+        address,
+        fromBlock,
+        toBlock,
+        page,
+        offset,
+        apikey
+      }
+    });
+
+    if (response.data.status !== BlockExplorerStatus.Success) {
+      throw new Error(response.data.message);
+    }
+
+    return response.data.result;
   }
 
   public async getEventLogsByTopics(options: GetEventLogsByTopicsOptions) {
