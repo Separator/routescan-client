@@ -35,17 +35,17 @@ async function main() {
   console.log(balances);
 
   // Get a list of 'Normal' Transactions By Address
-  const normalTxs = await blockExplorer.GetNormalTxListByAddress({
+  const normalTxs = await blockExplorer.getNormalTxListByAddress({
     address: WALLET
   });
   console.log(normalTxs);
 
-  const internalTxs = await blockExplorer.GetInternalTxListByAddress({
+  const internalTxs = await blockExplorer.getInternalTxListByAddress({
     address: WALLET
   });
   console.log(internalTxs);
 
-  const tokenEvents = await blockExplorer.GetErc20TokenTransferEventsList({
+  const tokenEvents = await blockExplorer.getErc20TokenTransferEventsList({
     address: '0x77134cbC06cB00b66F4c7e623D5fdBF6777635EC',
     contractaddress: '0x9702230A8Ea53601f5cD2dc00fDBc13d4dF4A8c7',
     page: 1,

@@ -215,18 +215,18 @@ export interface BlockExplorer {
    * @param options
    * @returns
    */
-  GetNormalTxListByAddress(options: GetNormalTxListByAddressOptions): Promise<BlockExplorerTransaction[]>;
+  getNormalTxListByAddress(options: GetNormalTxListByAddressOptions): Promise<BlockExplorerTransaction[]>;
   /**
    * Get a list of 'Internal' transactions by address
    * @param options
    * @returns
    */
-  GetInternalTxListByAddress(options: GetInternalTxListByAddressOptions): Promise<BlockExplorerTxInternal[]>;
+  getInternalTxListByAddress(options: GetInternalTxListByAddressOptions): Promise<BlockExplorerTxInternal[]>;
   /**
    * Get a list of 'ERC20 - token transfer events' by address
-   * @param options 
+   * @param options
    */
-  GetErc20TokenTransferEventsList(
+  getErc20TokenTransferEventsList(
     options: GetErc20TokenTransferEventsListOptions
   ): Promise<BlockExplorerErc20TokenTransferEvent[]>;
   /**

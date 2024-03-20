@@ -52,7 +52,11 @@ export interface BlockExplorerOptions {
   /**
    * @description API key to work with blockchain explorer
    */
-  apiKey: string;
+  apiKey?: string;
+  /**
+   * @description Custom block explorer url
+   */
+  url?: string;
 }
 
 export abstract class BlockExplorerCommon implements BlockExplorer {
@@ -61,10 +65,15 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
   protected chain: Chain = Chain.NotSpecified;
 
   constructor(options: BlockExplorerOptions) {
-    const { apiKey, chain } = options;
+    const { apiKey = '', chain, url = '' } = options;
     this.apikey = apiKey;
     this.chain = chain;
-    this.url = this.getBlockExplorerUrl(chain);
+
+    if (url) {
+      this.url = url;
+    } else {
+      this.url = this.getBlockExplorerUrl(chain);
+    }
   }
 
   public abstract getBlockCountdownTime(options: GetBlockCountdownTimeOptions): Promise<BlockCountdownTime>;
@@ -72,9 +81,9 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
   public abstract getAccountBalance(options: GetAccountBalanceOptions): Promise<bigint>;
   public abstract getAccountTokenBalance(options: GetAccountTokenBalanceOptions): Promise<bigint>;
   public abstract getAccountsBalances(options: GetAccountsBalanceOptions): Promise<{ account: string; balance: BigInt }[]>;
-  public abstract GetNormalTxListByAddress(options: GetNormalTxListByAddressOptions): Promise<BlockExplorerTransaction[]>;
-  public abstract GetInternalTxListByAddress(options: GetInternalTxListByAddressOptions): Promise<BlockExplorerTxInternal[]>;
-  public abstract GetErc20TokenTransferEventsList(
+  public abstract getNormalTxListByAddress(options: GetNormalTxListByAddressOptions): Promise<BlockExplorerTransaction[]>;
+  public abstract getInternalTxListByAddress(options: GetInternalTxListByAddressOptions): Promise<BlockExplorerTxInternal[]>;
+  public abstract getErc20TokenTransferEventsList(
     options: GetErc20TokenTransferEventsListOptions
   ): Promise<BlockExplorerErc20TokenTransferEvent[]>;
   public abstract getEventLogsByAddress(options: GetEventLogsByAddressOptions): Promise<EventLog[]>;
@@ -206,7 +215,7 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
     }));
   }
 
-  public async GetNormalTxListByAddress(options: GetNormalTxListByAddressOptions) {
+  public async getNormalTxListByAddress(options: GetNormalTxListByAddressOptions) {
     const { apikey, url } = this;
     const { address, startblock, endblock, page, offset, sort } = options;
 
@@ -234,7 +243,7 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
     return response.data.result;
   }
 
-  public async GetInternalTxListByAddress(options: GetNormalTxListByAddressOptions): Promise<BlockExplorerTxInternal[]> {
+  public async getInternalTxListByAddress(options: GetNormalTxListByAddressOptions): Promise<BlockExplorerTxInternal[]> {
     const { apikey, url } = this;
     const { address, startblock, endblock, page, offset, sort } = options;
 
@@ -262,7 +271,7 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
     return response.data.result;
   }
 
-  public async GetErc20TokenTransferEventsList(
+  public async getErc20TokenTransferEventsList(
     options: GetErc20TokenTransferEventsListOptions
   ): Promise<BlockExplorerErc20TokenTransferEvent[]> {
     const { apikey, url } = this;

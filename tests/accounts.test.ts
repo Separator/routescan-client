@@ -35,7 +35,7 @@ describe('Check functions from Accounts block', () => {
   test(
     "Get a list of 'Normal' Transactions By Address",
     async () => {
-      const txs = await blockExplorer.GetNormalTxListByAddress({
+      const txs = await blockExplorer.getNormalTxListByAddress({
         address: WALLET,
         startblock: 30471342,
         endblock: 30471342
@@ -48,7 +48,7 @@ describe('Check functions from Accounts block', () => {
   test(
     "Get a list of 'Internal' Transactions by Address",
     async () => {
-      const txs = await blockExplorer.GetInternalTxListByAddress({
+      const txs = await blockExplorer.getInternalTxListByAddress({
         address: CONTRACT,
         startblock: 30383613,
         endblock: 30383613
