@@ -8,7 +8,7 @@ At the moment, the number of available methods is limited to those indicated in 
 ## Accounts section
 
 ```javascript
-import { BlockExplorerCommon, BlockExplorerTag, BlockExplorerTopicOperation, Chain } from 'routescan-client';
+import { BlockExplorerCommon, BlockExplorerTag, BlockExplorerTopicOperation, Chain, BlockExplorerSort } from 'routescan-client';
 
 const ROUTESCAN_API_KEY = 'YourApiKey';
 const WALLET = '0x285f5F8Cd290Cff6596337C4eEC14e1a62235854';
@@ -35,15 +35,26 @@ async function main() {
   console.log(balances);
 
   // Get a list of 'Normal' Transactions By Address
-  const normalTxs = await blockExplorer.GetNormalTxListByAddress({
+  const normalTxs = await blockExplorer.getNormalTxListByAddress({
     address: WALLET
   });
   console.log(normalTxs);
 
-  const internalTxs = await blockExplorer.GetInternalTxListByAddress({
+  const internalTxs = await blockExplorer.getInternalTxListByAddress({
     address: WALLET
   });
   console.log(internalTxs);
+
+  const tokenEvents = await blockExplorer.getErc20TokenTransferEventsList({
+    address: '0x77134cbC06cB00b66F4c7e623D5fdBF6777635EC',
+    contractaddress: '0x9702230A8Ea53601f5cD2dc00fDBc13d4dF4A8c7',
+    page: 1,
+    offset: 100,
+    startblock: 34372864,
+    endblock: 34472864,
+    sort: BlockExplorerSort.Asc
+  });
+  console.log(tokenEvents);
 
   // Get ERC20-Token Account Balance for TokenContractAddress:
   const tokenBalance = await blockExplorer.getAccountTokenBalance({
@@ -103,8 +114,8 @@ async function main() {
     apiKey: ROUTESCAN_API_KEY
   });
 
-  // Get Event Logs by Address filtered by Topics:
-  const logs = await blockExplorer.getEventLogsByAddressFiltered({
+  // Get event logs by topics:
+  const topicsLogs = await blockExplorer.getEventLogsByTopics({
     fromBlock: 37000000,
     toBlock: 37200000,
     topic0: '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef',
@@ -113,7 +124,20 @@ async function main() {
     page: 1,
     offset: 1000
   });
-  console.log(logs.length);
+  console.log(topicsLogs.length);
+
+  // Get Event Logs by Address filtered by Topics:
+  const addressLogs = await blockExplorer.getEventLogsByAddressFiltered({
+    address: '0x9e66eba102b77fc75cd87b5e60141b85573bc8e8',
+    fromBlock: 37000000,
+    toBlock: 37200000,
+    topic0: '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef',
+    topic0_1_opr: BlockExplorerTopicOperation.And,
+    topic1: '0x0000000000000000000000000000000000000000000000000000000000000000',
+    page: 1,
+    offset: 1000
+  });
+  console.log(addressLogs.length);
 }
 
 main();

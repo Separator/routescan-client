@@ -42,29 +42,6 @@ export enum BlockExplorerTopicOperation {
   Or = 'or'
 }
 
-export interface BlockExplorerPagination {
-  /**
-   * @description The integer page number, if pagination is enabled
-   */
-  page?: number;
-  /**
-   * @description The number of transactions displayed per page
-   */
-  offset?: number;
-  /**
-   * @description The integer block number to start searching for transactions
-   */
-  startblock?: number;
-  /**
-   * @description The integer block number to stop searching for transactions
-   */
-  endblock?: number;
-  /**
-   * @description the sorting preference, use **asc** to sort by ascending and **desc** to sort by descending
-   */
-  sort?: BlockExplorerSort;
-}
-
 interface BlockExplorerTxCommon {
   /**
    * @description Block number string
@@ -120,7 +97,7 @@ interface BlockExplorerTxCommon {
    * @description Error code ("0" if all ok)
    * @example '0'
    */
-  isError: string;
+  isError?: string;
 }
 
 export interface BlockExplorerTransaction extends BlockExplorerTxCommon {
@@ -189,6 +166,54 @@ export interface BlockExplorerTxInternal extends BlockExplorerTxCommon {
   errCode: string;
 }
 
+export interface BlockExplorerErc20TokenTransferEvent extends BlockExplorerTxCommon {
+  /**
+   * @description From address nonce
+   * @example '0'
+   */
+  nonce: string;
+  /**
+   * @description Block hash string
+   * @example '0xf2988b9870e092f2898662ccdbc06e0e320a08139e9c6be98d0ce372f8611f22'
+   */
+  blockHash: string;
+  /**
+   * @description Transaction index
+   * @example '0'
+   */
+  transactionIndex: string;
+  /**
+   * @description Cumulative gas used
+   * @example '21612'
+   */
+  cumulativeGasUsed: string;
+  /**
+   * @description Gas price in wei
+   * @example '400000000000'
+   */
+  gasPrice: string;
+  /**
+   * @description Block confirmations count
+   * @example '19292464'
+   */
+  confirmations: string;
+  /**
+   * @description Token name
+   * @example 'TetherToken'
+   */
+  tokenName: string;
+  /**
+   * @description Token symbol
+   * @example 'USDt'
+   */
+  tokenSymbol: string;
+  /**
+   * @description Token decimal count
+   * @example '6'
+   */
+  tokenDecimal: string;
+}
+
 export interface BlockCountdownTime {
   /**
    * @description Current block id
@@ -212,21 +237,6 @@ export interface BlockCountdownTime {
   EstimateTimeInSec: string;
 }
 
-export interface BlockExplorerRequestCommon {
-  /**
-   * @description Module name
-   */
-  module: BlockExplorerModule;
-  /**
-   * @description Action (get block id, txs list etc.)
-   */
-  action: BlockExplorerAction;
-  /**
-   * @description API key string
-   */
-  apikey: string;
-}
-
 export interface BlockExplorerResponseCommon {
   /**
    * @description Status string (0 - fail, 1 - success)
@@ -240,17 +250,6 @@ export interface BlockExplorerResponseCommon {
 
 export interface BlockExplorerBlockCountdownTimeResponse extends BlockExplorerResponseCommon {
   result: BlockCountdownTime;
-}
-
-export interface BlockExplorerBlockIdRequest extends BlockExplorerRequestCommon {
-  /**
-   * @description The integer representing the Unix timestamp in seconds
-   */
-  timestamp: number;
-  /**
-   * @description the closest available block to the provided timestamp, either **before** or **after**
-   */
-  closest: BlockExplorerClosest;
 }
 
 export interface BlockExplorerBlockIdResponse extends BlockExplorerResponseCommon {
@@ -353,20 +352,13 @@ export interface EventLog {
   transactionIndex: string;
 }
 
-export interface GetEventLogsByTopicsResponse extends BlockExplorerResponseCommon {
+export interface GetEventLogsByAddressResponse extends BlockExplorerResponseCommon {
   result: EventLog[];
 }
 
-export interface GetEventLogsByAddressFilteredResponse extends BlockExplorerResponseCommon {
-  result: EventLog[];
-}
+export type GetEventLogsByTopicsResponse = GetEventLogsByAddressResponse;
 
-export interface BlockExplorerTxListRequest extends BlockExplorerRequestCommon, BlockExplorerPagination {
-  /**
-   * @description The string representing the addresses to check for txs
-   */
-  address: string;
-}
+export type GetEventLogsByAddressFilteredResponse = GetEventLogsByAddressResponse;
 
 export interface BlockExplorerTxListResponse extends BlockExplorerResponseCommon {
   /**
@@ -382,11 +374,6 @@ export interface BlockExplorerInternalTxListResponse extends BlockExplorerRespon
   result: BlockExplorerTxInternal[];
 }
 
-export interface BlockExplorerTokenTxListRequest extends BlockExplorerTxListRequest {
-  /**
-   * @description The string representing the token contract address
-   */
-  contractaddress: string;
+export interface GetErc20TokenTransferEventsListResponse extends BlockExplorerResponseCommon {
+  result: BlockExplorerErc20TokenTransferEvent[];
 }
-
-export interface BlockExplorerTokenTxListResponse extends BlockExplorerTxListResponse {}

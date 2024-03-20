@@ -1,6 +1,6 @@
 {
   "name": "routescan-client",
-  "version": "1.6.0",
+  "version": "2.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/Separator/routescan-client.git"
@@ -34,5 +34,9 @@
   },
   "dependencies": {
     "axios": "^1.6.7"
+  },
+  "funding": {
+    "type": "ethereum",
+    "url": "0x3F2f0098310e654040f7794AB7E44Ac48E0eaF7B"
   }
 }

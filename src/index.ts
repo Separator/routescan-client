@@ -14,7 +14,6 @@ import {
   BlockExplorerSort,
   BlockExplorerClosest,
   BlockExplorerTopicOperation,
-  BlockExplorerPagination,
   BlockExplorerTransaction,
   BlockExplorerTxInternal,
   BlockCountdownTime,
@@ -26,7 +25,7 @@ import {
   GetEventLogsByAddressFilteredResponse,
   BlockExplorerTxListResponse,
   BlockExplorerInternalTxListResponse,
-  BlockExplorerTokenTxListResponse,
+  BlockExplorerErc20TokenTransferEvent,
   EventLog
 } from './types/block-explorer';
 
@@ -38,7 +37,6 @@ export {
   BlockExplorerSort,
   BlockExplorerClosest,
   BlockExplorerTopicOperation,
-  BlockExplorerPagination,
   BlockExplorerTransaction,
   BlockExplorerTxInternal,
   BlockCountdownTime,
@@ -50,7 +48,7 @@ export {
   GetEventLogsByAddressFilteredResponse,
   BlockExplorerTxListResponse,
   BlockExplorerInternalTxListResponse,
-  BlockExplorerTokenTxListResponse,
+  BlockExplorerErc20TokenTransferEvent,
   EventLog,
   BlockExplorer,
   BlockExplorerCommon,
