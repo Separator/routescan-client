@@ -8,7 +8,7 @@ At the moment, the number of available methods is limited to those indicated in 
 ## Accounts section
 
 ```javascript
-import { BlockExplorerCommon, BlockExplorerTag, BlockExplorerTopicOperation, Chain } from 'routescan-client';
+import { BlockExplorerCommon, BlockExplorerTag, BlockExplorerTopicOperation, Chain, BlockExplorerSort } from 'routescan-client';
 
 const ROUTESCAN_API_KEY = 'YourApiKey';
 const WALLET = '0x285f5F8Cd290Cff6596337C4eEC14e1a62235854';
@@ -44,6 +44,17 @@ async function main() {
     address: WALLET
   });
   console.log(internalTxs);
+
+  const tokenEvents = await blockExplorer.GetErc20TokenTransferEventsList({
+    address: '0x77134cbC06cB00b66F4c7e623D5fdBF6777635EC',
+    contractaddress: '0x9702230A8Ea53601f5cD2dc00fDBc13d4dF4A8c7',
+    page: 1,
+    offset: 100,
+    startblock: 34372864,
+    endblock: 34472864,
+    sort: BlockExplorerSort.Asc
+  });
+  console.log(tokenEvents);
 
   // Get ERC20-Token Account Balance for TokenContractAddress:
   const tokenBalance = await blockExplorer.getAccountTokenBalance({
