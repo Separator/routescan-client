@@ -2,6 +2,7 @@ import { Chain } from '../types/chains';
 import {
   BlockCountdownTime,
   BlockExplorerClosest,
+  BlockExplorerErc20TokenTransferEvent,
   BlockExplorerSort,
   BlockExplorerTag,
   BlockExplorerTopicOperation,
@@ -25,6 +26,23 @@ interface PaginationOptions {
    * @description The number of records displayed per page
    */
   offset?: number;
+}
+
+interface BlockOptions {
+  /**
+   * @description The integer block number to start searching for records
+   * @example 0
+   */
+  startblock?: number;
+  /**
+   * @description The integer block number to stop searching for records
+   * @example 270257
+   */
+  endblock?: number;
+  /**
+   * @description The sorting preference, use **asc** to sort by ascending and **desc** to sort by descending
+   */
+  sort?: BlockExplorerSort;
 }
 
 export interface GetBlockCountdownTimeOptions {
@@ -139,31 +157,28 @@ export interface GetEventLogsByAddressFilteredOptions extends GetEventLogsByTopi
   address?: string;
 }
 
-export interface GetNormalTxListByAddressOptions extends PaginationOptions {
+export interface GetNormalTxListByAddressOptions extends PaginationOptions, BlockOptions {
   /**
    * @description The string representing the addresses to get corresponding txs
    * @example '0x2c1ba59d6f58433fb1eaee7d20b26ed83bda51a3'
    */
   address: string;
-  /**
-   * @description The integer block number to start searching for transactions
-   * @example 0
-   */
-  startblock?: number;
-  /**
-   * @description The integer block number to stop searching for transactions
-   * @example 270257
-   */
-  endblock?: number;
-  /**
-   * @description The sorting preference, use **asc** to sort by ascending and **desc** to sort by descending
-   */
-  sort?: BlockExplorerSort;
 }
 
 export type GetInternalTxListByAddressOptions = GetNormalTxListByAddressOptions;
 
-// https://api.routescan.io/v2/network/mainnet/evm/1/etherscan/api?module=account&action=txlistinternal&sort=asc&apikey=YourApiKeyToken
+export interface GetErc20TokenTransferEventsListOptions extends PaginationOptions, BlockOptions {
+  /**
+   * @description The string representing the address to check for balance
+     @example '0x77134cbC06cB00b66F4c7e623D5fdBF6777635EC'
+   */
+  address: string;
+  /**
+   * @description The string representing the token contract address to check for balance
+   * @example '0x9702230A8Ea53601f5cD2dc00fDBc13d4dF4A8c7'
+   */
+  contractaddress: string;
+}
 
 export interface BlockExplorer {
   /**
@@ -207,6 +222,13 @@ export interface BlockExplorer {
    * @returns
    */
   GetInternalTxListByAddress(options: GetInternalTxListByAddressOptions): Promise<BlockExplorerTxInternal[]>;
+  /**
+   * Get a list of 'ERC20 - token transfer events' by address
+   * @param options 
+   */
+  GetErc20TokenTransferEventsList(
+    options: GetErc20TokenTransferEventsListOptions
+  ): Promise<BlockExplorerErc20TokenTransferEvent[]>;
   /**
    * Get ERC20-Token account balance for TokenContractAddress
    * @param options

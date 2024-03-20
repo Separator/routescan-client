@@ -6,6 +6,7 @@ import {
   BlockExplorerBlockCountdownTimeResponse,
   BlockExplorerBlockIdResponse,
   BlockExplorerClosest,
+  BlockExplorerErc20TokenTransferEvent,
   BlockExplorerInternalTxListResponse,
   BlockExplorerModule,
   BlockExplorerStatus,
@@ -17,6 +18,7 @@ import {
   GetAccountBalanceResponse,
   GetAccountTokenBalanceResponse,
   GetAccountsBalanceResponse,
+  GetErc20TokenTransferEventsListResponse,
   GetEventLogsByAddressFilteredResponse,
   GetEventLogsByAddressResponse,
   GetEventLogsByTopicsResponse
@@ -33,7 +35,8 @@ import {
   GetNormalTxListByAddressOptions,
   GetEventLogsByAddressFilteredOptions,
   GetEventLogsByTopicsOptions,
-  GetEventLogsByAddressOptions
+  GetEventLogsByAddressOptions,
+  GetErc20TokenTransferEventsListOptions
 } from '../interfaces/BlockExplorer';
 import { Chain, ChainItem } from '../types/chains';
 
@@ -71,6 +74,9 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
   public abstract getAccountsBalances(options: GetAccountsBalanceOptions): Promise<{ account: string; balance: BigInt }[]>;
   public abstract GetNormalTxListByAddress(options: GetNormalTxListByAddressOptions): Promise<BlockExplorerTransaction[]>;
   public abstract GetInternalTxListByAddress(options: GetInternalTxListByAddressOptions): Promise<BlockExplorerTxInternal[]>;
+  public abstract GetErc20TokenTransferEventsList(
+    options: GetErc20TokenTransferEventsListOptions
+  ): Promise<BlockExplorerErc20TokenTransferEvent[]>;
   public abstract getEventLogsByAddress(options: GetEventLogsByAddressOptions): Promise<EventLog[]>;
   public abstract getEventLogsByTopics(options: GetEventLogsByTopicsOptions): Promise<EventLog[]>;
   public abstract getEventLogsByAddressFiltered(options: GetEventLogsByAddressFilteredOptions): Promise<EventLog[]>;
@@ -250,6 +256,27 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
       if (response.data.message === TX_NO_FOUND_MESSAGE) {
         return [];
       }
+      throw new Error(response.data.message);
+    }
+
+    return response.data.result;
+  }
+
+  public async GetErc20TokenTransferEventsList(
+    options: GetErc20TokenTransferEventsListOptions
+  ): Promise<BlockExplorerErc20TokenTransferEvent[]> {
+    const { apikey, url } = this;
+
+    const response = await axios.get<GetErc20TokenTransferEventsListResponse>(url, {
+      params: {
+        module: BlockExplorerModule.Account,
+        action: BlockExplorerAction.TokenTxList,
+        apikey,
+        ...options
+      }
+    });
+
+    if (response.data.status !== BlockExplorerStatus.Success) {
       throw new Error(response.data.message);
     }
 
