@@ -130,7 +130,7 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
     super(options);
   }
 
-  public async getBlockCountdownTime({ blockno }: GetBlockCountdownTimeOptions): Promise<BlockCountdownTime> {
+  public async getBlockCountdownTime(options: GetBlockCountdownTimeOptions): Promise<BlockCountdownTime> {
     const { apikey, url } = this;
 
     const response = await axios.get<BlockExplorerBlockCountdownTimeResponse>(url, {
@@ -138,7 +138,7 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
         module: BlockExplorerModule.Block,
         action: BlockExplorerAction.GetBlockCountdown,
         apikey,
-        blockno
+        ...options
       }
     });
 
@@ -178,8 +178,8 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
       params: {
         module: BlockExplorerModule.Account,
         action: BlockExplorerAction.Balance,
-        address,
         apikey,
+        address,
         tag
       }
     });
@@ -199,8 +199,8 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
       params: {
         module: BlockExplorerModule.Account,
         action: BlockExplorerAction.BalanceMulti,
-        address,
         apikey,
+        address,
         tag
       }
     });
@@ -217,19 +217,12 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
 
   public async getNormalTxListByAddress(options: GetNormalTxListByAddressOptions) {
     const { apikey, url } = this;
-    const { address, startblock, endblock, page, offset, sort } = options;
-
     const response = await axios.get<BlockExplorerTxListResponse>(url, {
       params: {
         module: BlockExplorerModule.Account,
         action: BlockExplorerAction.TxList,
-        address,
-        startblock,
-        endblock,
-        page,
-        offset,
-        sort,
-        apikey
+        apikey,
+        ...options
       }
     });
 
@@ -245,19 +238,12 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
 
   public async getInternalTxListByAddress(options: GetNormalTxListByAddressOptions): Promise<BlockExplorerTxInternal[]> {
     const { apikey, url } = this;
-    const { address, startblock, endblock, page, offset, sort } = options;
-
     const response = await axios.get<BlockExplorerInternalTxListResponse>(url, {
       params: {
         module: BlockExplorerModule.Account,
         action: BlockExplorerAction.TxListInternal,
-        address,
-        startblock,
-        endblock,
-        page,
-        offset,
-        sort,
-        apikey
+        apikey,
+        ...options
       }
     });
 
@@ -275,7 +261,6 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
     options: GetErc20TokenTransferEventsListOptions
   ): Promise<BlockExplorerErc20TokenTransferEvent[]> {
     const { apikey, url } = this;
-
     const response = await axios.get<GetErc20TokenTransferEventsListResponse>(url, {
       params: {
         module: BlockExplorerModule.Account,
@@ -298,11 +283,11 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
 
     const response = await axios.get<GetAccountTokenBalanceResponse>(url, {
       params: {
-        action: BlockExplorerAction.TokenBalance,
-        address,
-        apikey,
-        contractaddress: contractAddress,
         module: BlockExplorerModule.Account,
+        action: BlockExplorerAction.TokenBalance,
+        apikey,
+        address,
+        contractaddress: contractAddress,
         tag
       }
     });
@@ -316,18 +301,12 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
 
   public async getEventLogsByAddress(options: GetEventLogsByAddressOptions): Promise<EventLog[]> {
     const { apikey, url } = this;
-    const { fromBlock, toBlock, address, page, offset } = options;
-
     const response = await axios.get<GetEventLogsByAddressResponse>(url, {
       params: {
         module: BlockExplorerModule.Logs,
         action: BlockExplorerAction.GetLogs,
-        address,
-        fromBlock,
-        toBlock,
-        page,
-        offset,
-        apikey
+        apikey,
+        ...options
       }
     });
 
@@ -340,22 +319,12 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
 
   public async getEventLogsByTopics(options: GetEventLogsByTopicsOptions) {
     const { apikey, url } = this;
-    const { fromBlock, toBlock, topic0, topic0_1_opr, topic1, topic2, topic3, page, offset } = options;
-
     const response = await axios.get<GetEventLogsByTopicsResponse>(url, {
       params: {
         module: BlockExplorerModule.Logs,
         action: BlockExplorerAction.GetLogs,
-        fromBlock,
-        toBlock,
-        topic0_1_opr,
-        topic0,
-        topic1,
-        topic2,
-        topic3,
-        page,
-        offset,
-        apikey
+        apikey,
+        ...options
       }
     });
 
@@ -368,23 +337,12 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
 
   public async getEventLogsByAddressFiltered(options: GetEventLogsByAddressFilteredOptions) {
     const { apikey, url } = this;
-    const { address, fromBlock, toBlock, topic0, topic0_1_opr, topic1, topic2, topic3, page, offset } = options;
-
     const response = await axios.get<GetEventLogsByAddressFilteredResponse>(url, {
       params: {
         module: BlockExplorerModule.Logs,
         action: BlockExplorerAction.GetLogs,
-        address,
-        fromBlock,
-        toBlock,
-        topic0_1_opr,
-        topic0,
-        topic1,
-        topic2,
-        topic3,
-        page,
-        offset,
-        apikey
+        apikey,
+        ...options
       }
     });
 
