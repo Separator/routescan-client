@@ -172,7 +172,7 @@ Just register an account on corresponding site and generate an API key.
 | 97       | BinanceSmartChainTestnet | https://bscscan.com             |
 | 137      | Polygon                  | https://polygonscan.com         |
 | 80001    | PolygonMumbai            | https://polygonscan.com         |
-| 8453     | Base                     | https://routescan.io            |
+| 8453     | Base                     | https://basescan.org            |
 | 84531    | BaseGoerli               | https://basescan.org            |
 | 84532    | BaseSepolia              | https://basescan.org            |
 | 42161    | Arbitrum                 | https://arbiscan.io             |
