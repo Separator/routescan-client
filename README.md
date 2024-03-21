@@ -40,11 +40,13 @@ async function main() {
   });
   console.log(normalTxs);
 
+  // Get a list of 'Internal' transactions by address:
   const internalTxs = await blockExplorer.getInternalTxListByAddress({
     address: WALLET
   });
   console.log(internalTxs);
 
+  // Get a list of 'ERC20 - token transfer events' by address:
   const tokenEvents = await blockExplorer.getErc20TokenTransferEventsList({
     address: '0x77134cbC06cB00b66F4c7e623D5fdBF6777635EC',
     contractaddress: '0x9702230A8Ea53601f5cD2dc00fDBc13d4dF4A8c7',
@@ -113,6 +115,16 @@ async function main() {
     chain: Chain.AvalancheCChainFuji,
     apiKey: ROUTESCAN_API_KEY
   });
+
+  // Get event logs by address:
+  const logs = await blockExplorer.getEventLogsByAddress({
+    address: '0x9e66eba102b77fc75cd87b5e60141b85573bc8e8',
+    fromBlock: 37000000,
+    toBlock: 37200000,
+    page: 1,
+    offset: 1000
+  });
+  console.log(logs);
 
   // Get event logs by topics:
   const topicsLogs = await blockExplorer.getEventLogsByTopics({
