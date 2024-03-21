@@ -162,9 +162,9 @@ Just register an account on corresponding site and generate an API key.
 
 | **ID**   | **Name**                 | **Block explorer**              |
 | -------- | ------------------------ | ------------------------------- |
-| 1        | Ethereum                 | https://routescan.io            |
-| 5        | EthereumGoerli           | https://routescan.io            |
-| 11155111 | EthereumSepolia          | https://routescan.io            |
+| 1        | Ethereum                 | https://etherscan.io            |
+| 5        | EthereumGoerli           | https://etherscan.io            |
+| 11155111 | EthereumSepolia          | https://etherscan.io            |
 | 10       | Optimism                 | https://optimistic.etherscan.io |
 | 420      | OptimismGoerli           | https://optimistic.etherscan.io |
 | 11155420 | OptimismSepolia          | https://optimistic.etherscan.io |
