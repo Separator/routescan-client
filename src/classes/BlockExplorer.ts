@@ -150,7 +150,7 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
     });
 
     if (response.data.status !== BlockExplorerStatus.Success) {
-      throw new Error(response.data.message);
+      throw new Error(JSON.stringify(response.data));
     }
 
     return response.data.result;
@@ -172,7 +172,7 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
     });
 
     if (response.data.status !== BlockExplorerStatus.Success) {
-      throw new Error(response.data.message);
+      throw new Error(JSON.stringify(response.data));
     }
 
     return Number(response.data.result);
@@ -194,7 +194,7 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
     });
 
     if (response.data.status !== BlockExplorerStatus.Success) {
-      throw new Error(response.data.message);
+      throw new Error(JSON.stringify(response.data));
     }
 
     return BigInt(response.data.result);
@@ -216,7 +216,7 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
     });
 
     if (response.data.status !== BlockExplorerStatus.Success) {
-      throw new Error(response.data.message);
+      throw new Error(JSON.stringify(response.data));
     }
 
     return response.data.result.map(({ account, balance }) => ({
@@ -241,7 +241,7 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
       if (response.data.message === TX_NO_FOUND_MESSAGE) {
         return [];
       }
-      throw new Error(response.data.message);
+      throw new Error(JSON.stringify(response.data));
     }
 
     return response.data.result;
@@ -263,7 +263,7 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
       if (response.data.message === TX_NO_FOUND_MESSAGE) {
         return [];
       }
-      throw new Error(response.data.message);
+      throw new Error(JSON.stringify(response.data));
     }
 
     return response.data.result;
@@ -284,7 +284,7 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
     });
 
     if (response.data.status !== BlockExplorerStatus.Success) {
-      throw new Error(response.data.message);
+      throw new Error(JSON.stringify(response.data));
     }
 
     return response.data.result;
@@ -307,7 +307,7 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
     });
 
     if (response.data.status !== BlockExplorerStatus.Success) {
-      throw new Error(response.data.message);
+      throw new Error(JSON.stringify(response.data));
     }
 
     return BigInt(response.data.result);
@@ -326,7 +326,7 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
     });
 
     if (response.data.status !== BlockExplorerStatus.Success) {
-      throw new Error(response.data.message);
+      throw new Error(JSON.stringify(response.data));
     }
 
     return response.data.result;
@@ -345,7 +345,7 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
     });
 
     if (response.data.status !== BlockExplorerStatus.Success) {
-      throw new Error(response.data.message);
+      throw new Error(JSON.stringify(response.data));
     }
 
     return response.data.result;
@@ -364,7 +364,7 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
     });
 
     if (response.data.status !== BlockExplorerStatus.Success) {
-      throw new Error(response.data.message);
+      throw new Error(JSON.stringify(response.data));
     }
 
     return response.data.result;
