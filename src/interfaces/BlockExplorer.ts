@@ -188,6 +188,12 @@ export interface BlockExplorer {
   getChain: () => Chain;
 
   /**
+   * Get API key string
+   * @returns API key
+   */
+  getApiKey: () => string;
+
+  /**
    * Get ether balance for a single address
    * @param options
    * @returns Account balance in wei

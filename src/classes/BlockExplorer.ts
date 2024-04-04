@@ -117,6 +117,10 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
     return this.chain;
   }
 
+  public getApiKey(): string {
+    return this.apikey;
+  }
+
   public static getChainOptions(chain?: Chain): ChainItem {
     if (!chain) {
       throw new Error(`Chain id not specified`);
