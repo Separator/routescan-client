@@ -74,12 +74,6 @@ export const chains: ChainItem[] = [
     blockExplorerUrl: 'https://api.basescan.org/api'
   },
   {
-    id: Chain.BaseGoerli,
-    type: ChainType.TestNet,
-    blockExplorerType: BlockExplorerType.Ethereum,
-    blockExplorerUrl: 'https://api-goerli.basescan.org/api'
-  },
-  {
     id: Chain.BaseSepolia,
     type: ChainType.TestNet,
     blockExplorerType: BlockExplorerType.Ethereum,
@@ -91,12 +85,6 @@ export const chains: ChainItem[] = [
     type: ChainType.MainNet,
     blockExplorerType: BlockExplorerType.Ethereum,
     blockExplorerUrl: 'https://api.arbiscan.io/api'
-  },
-  {
-    id: Chain.ArbitrumGoerli,
-    type: ChainType.TestNet,
-    blockExplorerType: BlockExplorerType.Ethereum,
-    blockExplorerUrl: 'https://api-goerli.arbiscan.io/api'
   },
   {
     id: Chain.ArbitrumSepolia,

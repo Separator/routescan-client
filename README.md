@@ -173,10 +173,8 @@ Just register an account on corresponding site and generate an API key.
 | 137      | Polygon                  | https://polygonscan.com         |
 | 80001    | PolygonMumbai            | https://polygonscan.com         |
 | 8453     | Base                     | https://basescan.org            |
-| 84531    | BaseGoerli               | https://basescan.org            |
 | 84532    | BaseSepolia              | https://basescan.org            |
 | 42161    | Arbitrum                 | https://arbiscan.io             |
-| 421613   | ArbitrumGoerli           | https://arbiscan.io             |
 | 421614   | ArbitrumSepolia          | https://arbiscan.io             |
 | 43114    | AvalancheCChain          | https://routescan.io            |
 | 43113    | AvalancheCChainFuji      | https://routescan.io            |
