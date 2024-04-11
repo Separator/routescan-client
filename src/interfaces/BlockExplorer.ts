@@ -186,18 +186,13 @@ export interface BlockExplorer {
    * @returns Get block explorer current chain id
    */
   getChain: () => Chain;
+
   /**
-   * Get estimated block countdown time by BlockNo
-   * @param options
-   * @returns Countdown info object
+   * Get API key string
+   * @returns API key
    */
-  getBlockCountdownTime(options: GetBlockCountdownTimeOptions): Promise<BlockCountdownTime>;
-  /**
-   * Get block number
-   * @param options
-   * @returns Block id
-   */
-  getBlockNumberByTimestamp(options: GetBlockNumberByTimestampOptions): Promise<number>;
+  getApiKey: () => string;
+
   /**
    * Get ether balance for a single address
    * @param options
@@ -229,6 +224,20 @@ export interface BlockExplorer {
   getErc20TokenTransferEventsList(
     options: GetErc20TokenTransferEventsListOptions
   ): Promise<BlockExplorerErc20TokenTransferEvent[]>;
+
+  /**
+   * Get estimated block countdown time by BlockNo
+   * @param options
+   * @returns Countdown info object
+   */
+  getBlockCountdownTime(options: GetBlockCountdownTimeOptions): Promise<BlockCountdownTime>;
+  /**
+   * Get block number
+   * @param options
+   * @returns Block id
+   */
+  getBlockNumberByTimestamp(options: GetBlockNumberByTimestampOptions): Promise<number>;
+
   /**
    * Get ERC20-Token account balance for TokenContractAddress
    * @param options

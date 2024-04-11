@@ -40,11 +40,13 @@ async function main() {
   });
   console.log(normalTxs);
 
+  // Get a list of 'Internal' transactions by address:
   const internalTxs = await blockExplorer.getInternalTxListByAddress({
     address: WALLET
   });
   console.log(internalTxs);
 
+  // Get a list of 'ERC20 - token transfer events' by address:
   const tokenEvents = await blockExplorer.getErc20TokenTransferEventsList({
     address: '0x77134cbC06cB00b66F4c7e623D5fdBF6777635EC',
     contractaddress: '0x9702230A8Ea53601f5cD2dc00fDBc13d4dF4A8c7',
@@ -114,6 +116,16 @@ async function main() {
     apiKey: ROUTESCAN_API_KEY
   });
 
+  // Get event logs by address:
+  const logs = await blockExplorer.getEventLogsByAddress({
+    address: '0x9e66eba102b77fc75cd87b5e60141b85573bc8e8',
+    fromBlock: 37000000,
+    toBlock: 37200000,
+    page: 1,
+    offset: 1000
+  });
+  console.log(logs);
+
   // Get event logs by topics:
   const topicsLogs = await blockExplorer.getEventLogsByTopics({
     fromBlock: 37000000,
@@ -150,9 +162,9 @@ Just register an account on corresponding site and generate an API key.
 
 | **ID**   | **Name**                 | **Block explorer**              |
 | -------- | ------------------------ | ------------------------------- |
-| 1        | Ethereum                 | https://routescan.io            |
-| 5        | EthereumGoerli           | https://routescan.io            |
-| 11155111 | EthereumSepolia          | https://routescan.io            |
+| 1        | Ethereum                 | https://etherscan.io            |
+| 5        | EthereumGoerli           | https://etherscan.io            |
+| 11155111 | EthereumSepolia          | https://etherscan.io            |
 | 10       | Optimism                 | https://optimistic.etherscan.io |
 | 420      | OptimismGoerli           | https://optimistic.etherscan.io |
 | 11155420 | OptimismSepolia          | https://optimistic.etherscan.io |
@@ -160,11 +172,9 @@ Just register an account on corresponding site and generate an API key.
 | 97       | BinanceSmartChainTestnet | https://bscscan.com             |
 | 137      | Polygon                  | https://polygonscan.com         |
 | 80001    | PolygonMumbai            | https://polygonscan.com         |
-| 8453     | Base                     | https://routescan.io            |
-| 84531    | BaseGoerli               | https://basescan.org            |
+| 8453     | Base                     | https://basescan.org            |
 | 84532    | BaseSepolia              | https://basescan.org            |
 | 42161    | Arbitrum                 | https://arbiscan.io             |
-| 421613   | ArbitrumGoerli           | https://arbiscan.io             |
 | 421614   | ArbitrumSepolia          | https://arbiscan.io             |
 | 43114    | AvalancheCChain          | https://routescan.io            |
 | 43113    | AvalancheCChainFuji      | https://routescan.io            |
