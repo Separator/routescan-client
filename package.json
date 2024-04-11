@@ -3,7 +3,7 @@
   "version": "2.2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Separator/routescan-client.git"
+    "url": "git+https://github.com/Separator/routescan-client.git"
   },
   "description": "A set of classes to  work with evm-compatible blockchain observers",
   "keywords": [
