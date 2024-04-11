@@ -381,12 +381,6 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
   }
 }
 
-export class BlockExplorerRoutescan extends BlockExplorerEthereum {
-  protected getBlockExplorerUrl(chain: Chain = this.chain): string {
-    const chainOptions = BlockExplorerCommon.getChainOptions(chain);
-    const { blockExplorerUrl, type } = chainOptions;
-    return `${blockExplorerUrl}/${type}/evm/${chain}/etherscan/api`;
-  }
-}
+export class BlockExplorerRoutescan extends BlockExplorerEthereum {}
 
 export class BlockExplorerChainlens extends BlockExplorerRoutescan {}

@@ -2,25 +2,23 @@ import { ChainType } from '../types/routescan';
 import { Chain, ChainItem } from '../types/chains';
 import { BlockExplorerType } from '../interfaces/BlockExplorer';
 
-const ROUTESCAN_URL = 'https://api.routescan.io/v2/network';
-
 export const chains: ChainItem[] = [
   {
     id: Chain.Ethereum,
     type: ChainType.MainNet,
-    blockExplorerType: BlockExplorerType.Routescan,
+    blockExplorerType: BlockExplorerType.Ethereum,
     blockExplorerUrl: 'https://api.etherscan.io/api'
   },
   {
     id: Chain.EthereumGoerli,
     type: ChainType.TestNet,
-    blockExplorerType: BlockExplorerType.Routescan,
+    blockExplorerType: BlockExplorerType.Ethereum,
     blockExplorerUrl: 'https://api-goerli.etherscan.io/api'
   },
   {
     id: Chain.EthereumSepolia,
     type: ChainType.TestNet,
-    blockExplorerType: BlockExplorerType.Routescan,
+    blockExplorerType: BlockExplorerType.Ethereum,
     blockExplorerUrl: 'https://api-sepolia.etherscan.io/api'
   },
 
@@ -72,7 +70,7 @@ export const chains: ChainItem[] = [
   {
     id: Chain.Base,
     type: ChainType.MainNet,
-    blockExplorerType: BlockExplorerType.Routescan,
+    blockExplorerType: BlockExplorerType.Ethereum,
     blockExplorerUrl: 'https://api.basescan.org/api'
   },
   {
@@ -111,13 +109,13 @@ export const chains: ChainItem[] = [
     id: Chain.AvalancheCChain,
     type: ChainType.MainNet,
     blockExplorerType: BlockExplorerType.Routescan,
-    blockExplorerUrl: ROUTESCAN_URL
+    blockExplorerUrl: 'https://api.routescan.io/v2/network/mainnet/evm/43114/etherscan/api'
   },
   {
     id: Chain.AvalancheCChainFuji,
     type: ChainType.TestNet,
     blockExplorerType: BlockExplorerType.Routescan,
-    blockExplorerUrl: ROUTESCAN_URL
+    blockExplorerUrl: 'https://api.routescan.io/v2/network/testnet/evm/43113/etherscan/api'
   },
 
   {
