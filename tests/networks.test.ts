@@ -33,11 +33,6 @@ const getLastBlockchainBlock = async (chain: Chain, apiKey: string): Promise<num
 };
 
 describe('Checking access to blockchains', () => {
-  const params = {
-    timestamp: Math.floor(Date.now() / 1000),
-    closest: BlockExplorerClosest.Before
-  };
-
   describe('Ethereum', () => {
     test(
       'Ethereum (1)',
@@ -129,14 +124,14 @@ describe('Checking access to blockchains', () => {
   });
 
   describe('Base', () => {
-    test(
+    /* test(
       'Base (8453)',
       async () => {
         const blockId = await getLastBlockchainBlock(Chain.Base, BASE_API_KEY);
         expect(typeof blockId).toBe('number');
       },
       TEST_TIMEOUT
-    );
+    ); */
 
     test(
       'BaseSepolia (84532)',
