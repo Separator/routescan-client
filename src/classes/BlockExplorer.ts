@@ -7,12 +7,14 @@ import {
   BlockExplorerBlockIdResponse,
   BlockExplorerClosest,
   BlockExplorerErc20TokenTransferEvent,
+  BlockExplorerInternalTxListByHashResponse,
   BlockExplorerInternalTxListResponse,
   BlockExplorerModule,
   BlockExplorerStatus,
   BlockExplorerTag,
   BlockExplorerTransaction,
   BlockExplorerTxInternal,
+  BlockExplorerTxInternalByTxHash,
   BlockExplorerTxListResponse,
   EventLog,
   GetAccountBalanceResponse,
@@ -36,7 +38,8 @@ import {
   GetEventLogsByAddressFilteredOptions,
   GetEventLogsByTopicsOptions,
   GetEventLogsByAddressOptions,
-  GetErc20TokenTransferEventsListOptions
+  GetErc20TokenTransferEventsListOptions,
+  GetInternalTxListByTxHashOptions
 } from '../interfaces/BlockExplorer';
 import { Chain, ChainItem } from '../types/chains';
 
@@ -89,6 +92,9 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
   public abstract getAccountsBalances(options: GetAccountsBalanceOptions): Promise<{ account: string; balance: BigInt }[]>;
   public abstract getNormalTxListByAddress(options: GetNormalTxListByAddressOptions): Promise<BlockExplorerTransaction[]>;
   public abstract getInternalTxListByAddress(options: GetInternalTxListByAddressOptions): Promise<BlockExplorerTxInternal[]>;
+  public abstract getInternalTxListByTxHash(
+    options: GetInternalTxListByTxHashOptions
+  ): Promise<BlockExplorerTxInternalByTxHash[]>;
   public abstract getErc20TokenTransferEventsList(
     options: GetErc20TokenTransferEventsListOptions
   ): Promise<BlockExplorerErc20TokenTransferEvent[]>;
@@ -133,6 +139,21 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
 
     return chainOptions;
   }
+
+  getAxiosRequestConfig(params: any): AxiosRequestConfig {
+    const { apikey, axiosOptions } = this;
+
+    return {
+      ...axiosOptions,
+      headers: {
+        'User-Agent': ''
+      },
+      params: {
+        apikey,
+        ...params
+      }
+    };
+  }
 }
 
 export class BlockExplorerEthereum extends BlockExplorerCommon {
@@ -141,17 +162,14 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
   }
 
   public async getBlockCountdownTime(options: GetBlockCountdownTimeOptions): Promise<BlockCountdownTime> {
-    const { apikey, url } = this;
-
-    const response = await axios.get<BlockExplorerBlockCountdownTimeResponse>(url, {
-      ...this.axiosOptions,
-      params: {
+    const response = await axios.get<BlockExplorerBlockCountdownTimeResponse>(
+      this.url,
+      this.getAxiosRequestConfig({
+        ...options,
         module: BlockExplorerModule.Block,
-        action: BlockExplorerAction.GetBlockCountdown,
-        apikey,
-        ...options
-      }
-    });
+        action: BlockExplorerAction.GetBlockCountdown
+      })
+    );
 
     if (response.data.status !== BlockExplorerStatus.Success) {
       throw new Error(JSON.stringify(response.data));
@@ -161,19 +179,17 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
   }
 
   public async getBlockNumberByTimestamp(options: GetBlockNumberByTimestampOptions) {
-    const { apikey, url } = this;
     const { closest = BlockExplorerClosest.After, timestamp } = options;
 
-    const response = await axios.get<BlockExplorerBlockIdResponse>(url, {
-      ...this.axiosOptions,
-      params: {
+    const response = await axios.get<BlockExplorerBlockIdResponse>(
+      this.url,
+      this.getAxiosRequestConfig({
         module: BlockExplorerModule.Block,
         action: BlockExplorerAction.GetBlockByTime,
-        apikey,
         closest,
         timestamp
-      }
-    });
+      })
+    );
 
     if (response.data.status !== BlockExplorerStatus.Success) {
       throw new Error(JSON.stringify(response.data));
@@ -183,19 +199,17 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
   }
 
   public async getAccountBalance(options: GetAccountBalanceOptions) {
-    const { apikey, url } = this;
     const { address, tag = BlockExplorerTag.Latest } = options;
 
-    const response = await axios.get<GetAccountBalanceResponse>(url, {
-      ...this.axiosOptions,
-      params: {
+    const response = await axios.get<GetAccountBalanceResponse>(
+      this.url,
+      this.getAxiosRequestConfig({
         module: BlockExplorerModule.Account,
         action: BlockExplorerAction.Balance,
-        apikey,
         address,
         tag
-      }
-    });
+      })
+    );
 
     if (response.data.status !== BlockExplorerStatus.Success) {
       throw new Error(JSON.stringify(response.data));
@@ -205,19 +219,17 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
   }
 
   public async getAccountsBalances(options: GetAccountsBalanceOptions) {
-    const { apikey, url } = this;
     const { address, tag = BlockExplorerTag.Latest } = options;
 
-    const response = await axios.get<GetAccountsBalanceResponse>(url, {
-      ...this.axiosOptions,
-      params: {
+    const response = await axios.get<GetAccountsBalanceResponse>(
+      this.url,
+      this.getAxiosRequestConfig({
         module: BlockExplorerModule.Account,
         action: BlockExplorerAction.BalanceMulti,
-        apikey,
         address,
         tag
-      }
-    });
+      })
+    );
 
     if (response.data.status !== BlockExplorerStatus.Success) {
       throw new Error(JSON.stringify(response.data));
@@ -230,16 +242,14 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
   }
 
   public async getNormalTxListByAddress(options: GetNormalTxListByAddressOptions) {
-    const { apikey, url } = this;
-    const response = await axios.get<BlockExplorerTxListResponse>(url, {
-      ...this.axiosOptions,
-      params: {
+    const response = await axios.get<BlockExplorerTxListResponse>(
+      this.url,
+      this.getAxiosRequestConfig({
+        ...options,
         module: BlockExplorerModule.Account,
-        action: BlockExplorerAction.TxList,
-        apikey,
-        ...options
-      }
-    });
+        action: BlockExplorerAction.TxList
+      })
+    );
 
     if (response.data.status !== BlockExplorerStatus.Success) {
       if (response.data.message === TX_NO_FOUND_MESSAGE) {
@@ -252,16 +262,34 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
   }
 
   public async getInternalTxListByAddress(options: GetNormalTxListByAddressOptions): Promise<BlockExplorerTxInternal[]> {
-    const { apikey, url } = this;
-    const response = await axios.get<BlockExplorerInternalTxListResponse>(url, {
-      ...this.axiosOptions,
-      params: {
+    const response = await axios.get<BlockExplorerInternalTxListResponse>(
+      this.url,
+      this.getAxiosRequestConfig({
+        ...options,
         module: BlockExplorerModule.Account,
-        action: BlockExplorerAction.TxListInternal,
-        apikey,
-        ...options
+        action: BlockExplorerAction.TxListInternal
+      })
+    );
+
+    if (response.data.status !== BlockExplorerStatus.Success) {
+      if (response.data.message === TX_NO_FOUND_MESSAGE) {
+        return [];
       }
-    });
+      throw new Error(JSON.stringify(response.data));
+    }
+
+    return response.data.result;
+  }
+
+  public async getInternalTxListByTxHash(options: GetInternalTxListByTxHashOptions): Promise<BlockExplorerTxInternalByTxHash[]> {
+    const response = await axios.get<BlockExplorerInternalTxListByHashResponse>(
+      this.url,
+      this.getAxiosRequestConfig({
+        ...options,
+        module: BlockExplorerModule.Account,
+        action: BlockExplorerAction.TxListInternal
+      })
+    );
 
     if (response.data.status !== BlockExplorerStatus.Success) {
       if (response.data.message === TX_NO_FOUND_MESSAGE) {
@@ -276,16 +304,14 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
   public async getErc20TokenTransferEventsList(
     options: GetErc20TokenTransferEventsListOptions
   ): Promise<BlockExplorerErc20TokenTransferEvent[]> {
-    const { apikey, url } = this;
-    const response = await axios.get<GetErc20TokenTransferEventsListResponse>(url, {
-      ...this.axiosOptions,
-      params: {
+    const response = await axios.get<GetErc20TokenTransferEventsListResponse>(
+      this.url,
+      this.getAxiosRequestConfig({
+        ...options,
         module: BlockExplorerModule.Account,
-        action: BlockExplorerAction.TokenTxList,
-        apikey,
-        ...options
-      }
-    });
+        action: BlockExplorerAction.TokenTxList
+      })
+    );
 
     if (response.data.status !== BlockExplorerStatus.Success) {
       throw new Error(JSON.stringify(response.data));
@@ -295,20 +321,18 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
   }
 
   public async getAccountTokenBalance(options: GetAccountTokenBalanceOptions) {
-    const { apikey, url } = this;
     const { address, contractAddress, tag = BlockExplorerTag.Latest } = options;
 
-    const response = await axios.get<GetAccountTokenBalanceResponse>(url, {
-      ...this.axiosOptions,
-      params: {
+    const response = await axios.get<GetAccountTokenBalanceResponse>(
+      this.url,
+      this.getAxiosRequestConfig({
         module: BlockExplorerModule.Account,
         action: BlockExplorerAction.TokenBalance,
-        apikey,
         address,
         contractaddress: contractAddress,
         tag
-      }
-    });
+      })
+    );
 
     if (response.data.status !== BlockExplorerStatus.Success) {
       throw new Error(JSON.stringify(response.data));
@@ -318,16 +342,14 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
   }
 
   public async getEventLogsByAddress(options: GetEventLogsByAddressOptions): Promise<EventLog[]> {
-    const { apikey, url } = this;
-    const response = await axios.get<GetEventLogsByAddressResponse>(url, {
-      ...this.axiosOptions,
-      params: {
+    const response = await axios.get<GetEventLogsByAddressResponse>(
+      this.url,
+      this.getAxiosRequestConfig({
+        ...options,
         module: BlockExplorerModule.Logs,
-        action: BlockExplorerAction.GetLogs,
-        apikey,
-        ...options
-      }
-    });
+        action: BlockExplorerAction.GetLogs
+      })
+    );
 
     if (response.data.status !== BlockExplorerStatus.Success) {
       throw new Error(JSON.stringify(response.data));
@@ -337,16 +359,14 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
   }
 
   public async getEventLogsByTopics(options: GetEventLogsByTopicsOptions) {
-    const { apikey, url } = this;
-    const response = await axios.get<GetEventLogsByTopicsResponse>(url, {
-      ...this.axiosOptions,
-      params: {
+    const response = await axios.get<GetEventLogsByTopicsResponse>(
+      this.url,
+      this.getAxiosRequestConfig({
+        ...options,
         module: BlockExplorerModule.Logs,
-        action: BlockExplorerAction.GetLogs,
-        apikey,
-        ...options
-      }
-    });
+        action: BlockExplorerAction.GetLogs
+      })
+    );
 
     if (response.data.status !== BlockExplorerStatus.Success) {
       throw new Error(JSON.stringify(response.data));
@@ -356,16 +376,14 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
   }
 
   public async getEventLogsByAddressFiltered(options: GetEventLogsByAddressFilteredOptions) {
-    const { apikey, url } = this;
-    const response = await axios.get<GetEventLogsByAddressFilteredResponse>(url, {
-      ...this.axiosOptions,
-      params: {
+    const response = await axios.get<GetEventLogsByAddressFilteredResponse>(
+      this.url,
+      this.getAxiosRequestConfig({
+        ...options,
         module: BlockExplorerModule.Logs,
-        action: BlockExplorerAction.GetLogs,
-        apikey,
-        ...options
-      }
-    });
+        action: BlockExplorerAction.GetLogs
+      })
+    );
 
     if (response.data.status !== BlockExplorerStatus.Success) {
       throw new Error(JSON.stringify(response.data));

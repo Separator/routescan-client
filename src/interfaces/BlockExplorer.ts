@@ -8,6 +8,7 @@ import {
   BlockExplorerTopicOperation,
   BlockExplorerTransaction,
   BlockExplorerTxInternal,
+  BlockExplorerTxInternalByTxHash,
   EventLog
 } from '../types/block-explorer';
 
@@ -167,6 +168,14 @@ export interface GetNormalTxListByAddressOptions extends PaginationOptions, Bloc
 
 export type GetInternalTxListByAddressOptions = GetNormalTxListByAddressOptions;
 
+export interface GetInternalTxListByTxHashOptions {
+  /**
+   * @description The string representing the transaction hash to check for internal transactions
+   * @example '0x40eb908387324f2b575b4879cd9d7188f69c8fc9d87c901b9e2daaea4b442170'
+   */
+  txhash: string;
+}
+
 export interface GetErc20TokenTransferEventsListOptions extends PaginationOptions, BlockOptions {
   /**
    * @description The string representing the address to check for balance
@@ -217,6 +226,11 @@ export interface BlockExplorer {
    * @returns
    */
   getInternalTxListByAddress(options: GetInternalTxListByAddressOptions): Promise<BlockExplorerTxInternal[]>;
+  /**
+   * Get 'internal transactions' by transaction hash
+   * @param options
+   */
+  getInternalTxListByTxHash(options: GetInternalTxListByTxHashOptions): Promise<BlockExplorerTxInternalByTxHash[]>;
   /**
    * Get a list of 'ERC20 - token transfer events' by address
    * @param options

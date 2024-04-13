@@ -33,11 +33,6 @@ const getLastBlockchainBlock = async (chain: Chain, apiKey: string): Promise<num
 };
 
 describe('Checking access to blockchains', () => {
-  const params = {
-    timestamp: Math.floor(Date.now() / 1000),
-    closest: BlockExplorerClosest.Before
-  };
-
   describe('Ethereum', () => {
     test(
       'Ethereum (1)',
