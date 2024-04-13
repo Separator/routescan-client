@@ -7,12 +7,14 @@ import {
   BlockExplorerBlockIdResponse,
   BlockExplorerClosest,
   BlockExplorerErc20TokenTransferEvent,
+  BlockExplorerInternalTxListByHashResponse,
   BlockExplorerInternalTxListResponse,
   BlockExplorerModule,
   BlockExplorerStatus,
   BlockExplorerTag,
   BlockExplorerTransaction,
   BlockExplorerTxInternal,
+  BlockExplorerTxInternalByTxHash,
   BlockExplorerTxListResponse,
   EventLog,
   GetAccountBalanceResponse,
@@ -36,7 +38,8 @@ import {
   GetEventLogsByAddressFilteredOptions,
   GetEventLogsByTopicsOptions,
   GetEventLogsByAddressOptions,
-  GetErc20TokenTransferEventsListOptions
+  GetErc20TokenTransferEventsListOptions,
+  GetInternalTxListByTxHashOptions
 } from '../interfaces/BlockExplorer';
 import { Chain, ChainItem } from '../types/chains';
 
@@ -89,6 +92,9 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
   public abstract getAccountsBalances(options: GetAccountsBalanceOptions): Promise<{ account: string; balance: BigInt }[]>;
   public abstract getNormalTxListByAddress(options: GetNormalTxListByAddressOptions): Promise<BlockExplorerTransaction[]>;
   public abstract getInternalTxListByAddress(options: GetInternalTxListByAddressOptions): Promise<BlockExplorerTxInternal[]>;
+  public abstract getInternalTxListByTxHash(
+    options: GetInternalTxListByTxHashOptions
+  ): Promise<BlockExplorerTxInternalByTxHash[]>;
   public abstract getErc20TokenTransferEventsList(
     options: GetErc20TokenTransferEventsListOptions
   ): Promise<BlockExplorerErc20TokenTransferEvent[]>;
@@ -257,6 +263,26 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
 
   public async getInternalTxListByAddress(options: GetNormalTxListByAddressOptions): Promise<BlockExplorerTxInternal[]> {
     const response = await axios.get<BlockExplorerInternalTxListResponse>(
+      this.url,
+      this.getAxiosRequestConfig({
+        ...options,
+        module: BlockExplorerModule.Account,
+        action: BlockExplorerAction.TxListInternal
+      })
+    );
+
+    if (response.data.status !== BlockExplorerStatus.Success) {
+      if (response.data.message === TX_NO_FOUND_MESSAGE) {
+        return [];
+      }
+      throw new Error(JSON.stringify(response.data));
+    }
+
+    return response.data.result;
+  }
+
+  public async getInternalTxListByTxHash(options: GetInternalTxListByTxHashOptions): Promise<BlockExplorerTxInternalByTxHash[]> {
+    const response = await axios.get<BlockExplorerInternalTxListByHashResponse>(
       this.url,
       this.getAxiosRequestConfig({
         ...options,

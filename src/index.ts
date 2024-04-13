@@ -25,7 +25,9 @@ import {
   GetEventLogsByAddressFilteredResponse,
   BlockExplorerTxListResponse,
   BlockExplorerInternalTxListResponse,
+  BlockExplorerInternalTxListByHashResponse,
   BlockExplorerErc20TokenTransferEvent,
+  BlockExplorerTxInternalByTxHash,
   EventLog
 } from './types/block-explorer';
 
@@ -48,7 +50,9 @@ export {
   GetEventLogsByAddressFilteredResponse,
   BlockExplorerTxListResponse,
   BlockExplorerInternalTxListResponse,
+  BlockExplorerInternalTxListByHashResponse,
   BlockExplorerErc20TokenTransferEvent,
+  BlockExplorerTxInternalByTxHash,
   EventLog,
   BlockExplorer,
   BlockExplorerCommon,

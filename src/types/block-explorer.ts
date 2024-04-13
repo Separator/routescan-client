@@ -42,7 +42,7 @@ export enum BlockExplorerTopicOperation {
   Or = 'or'
 }
 
-interface BlockExplorerTxCommon {
+interface BlockExplorerTxBase {
   /**
    * @description Block number string
    * @example '47884'
@@ -53,11 +53,6 @@ interface BlockExplorerTxCommon {
    * @example '1438947953'
    */
   timeStamp: string;
-  /**
-   * @description Transaction hash
-   * @example '0xad1c27dd8d0329dbc400021d7477b34ac41e84365bd54b45a4019a15deb10c0d'
-   */
-  hash: string;
   /**
    * @description From address (transaction initiator)
    * @example '0xddbd2b932c763ba5b1b7ae3b362eac3e8d40121a'
@@ -98,6 +93,14 @@ interface BlockExplorerTxCommon {
    * @example '0'
    */
   isError?: string;
+}
+
+interface BlockExplorerTxCommon extends BlockExplorerTxBase {
+  /**
+   * @description Transaction hash
+   * @example '0xad1c27dd8d0329dbc400021d7477b34ac41e84365bd54b45a4019a15deb10c0d'
+   */
+  hash: string;
 }
 
 export interface BlockExplorerTransaction extends BlockExplorerTxCommon {
@@ -159,6 +162,19 @@ export interface BlockExplorerTxInternal extends BlockExplorerTxCommon {
    * @example '1'
    */
   traceId: string;
+  /**
+   * @description Error code
+   * @example ''
+   */
+  errCode: string;
+}
+
+export interface BlockExplorerTxInternalByTxHash extends BlockExplorerTxBase {
+  /**
+   * @description Tx type
+   * @example 'call'
+   */
+  type: string;
   /**
    * @description Error code
    * @example ''
@@ -372,6 +388,13 @@ export interface BlockExplorerInternalTxListResponse extends BlockExplorerRespon
    * @description List of internal tx objects
    */
   result: BlockExplorerTxInternal[];
+}
+
+export interface BlockExplorerInternalTxListByHashResponse extends BlockExplorerResponseCommon {
+  /**
+   * @description List of internal tx objects
+   */
+  result: BlockExplorerTxInternalByTxHash[];
 }
 
 export interface GetErc20TokenTransferEventsListResponse extends BlockExplorerResponseCommon {

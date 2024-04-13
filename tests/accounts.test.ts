@@ -58,6 +58,13 @@ describe('Check functions from Accounts block', () => {
     TEST_TIMEOUT
   );
 
+  test("Get 'Internal Transactions' by Transaction Hash", async () => {
+    const txs = await blockExplorer.getInternalTxListByTxHash({
+      txhash: '0x1a63740bae28ec284f1dd78f86faec72462871d25926a31ea74a498090670e83'
+    });
+    expect(txs.length).toBe(1);
+  });
+
   test(`Get a list of 'ERC20 - token transfer events' by address`, async () => {
     const transferEvents = await blockExplorer.getErc20TokenTransferEventsList({
       address: WALLET,

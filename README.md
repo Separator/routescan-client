@@ -40,11 +40,17 @@ async function main() {
   });
   console.log(normalTxs);
 
-  // Get a list of 'Internal' transactions by address:
+  // Get a list of 'internal' transactions by address:
   const internalTxs = await blockExplorer.getInternalTxListByAddress({
     address: WALLET
   });
   console.log(internalTxs);
+
+  // Get 'internal transactions' by transaction hash
+  const internalTxsByHash = await blockExplorer.getInternalTxListByTxHash({
+    txhash: '0x40eb908387324f2b575b4879cd9d7188f69c8fc9d87c901b9e2daaea4b442170'
+  });
+  console.log(internalTxsByHash);
 
   // Get a list of 'ERC20 - token transfer events' by address:
   const tokenEvents = await blockExplorer.getErc20TokenTransferEventsList({
