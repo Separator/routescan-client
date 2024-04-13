@@ -124,14 +124,14 @@ describe('Checking access to blockchains', () => {
   });
 
   describe('Base', () => {
-    /* test(
+    test(
       'Base (8453)',
       async () => {
         const blockId = await getLastBlockchainBlock(Chain.Base, BASE_API_KEY);
         expect(typeof blockId).toBe('number');
       },
       TEST_TIMEOUT
-    ); */
+    );
 
     test(
       'BaseSepolia (84532)',
