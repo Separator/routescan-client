@@ -1,11 +1,11 @@
 import { config } from 'dotenv';
 
-import { BlockExplorerCommon, BlockExplorerTag, Chain } from '../src';
+import { BlockExplorerCommon, Chain } from '../src';
 
 config();
 
 const TEST_TIMEOUT = 60000;
-const { WALLET = '', ROUTESCAN_API_KEY, CONTRACT = '', TOKEN_ADDRESS = '' } = process.env;
+const { ROUTESCAN_API_KEY } = process.env;
 const blockExplorer = BlockExplorerCommon.build({ chain: Chain.AvalancheCChainFuji, apiKey: ROUTESCAN_API_KEY! });
 
 describe('Check functions from Accounts block', () => {

@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import { AxiosRequestConfig } from 'axios';
 
 import {
   BlockCountdownTime,
@@ -140,6 +140,12 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
     super(options);
   }
 
+  private checkResponseStatus(response: any) {
+    if (response.data.status !== BlockExplorerStatus.Success) {
+      throw new Error(JSON.stringify(response.data));
+    }
+  }
+
   public async getBlockCountdownTime(options: GetBlockCountdownTimeOptions): Promise<BlockCountdownTime> {
     const response = await this.transport.get<BlockExplorerBlockCountdownTimeResponse>({
       ...options,
@@ -147,9 +153,7 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
       action: BlockExplorerAction.GetBlockCountdown
     });
 
-    if (response.data.status !== BlockExplorerStatus.Success) {
-      throw new Error(JSON.stringify(response.data));
-    }
+    this.checkResponseStatus(response);
 
     return response.data.result;
   }
@@ -164,9 +168,7 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
       timestamp
     });
 
-    if (response.data.status !== BlockExplorerStatus.Success) {
-      throw new Error(JSON.stringify(response.data));
-    }
+    this.checkResponseStatus(response);
 
     return Number(response.data.result);
   }
@@ -181,9 +183,7 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
       tag
     });
 
-    if (response.data.status !== BlockExplorerStatus.Success) {
-      throw new Error(JSON.stringify(response.data));
-    }
+    this.checkResponseStatus(response);
 
     return BigInt(response.data.result);
   }
@@ -198,9 +198,7 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
       tag
     });
 
-    if (response.data.status !== BlockExplorerStatus.Success) {
-      throw new Error(JSON.stringify(response.data));
-    }
+    this.checkResponseStatus(response);
 
     return response.data.result.map(({ account, balance }) => ({
       account,
@@ -215,12 +213,10 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
       action: BlockExplorerAction.TxList
     });
 
-    if (response.data.status !== BlockExplorerStatus.Success) {
-      if (response.data.message === TX_NO_FOUND_MESSAGE) {
-        return [];
-      }
-      throw new Error(JSON.stringify(response.data));
+    if (response.data.message === TX_NO_FOUND_MESSAGE) {
+      return [];
     }
+    this.checkResponseStatus(response);
 
     return response.data.result;
   }
@@ -232,12 +228,10 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
       action: BlockExplorerAction.TxListInternal
     });
 
-    if (response.data.status !== BlockExplorerStatus.Success) {
-      if (response.data.message === TX_NO_FOUND_MESSAGE) {
-        return [];
-      }
-      throw new Error(JSON.stringify(response.data));
+    if (response.data.message === TX_NO_FOUND_MESSAGE) {
+      return [];
     }
+    this.checkResponseStatus(response);
 
     return response.data.result;
   }
@@ -249,12 +243,10 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
       action: BlockExplorerAction.TxListInternal
     });
 
-    if (response.data.status !== BlockExplorerStatus.Success) {
-      if (response.data.message === TX_NO_FOUND_MESSAGE) {
-        return [];
-      }
-      throw new Error(JSON.stringify(response.data));
+    if (response.data.message === TX_NO_FOUND_MESSAGE) {
+      return [];
     }
+    this.checkResponseStatus(response);
 
     return response.data.result;
   }
@@ -268,9 +260,7 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
       action: BlockExplorerAction.TokenTxList
     });
 
-    if (response.data.status !== BlockExplorerStatus.Success) {
-      throw new Error(JSON.stringify(response.data));
-    }
+    this.checkResponseStatus(response);
 
     return response.data.result;
   }
@@ -286,9 +276,7 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
       tag
     });
 
-    if (response.data.status !== BlockExplorerStatus.Success) {
-      throw new Error(JSON.stringify(response.data));
-    }
+    this.checkResponseStatus(response);
 
     return BigInt(response.data.result);
   }
@@ -300,9 +288,7 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
       action: BlockExplorerAction.GetLogs
     });
 
-    if (response.data.status !== BlockExplorerStatus.Success) {
-      throw new Error(JSON.stringify(response.data));
-    }
+    this.checkResponseStatus(response);
 
     return response.data.result;
   }
@@ -314,9 +300,7 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
       action: BlockExplorerAction.GetLogs
     });
 
-    if (response.data.status !== BlockExplorerStatus.Success) {
-      throw new Error(JSON.stringify(response.data));
-    }
+    this.checkResponseStatus(response);
 
     return response.data.result;
   }
@@ -328,9 +312,7 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
       action: BlockExplorerAction.GetLogs
     });
 
-    if (response.data.status !== BlockExplorerStatus.Success) {
-      throw new Error(JSON.stringify(response.data));
-    }
+    this.checkResponseStatus(response);
 
     return response.data.result;
   }
