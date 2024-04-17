@@ -114,9 +114,9 @@ describe('Checking access to blockchains', () => {
     );
 
     test(
-      'PolygonMumbai (80001)',
+      'PolygonAmoy (80002)',
       async () => {
-        const blockId = await getLastBlockchainBlock(Chain.PolygonMumbai, POLYGON_API_KEY);
+        const blockId = await getLastBlockchainBlock(Chain.PolygonAmoy, POLYGON_API_KEY);
         expect(typeof blockId).toBe('number');
       },
       TEST_TIMEOUT

@@ -66,6 +66,12 @@ export const chains: ChainItem[] = [
     blockExplorerType: BlockExplorerType.Ethereum,
     blockExplorerUrl: 'https://api-testnet.polygonscan.com/api'
   },
+  {
+    id: Chain.PolygonAmoy,
+    type: ChainType.TestNet,
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api-amoy.polygonscan.com/api'
+  },
 
   {
     id: Chain.Base,
