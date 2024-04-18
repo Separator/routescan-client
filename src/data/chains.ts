@@ -68,6 +68,19 @@ export const chains: ChainItem[] = [
   },
 
   {
+    id: Chain.Fantom,
+    type: ChainType.MainNet,
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api.ftmscan.com/api'
+  },
+  {
+    id: Chain.FantomTestnet,
+    type: ChainType.TestNet,
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api-testnet.ftmscan.com/api'
+  },
+
+  {
     id: Chain.Polygon,
     type: ChainType.MainNet,
     blockExplorerType: BlockExplorerType.Ethereum,

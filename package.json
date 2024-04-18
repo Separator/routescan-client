@@ -1,6 +1,6 @@
 {
   "name": "routescan-client",
-  "version": "2.7.0",
+  "version": "2.7.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Separator/routescan-client.git"

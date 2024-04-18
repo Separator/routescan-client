@@ -14,7 +14,8 @@ const {
   ARBITRUM_API_KEY = '',
   ROUTESCAN_API_KEY = '',
   CELO_API_KEY = '',
-  LINEA_API_KEY = ''
+  LINEA_API_KEY = '',
+  FTM_SCAN_API_KEY = ''
 } = process.env;
 const TEST_TIMEOUT = 60000;
 
@@ -138,6 +139,26 @@ describe('Checking access to blockchains', () => {
       'PolygonAmoy (80002)',
       async () => {
         const blockId = await getLastBlockchainBlock(Chain.PolygonAmoy, POLYGON_API_KEY);
+        expect(typeof blockId).toBe('number');
+      },
+      TEST_TIMEOUT
+    );
+  });
+
+  describe('Fantom', () => {
+    test(
+      'Fantom (250)',
+      async () => {
+        const blockId = await getLastBlockchainBlock(Chain.Fantom, FTM_SCAN_API_KEY);
+        expect(typeof blockId).toBe('number');
+      },
+      TEST_TIMEOUT
+    );
+
+    test(
+      'FantomTestnet (4002)',
+      async () => {
+        const blockId = await getLastBlockchainBlock(Chain.FantomTestnet, FTM_SCAN_API_KEY);
         expect(typeof blockId).toBe('number');
       },
       TEST_TIMEOUT
