@@ -178,6 +178,8 @@ Just register an account on corresponding site and generate an API key.
 | 97       | BinanceSmartChainTestnet | https://bscscan.com             |
 | 137      | Polygon                  | https://polygonscan.com         |
 | 80002    | PolygonAmoy              | https://polygonscan.com         |
+| 204      | BinanceOpBnbMainnet      | https://opbnb.bscscan.com       |
+| 5611     | BinanceOpBnbTestnet      | https://opbnb.bscscan.com       |
 | 8453     | Base                     | https://basescan.org            |
 | 84532    | BaseSepolia              | https://basescan.org            |
 | 42161    | Arbitrum                 | https://arbiscan.io             |

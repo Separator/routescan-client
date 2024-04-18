@@ -17,8 +17,9 @@ export enum Chain {
 
   BinanceSmartChain = 56,
   BinanceSmartChainTestnet = 97,
-  BinanceSmartChainOpBnbL2 = 204,
-  BinanceSmartChainOpBnbL2Testnet = 5611,
+
+  BinanceOpBnbMainnet = 204,
+  BinanceOpBnbTestnet = 5611,
 
   Polygon = 137,
   PolygonMumbai = 80001,

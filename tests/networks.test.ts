@@ -8,6 +8,7 @@ const {
   ETHEREUM_API_KEY = '',
   OPTIMISM_API_KEY = '',
   BSC_API_KEY = '',
+  BSC_OPBNB_API_KEY = '',
   POLYGON_API_KEY = '',
   BASE_API_KEY = '',
   ARBITRUM_API_KEY = '',
@@ -97,6 +98,26 @@ describe('Checking access to blockchains', () => {
       'BinanceSmartChainTestnet (97)',
       async () => {
         const blockId = await getLastBlockchainBlock(Chain.BinanceSmartChainTestnet, BSC_API_KEY);
+        expect(typeof blockId).toBe('number');
+      },
+      TEST_TIMEOUT
+    );
+  });
+
+  describe('BinanceSmartChain OPBNB', () => {
+    test(
+      'BinanceOpBnbMainnet (204)',
+      async () => {
+        const blockId = await getLastBlockchainBlock(Chain.BinanceOpBnbMainnet, BSC_OPBNB_API_KEY);
+        expect(typeof blockId).toBe('number');
+      },
+      TEST_TIMEOUT
+    );
+
+    test(
+      'BinanceOpBnbTestnet (5611)',
+      async () => {
+        const blockId = await getLastBlockchainBlock(Chain.BinanceOpBnbTestnet, BSC_OPBNB_API_KEY);
         expect(typeof blockId).toBe('number');
       },
       TEST_TIMEOUT

@@ -55,6 +55,19 @@ export const chains: ChainItem[] = [
   },
 
   {
+    id: Chain.BinanceOpBnbMainnet,
+    type: ChainType.MainNet,
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api-opbnb.bscscan.com/api'
+  },
+  {
+    id: Chain.BinanceOpBnbTestnet,
+    type: ChainType.TestNet,
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api-opbnb-testnet.bscscan.com/api'
+  },
+
+  {
     id: Chain.Polygon,
     type: ChainType.MainNet,
     blockExplorerType: BlockExplorerType.Ethereum,
