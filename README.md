@@ -5,6 +5,10 @@
 Client for receiving blockchain data through block explorers (in particular, routescan).  
 At the moment, the number of available methods is limited to those indicated in the examples below:
 
+## Donation
+
+To support this project, you can send crypto to **0x3F2f0098310e654040f7794AB7E44Ac48E0eaF7B**.
+
 ## Accounts section
 
 ```javascript
