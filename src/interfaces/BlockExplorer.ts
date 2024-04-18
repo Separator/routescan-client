@@ -14,8 +14,7 @@ import {
 
 export enum BlockExplorerType {
   Routescan = 'routescan',
-  Ethereum = 'ethereum',
-  Chainlens = 'chainlens'
+  Ethereum = 'ethereum'
 }
 
 interface PaginationOptions {

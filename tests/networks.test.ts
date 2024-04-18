@@ -8,12 +8,14 @@ const {
   ETHEREUM_API_KEY = '',
   OPTIMISM_API_KEY = '',
   BSC_API_KEY = '',
+  BSC_OPBNB_API_KEY = '',
   POLYGON_API_KEY = '',
   BASE_API_KEY = '',
   ARBITRUM_API_KEY = '',
   ROUTESCAN_API_KEY = '',
   CELO_API_KEY = '',
-  LINEA_API_KEY = ''
+  LINEA_API_KEY = '',
+  FTM_SCAN_API_KEY = ''
 } = process.env;
 const TEST_TIMEOUT = 60000;
 
@@ -103,6 +105,26 @@ describe('Checking access to blockchains', () => {
     );
   });
 
+  describe('BinanceSmartChain OPBNB', () => {
+    test(
+      'BinanceOpBnbMainnet (204)',
+      async () => {
+        const blockId = await getLastBlockchainBlock(Chain.BinanceOpBnbMainnet, BSC_OPBNB_API_KEY);
+        expect(typeof blockId).toBe('number');
+      },
+      TEST_TIMEOUT
+    );
+
+    test(
+      'BinanceOpBnbTestnet (5611)',
+      async () => {
+        const blockId = await getLastBlockchainBlock(Chain.BinanceOpBnbTestnet, BSC_OPBNB_API_KEY);
+        expect(typeof blockId).toBe('number');
+      },
+      TEST_TIMEOUT
+    );
+  });
+
   describe('Polygon', () => {
     test(
       'Polygon (137)',
@@ -114,9 +136,29 @@ describe('Checking access to blockchains', () => {
     );
 
     test(
-      'PolygonMumbai (80001)',
+      'PolygonAmoy (80002)',
       async () => {
-        const blockId = await getLastBlockchainBlock(Chain.PolygonMumbai, POLYGON_API_KEY);
+        const blockId = await getLastBlockchainBlock(Chain.PolygonAmoy, POLYGON_API_KEY);
+        expect(typeof blockId).toBe('number');
+      },
+      TEST_TIMEOUT
+    );
+  });
+
+  describe('Fantom', () => {
+    test(
+      'Fantom (250)',
+      async () => {
+        const blockId = await getLastBlockchainBlock(Chain.Fantom, FTM_SCAN_API_KEY);
+        expect(typeof blockId).toBe('number');
+      },
+      TEST_TIMEOUT
+    );
+
+    test(
+      'FantomTestnet (4002)',
+      async () => {
+        const blockId = await getLastBlockchainBlock(Chain.FantomTestnet, FTM_SCAN_API_KEY);
         expect(typeof blockId).toBe('number');
       },
       TEST_TIMEOUT
@@ -148,6 +190,15 @@ describe('Checking access to blockchains', () => {
       'Arbitrum (42161)',
       async () => {
         const blockId = await getLastBlockchainBlock(Chain.Arbitrum, ARBITRUM_API_KEY);
+        expect(typeof blockId).toBe('number');
+      },
+      TEST_TIMEOUT
+    );
+
+    test(
+      'ArbitrumNova (42170)',
+      async () => {
+        const blockId = await getLastBlockchainBlock(Chain.ArbitrumNova, ARBITRUM_API_KEY);
         expect(typeof blockId).toBe('number');
       },
       TEST_TIMEOUT

@@ -17,17 +17,23 @@ export enum Chain {
 
   BinanceSmartChain = 56,
   BinanceSmartChainTestnet = 97,
-  BinanceSmartChainOpBnbL2 = 204,
-  BinanceSmartChainOpBnbL2Testnet = 5611,
+
+  BinanceOpBnbMainnet = 204,
+  BinanceOpBnbTestnet = 5611,
 
   Polygon = 137,
   PolygonMumbai = 80001,
+  PolygonAmoy = 80002,
+
+  Fantom = 250,
+  FantomTestnet = 4002,
 
   Base = 8453,
   BaseGoerli = 84531,
   BaseSepolia = 84532,
 
   Arbitrum = 42161,
+  ArbitrumNova = 42170,
   ArbitrumGoerli = 421613,
   ArbitrumSepolia = 421614,
 

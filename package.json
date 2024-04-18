@@ -1,13 +1,28 @@
 {
   "name": "routescan-client",
-  "version": "2.4.0",
+  "version": "2.8.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Separator/routescan-client.git"
   },
   "description": "A set of classes to  work with evm-compatible blockchain observers",
   "keywords": [
-    "routescan"
+    "routescan",
+    "etherscan",
+    "bscscan",
+    "polygonscan",
+    "ftmscan",
+    "basescan",
+    "arbiscan",
+    "celoscan",
+    "lineascan",
+    "ethereum",
+    "polygon",
+    "arbitrum",
+    "celo",
+    "linea",
+    "base",
+    "ftm"
   ],
   "author": "Separator",
   "license": "MIT",
@@ -36,7 +51,7 @@
     "axios": "^1.6.7"
   },
   "funding": {
-    "type": "ethereum",
-    "url": "0x3F2f0098310e654040f7794AB7E44Ac48E0eaF7B"
+    "type": "custom",
+    "url": "https://www.npmjs.com/package/routescan-client"
   }
 }

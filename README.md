@@ -5,6 +5,10 @@
 Client for receiving blockchain data through block explorers (in particular, routescan).  
 At the moment, the number of available methods is limited to those indicated in the examples below:
 
+## Donation
+
+To support this project, you can send crypto to **0x3F2f0098310e654040f7794AB7E44Ac48E0eaF7B**.
+
 ## Accounts section
 
 ```javascript
@@ -177,10 +181,15 @@ Just register an account on corresponding site and generate an API key.
 | 56       | BinanceSmartChain        | https://bscscan.com             |
 | 97       | BinanceSmartChainTestnet | https://bscscan.com             |
 | 137      | Polygon                  | https://polygonscan.com         |
-| 80001    | PolygonMumbai            | https://polygonscan.com         |
+| 80002    | PolygonAmoy              | https://polygonscan.com         |
+| 204      | BinanceOpBnbMainnet      | https://opbnb.bscscan.com       |
+| 5611     | BinanceOpBnbTestnet      | https://opbnb.bscscan.com       |
+| 250      | Fantom                   | https://ftmscan.com             |
+| 4002     | FantomTestnet            | https://ftmscan.com             |
 | 8453     | Base                     | https://basescan.org            |
 | 84532    | BaseSepolia              | https://basescan.org            |
 | 42161    | Arbitrum                 | https://arbiscan.io             |
+| 42170    | ArbitrumNova             | https://arbiscan.io             |
 | 421614   | ArbitrumSepolia          | https://arbiscan.io             |
 | 43114    | AvalancheCChain          | https://routescan.io            |
 | 43113    | AvalancheCChainFuji      | https://routescan.io            |
@@ -188,3 +197,5 @@ Just register an account on corresponding site and generate an API key.
 | 44787    | CeloAlfajores            | https://celoscan.io             |
 | 59144    | Linea                    | https://lineascan.build         |
 | 59140    | LineaGoerli              | https://lineascan.build         |
+
+Client also support other etherscan-compatible block explorers, but in this case you must provide custom **url** parameter.

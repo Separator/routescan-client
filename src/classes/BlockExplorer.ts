@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import { AxiosRequestConfig } from 'axios';
 
 import {
   BlockCountdownTime,
@@ -44,6 +44,7 @@ import {
 import { Chain, ChainItem } from '../types/chains';
 
 import { chains } from '../data/chains';
+import { AxiosTransport, Transport } from './Transport';
 
 const TX_NO_FOUND_MESSAGE = 'No transactions found';
 
@@ -67,22 +68,15 @@ export interface BlockExplorerOptions {
 }
 
 export abstract class BlockExplorerCommon implements BlockExplorer {
-  protected url: string = '';
-  protected apikey: string = '';
   protected chain: Chain = Chain.NotSpecified;
-  protected axiosOptions: AxiosRequestConfig = {};
+  protected transport: Transport;
 
   constructor(options: BlockExplorerOptions) {
     const { apiKey = '', chain, url = '', axiosOptions = {} } = options;
-    this.apikey = apiKey;
-    this.chain = chain;
-    this.axiosOptions = axiosOptions;
 
-    if (url) {
-      this.url = url;
-    } else {
-      this.url = this.getBlockExplorerUrl(chain);
-    }
+    this.chain = chain;
+    const transportUrl = url ? url : this.getBlockExplorerUrl(chain);
+    this.transport = new AxiosTransport(transportUrl, apiKey, axiosOptions);
   }
 
   public abstract getBlockCountdownTime(options: GetBlockCountdownTimeOptions): Promise<BlockCountdownTime>;
@@ -105,17 +99,19 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
   protected abstract getBlockExplorerUrl(chain: Chain): string;
 
   public static build(options: BlockExplorerOptions): BlockExplorer {
-    const { chain } = options;
-    const chainOptions = BlockExplorerCommon.getChainOptions(chain);
+    try {
+      const { chain } = options;
+      const chainOptions = BlockExplorerCommon.getChainOptions(chain);
 
-    const { blockExplorerType } = chainOptions;
-    switch (blockExplorerType) {
-      case BlockExplorerType.Ethereum:
-        return new BlockExplorerEthereum(options);
-      case BlockExplorerType.Routescan:
-        return new BlockExplorerRoutescan(options);
-      case BlockExplorerType.Chainlens:
-        return new BlockExplorerChainlens(options);
+      const { blockExplorerType } = chainOptions;
+      switch (blockExplorerType) {
+        case BlockExplorerType.Ethereum:
+          return new BlockExplorerEthereum(options);
+        case BlockExplorerType.Routescan:
+          return new BlockExplorerRoutescan(options);
+      }
+    } catch (e) {
+      return new BlockExplorerEthereum(options);
     }
   }
 
@@ -124,7 +120,7 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
   }
 
   public getApiKey(): string {
-    return this.apikey;
+    return this.transport.apiKey;
   }
 
   public static getChainOptions(chain?: Chain): ChainItem {
@@ -139,21 +135,6 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
 
     return chainOptions;
   }
-
-  getAxiosRequestConfig(params: any): AxiosRequestConfig {
-    const { apikey, axiosOptions } = this;
-
-    return {
-      ...axiosOptions,
-      headers: {
-        'User-Agent': ''
-      },
-      params: {
-        apikey,
-        ...params
-      }
-    };
-  }
 }
 
 export class BlockExplorerEthereum extends BlockExplorerCommon {
@@ -161,19 +142,20 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
     super(options);
   }
 
-  public async getBlockCountdownTime(options: GetBlockCountdownTimeOptions): Promise<BlockCountdownTime> {
-    const response = await axios.get<BlockExplorerBlockCountdownTimeResponse>(
-      this.url,
-      this.getAxiosRequestConfig({
-        ...options,
-        module: BlockExplorerModule.Block,
-        action: BlockExplorerAction.GetBlockCountdown
-      })
-    );
-
+  private checkResponseStatus(response: any) {
     if (response.data.status !== BlockExplorerStatus.Success) {
       throw new Error(JSON.stringify(response.data));
     }
+  }
+
+  public async getBlockCountdownTime(options: GetBlockCountdownTimeOptions): Promise<BlockCountdownTime> {
+    const response = await this.transport.get<BlockExplorerBlockCountdownTimeResponse>({
+      ...options,
+      module: BlockExplorerModule.Block,
+      action: BlockExplorerAction.GetBlockCountdown
+    });
+
+    this.checkResponseStatus(response);
 
     return response.data.result;
   }
@@ -181,19 +163,14 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
   public async getBlockNumberByTimestamp(options: GetBlockNumberByTimestampOptions) {
     const { closest = BlockExplorerClosest.After, timestamp } = options;
 
-    const response = await axios.get<BlockExplorerBlockIdResponse>(
-      this.url,
-      this.getAxiosRequestConfig({
-        module: BlockExplorerModule.Block,
-        action: BlockExplorerAction.GetBlockByTime,
-        closest,
-        timestamp
-      })
-    );
+    const response = await this.transport.get<BlockExplorerBlockIdResponse>({
+      module: BlockExplorerModule.Block,
+      action: BlockExplorerAction.GetBlockByTime,
+      closest,
+      timestamp
+    });
 
-    if (response.data.status !== BlockExplorerStatus.Success) {
-      throw new Error(JSON.stringify(response.data));
-    }
+    this.checkResponseStatus(response);
 
     return Number(response.data.result);
   }
@@ -201,19 +178,14 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
   public async getAccountBalance(options: GetAccountBalanceOptions) {
     const { address, tag = BlockExplorerTag.Latest } = options;
 
-    const response = await axios.get<GetAccountBalanceResponse>(
-      this.url,
-      this.getAxiosRequestConfig({
-        module: BlockExplorerModule.Account,
-        action: BlockExplorerAction.Balance,
-        address,
-        tag
-      })
-    );
+    const response = await this.transport.get<GetAccountBalanceResponse>({
+      module: BlockExplorerModule.Account,
+      action: BlockExplorerAction.Balance,
+      address,
+      tag
+    });
 
-    if (response.data.status !== BlockExplorerStatus.Success) {
-      throw new Error(JSON.stringify(response.data));
-    }
+    this.checkResponseStatus(response);
 
     return BigInt(response.data.result);
   }
@@ -221,19 +193,14 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
   public async getAccountsBalances(options: GetAccountsBalanceOptions) {
     const { address, tag = BlockExplorerTag.Latest } = options;
 
-    const response = await axios.get<GetAccountsBalanceResponse>(
-      this.url,
-      this.getAxiosRequestConfig({
-        module: BlockExplorerModule.Account,
-        action: BlockExplorerAction.BalanceMulti,
-        address,
-        tag
-      })
-    );
+    const response = await this.transport.get<GetAccountsBalanceResponse>({
+      module: BlockExplorerModule.Account,
+      action: BlockExplorerAction.BalanceMulti,
+      address,
+      tag
+    });
 
-    if (response.data.status !== BlockExplorerStatus.Success) {
-      throw new Error(JSON.stringify(response.data));
-    }
+    this.checkResponseStatus(response);
 
     return response.data.result.map(({ account, balance }) => ({
       account,
@@ -242,61 +209,46 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
   }
 
   public async getNormalTxListByAddress(options: GetNormalTxListByAddressOptions) {
-    const response = await axios.get<BlockExplorerTxListResponse>(
-      this.url,
-      this.getAxiosRequestConfig({
-        ...options,
-        module: BlockExplorerModule.Account,
-        action: BlockExplorerAction.TxList
-      })
-    );
+    const response = await this.transport.get<BlockExplorerTxListResponse>({
+      ...options,
+      module: BlockExplorerModule.Account,
+      action: BlockExplorerAction.TxList
+    });
 
-    if (response.data.status !== BlockExplorerStatus.Success) {
-      if (response.data.message === TX_NO_FOUND_MESSAGE) {
-        return [];
-      }
-      throw new Error(JSON.stringify(response.data));
+    if (response.data.message === TX_NO_FOUND_MESSAGE) {
+      return [];
     }
+    this.checkResponseStatus(response);
 
     return response.data.result;
   }
 
   public async getInternalTxListByAddress(options: GetNormalTxListByAddressOptions): Promise<BlockExplorerTxInternal[]> {
-    const response = await axios.get<BlockExplorerInternalTxListResponse>(
-      this.url,
-      this.getAxiosRequestConfig({
-        ...options,
-        module: BlockExplorerModule.Account,
-        action: BlockExplorerAction.TxListInternal
-      })
-    );
+    const response = await this.transport.get<BlockExplorerInternalTxListResponse>({
+      ...options,
+      module: BlockExplorerModule.Account,
+      action: BlockExplorerAction.TxListInternal
+    });
 
-    if (response.data.status !== BlockExplorerStatus.Success) {
-      if (response.data.message === TX_NO_FOUND_MESSAGE) {
-        return [];
-      }
-      throw new Error(JSON.stringify(response.data));
+    if (response.data.message === TX_NO_FOUND_MESSAGE) {
+      return [];
     }
+    this.checkResponseStatus(response);
 
     return response.data.result;
   }
 
   public async getInternalTxListByTxHash(options: GetInternalTxListByTxHashOptions): Promise<BlockExplorerTxInternalByTxHash[]> {
-    const response = await axios.get<BlockExplorerInternalTxListByHashResponse>(
-      this.url,
-      this.getAxiosRequestConfig({
-        ...options,
-        module: BlockExplorerModule.Account,
-        action: BlockExplorerAction.TxListInternal
-      })
-    );
+    const response = await this.transport.get<BlockExplorerInternalTxListByHashResponse>({
+      ...options,
+      module: BlockExplorerModule.Account,
+      action: BlockExplorerAction.TxListInternal
+    });
 
-    if (response.data.status !== BlockExplorerStatus.Success) {
-      if (response.data.message === TX_NO_FOUND_MESSAGE) {
-        return [];
-      }
-      throw new Error(JSON.stringify(response.data));
+    if (response.data.message === TX_NO_FOUND_MESSAGE) {
+      return [];
     }
+    this.checkResponseStatus(response);
 
     return response.data.result;
   }
@@ -304,18 +256,13 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
   public async getErc20TokenTransferEventsList(
     options: GetErc20TokenTransferEventsListOptions
   ): Promise<BlockExplorerErc20TokenTransferEvent[]> {
-    const response = await axios.get<GetErc20TokenTransferEventsListResponse>(
-      this.url,
-      this.getAxiosRequestConfig({
-        ...options,
-        module: BlockExplorerModule.Account,
-        action: BlockExplorerAction.TokenTxList
-      })
-    );
+    const response = await this.transport.get<GetErc20TokenTransferEventsListResponse>({
+      ...options,
+      module: BlockExplorerModule.Account,
+      action: BlockExplorerAction.TokenTxList
+    });
 
-    if (response.data.status !== BlockExplorerStatus.Success) {
-      throw new Error(JSON.stringify(response.data));
-    }
+    this.checkResponseStatus(response);
 
     return response.data.result;
   }
@@ -323,71 +270,51 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
   public async getAccountTokenBalance(options: GetAccountTokenBalanceOptions) {
     const { address, contractAddress, tag = BlockExplorerTag.Latest } = options;
 
-    const response = await axios.get<GetAccountTokenBalanceResponse>(
-      this.url,
-      this.getAxiosRequestConfig({
-        module: BlockExplorerModule.Account,
-        action: BlockExplorerAction.TokenBalance,
-        address,
-        contractaddress: contractAddress,
-        tag
-      })
-    );
+    const response = await this.transport.get<GetAccountTokenBalanceResponse>({
+      module: BlockExplorerModule.Account,
+      action: BlockExplorerAction.TokenBalance,
+      address,
+      contractaddress: contractAddress,
+      tag
+    });
 
-    if (response.data.status !== BlockExplorerStatus.Success) {
-      throw new Error(JSON.stringify(response.data));
-    }
+    this.checkResponseStatus(response);
 
     return BigInt(response.data.result);
   }
 
   public async getEventLogsByAddress(options: GetEventLogsByAddressOptions): Promise<EventLog[]> {
-    const response = await axios.get<GetEventLogsByAddressResponse>(
-      this.url,
-      this.getAxiosRequestConfig({
-        ...options,
-        module: BlockExplorerModule.Logs,
-        action: BlockExplorerAction.GetLogs
-      })
-    );
+    const response = await this.transport.get<GetEventLogsByAddressResponse>({
+      ...options,
+      module: BlockExplorerModule.Logs,
+      action: BlockExplorerAction.GetLogs
+    });
 
-    if (response.data.status !== BlockExplorerStatus.Success) {
-      throw new Error(JSON.stringify(response.data));
-    }
+    this.checkResponseStatus(response);
 
     return response.data.result;
   }
 
   public async getEventLogsByTopics(options: GetEventLogsByTopicsOptions) {
-    const response = await axios.get<GetEventLogsByTopicsResponse>(
-      this.url,
-      this.getAxiosRequestConfig({
-        ...options,
-        module: BlockExplorerModule.Logs,
-        action: BlockExplorerAction.GetLogs
-      })
-    );
+    const response = await this.transport.get<GetEventLogsByTopicsResponse>({
+      ...options,
+      module: BlockExplorerModule.Logs,
+      action: BlockExplorerAction.GetLogs
+    });
 
-    if (response.data.status !== BlockExplorerStatus.Success) {
-      throw new Error(JSON.stringify(response.data));
-    }
+    this.checkResponseStatus(response);
 
     return response.data.result;
   }
 
   public async getEventLogsByAddressFiltered(options: GetEventLogsByAddressFilteredOptions) {
-    const response = await axios.get<GetEventLogsByAddressFilteredResponse>(
-      this.url,
-      this.getAxiosRequestConfig({
-        ...options,
-        module: BlockExplorerModule.Logs,
-        action: BlockExplorerAction.GetLogs
-      })
-    );
+    const response = await this.transport.get<GetEventLogsByAddressFilteredResponse>({
+      ...options,
+      module: BlockExplorerModule.Logs,
+      action: BlockExplorerAction.GetLogs
+    });
 
-    if (response.data.status !== BlockExplorerStatus.Success) {
-      throw new Error(JSON.stringify(response.data));
-    }
+    this.checkResponseStatus(response);
 
     return response.data.result;
   }
@@ -400,5 +327,3 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
 }
 
 export class BlockExplorerRoutescan extends BlockExplorerEthereum {}
-
-export class BlockExplorerChainlens extends BlockExplorerRoutescan {}

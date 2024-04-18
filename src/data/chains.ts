@@ -55,6 +55,32 @@ export const chains: ChainItem[] = [
   },
 
   {
+    id: Chain.BinanceOpBnbMainnet,
+    type: ChainType.MainNet,
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api-opbnb.bscscan.com/api'
+  },
+  {
+    id: Chain.BinanceOpBnbTestnet,
+    type: ChainType.TestNet,
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api-opbnb-testnet.bscscan.com/api'
+  },
+
+  {
+    id: Chain.Fantom,
+    type: ChainType.MainNet,
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api.ftmscan.com/api'
+  },
+  {
+    id: Chain.FantomTestnet,
+    type: ChainType.TestNet,
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api-testnet.ftmscan.com/api'
+  },
+
+  {
     id: Chain.Polygon,
     type: ChainType.MainNet,
     blockExplorerType: BlockExplorerType.Ethereum,
@@ -65,6 +91,12 @@ export const chains: ChainItem[] = [
     type: ChainType.TestNet,
     blockExplorerType: BlockExplorerType.Ethereum,
     blockExplorerUrl: 'https://api-testnet.polygonscan.com/api'
+  },
+  {
+    id: Chain.PolygonAmoy,
+    type: ChainType.TestNet,
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api-amoy.polygonscan.com/api'
   },
 
   {
@@ -85,6 +117,12 @@ export const chains: ChainItem[] = [
     type: ChainType.MainNet,
     blockExplorerType: BlockExplorerType.Ethereum,
     blockExplorerUrl: 'https://api.arbiscan.io/api'
+  },
+  {
+    id: Chain.ArbitrumNova,
+    type: ChainType.MainNet,
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api-nova.arbiscan.io/api'
   },
   {
     id: Chain.ArbitrumSepolia,
