@@ -197,3 +197,5 @@ Just register an account on corresponding site and generate an API key.
 | 44787    | CeloAlfajores            | https://celoscan.io             |
 | 59144    | Linea                    | https://lineascan.build         |
 | 59140    | LineaGoerli              | https://lineascan.build         |
+
+Client also support other etherscan-compatible block explorers, but in this case you must provide custom **url** parameter.

@@ -99,17 +99,19 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
   protected abstract getBlockExplorerUrl(chain: Chain): string;
 
   public static build(options: BlockExplorerOptions): BlockExplorer {
-    const { chain } = options;
-    const chainOptions = BlockExplorerCommon.getChainOptions(chain);
+    try {
+      const { chain } = options;
+      const chainOptions = BlockExplorerCommon.getChainOptions(chain);
 
-    const { blockExplorerType } = chainOptions;
-    switch (blockExplorerType) {
-      case BlockExplorerType.Ethereum:
-        return new BlockExplorerEthereum(options);
-      case BlockExplorerType.Routescan:
-        return new BlockExplorerRoutescan(options);
-      case BlockExplorerType.Chainlens:
-        return new BlockExplorerChainlens(options);
+      const { blockExplorerType } = chainOptions;
+      switch (blockExplorerType) {
+        case BlockExplorerType.Ethereum:
+          return new BlockExplorerEthereum(options);
+        case BlockExplorerType.Routescan:
+          return new BlockExplorerRoutescan(options);
+      }
+    } catch (e) {
+      return new BlockExplorerEthereum(options);
     }
   }
 
@@ -325,5 +327,3 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
 }
 
 export class BlockExplorerRoutescan extends BlockExplorerEthereum {}
-
-export class BlockExplorerChainlens extends BlockExplorerRoutescan {}
