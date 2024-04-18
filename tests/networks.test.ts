@@ -154,6 +154,15 @@ describe('Checking access to blockchains', () => {
     );
 
     test(
+      'ArbitrumNova (42170)',
+      async () => {
+        const blockId = await getLastBlockchainBlock(Chain.ArbitrumNova, ARBITRUM_API_KEY);
+        expect(typeof blockId).toBe('number');
+      },
+      TEST_TIMEOUT
+    );
+
+    test(
       'ArbitrumSepolia (421614)',
       async () => {
         const blockId = await getLastBlockchainBlock(Chain.ArbitrumSepolia, ARBITRUM_API_KEY);

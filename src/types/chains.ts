@@ -29,6 +29,7 @@ export enum Chain {
   BaseSepolia = 84532,
 
   Arbitrum = 42161,
+  ArbitrumNova = 42170,
   ArbitrumGoerli = 421613,
   ArbitrumSepolia = 421614,
 

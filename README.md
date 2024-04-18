@@ -181,6 +181,7 @@ Just register an account on corresponding site and generate an API key.
 | 8453     | Base                     | https://basescan.org            |
 | 84532    | BaseSepolia              | https://basescan.org            |
 | 42161    | Arbitrum                 | https://arbiscan.io             |
+| 42170    | ArbitrumNova             | https://arbiscan.io             |
 | 421614   | ArbitrumSepolia          | https://arbiscan.io             |
 | 43114    | AvalancheCChain          | https://routescan.io            |
 | 43113    | AvalancheCChainFuji      | https://routescan.io            |

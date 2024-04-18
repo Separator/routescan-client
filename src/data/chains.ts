@@ -93,6 +93,12 @@ export const chains: ChainItem[] = [
     blockExplorerUrl: 'https://api.arbiscan.io/api'
   },
   {
+    id: Chain.ArbitrumNova,
+    type: ChainType.MainNet,
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api-nova.arbiscan.io/api'
+  },
+  {
     id: Chain.ArbitrumSepolia,
     type: ChainType.TestNet,
     blockExplorerType: BlockExplorerType.Ethereum,
