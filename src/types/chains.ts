@@ -1,4 +1,3 @@
-import { ChainType } from './routescan';
 import { BlockExplorerType } from '../interfaces/BlockExplorer';
 
 export enum Chain {
@@ -52,7 +51,6 @@ export enum Chain {
 
 export interface ChainItem {
   id: Chain;
-  type: ChainType;
   blockExplorerType: BlockExplorerType;
   blockExplorerUrl: string;
 }
