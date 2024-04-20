@@ -170,6 +170,8 @@ main();
 **You must use the API key of the corresponding block explorer!!!**  
 Just register an account on corresponding site and generate an API key.
 
+**PS**: Client also support other etherscan-compatible block explorers, but in this case you must provide custom **url** parameter.
+
 | **ID**   | **Name**                 | **Block explorer**              |
 | -------- | ------------------------ | ------------------------------- |
 | 1        | Ethereum                 | https://etherscan.io            |
@@ -197,5 +199,3 @@ Just register an account on corresponding site and generate an API key.
 | 44787    | CeloAlfajores            | https://celoscan.io             |
 | 59144    | Linea                    | https://lineascan.build         |
 | 59140    | LineaGoerli              | https://lineascan.build         |
-
-Client also support other etherscan-compatible block explorers, but in this case you must provide custom **url** parameter.
