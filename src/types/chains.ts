@@ -27,6 +27,10 @@ export enum Chain {
   Fantom = 250,
   FantomTestnet = 4002,
 
+  Filecoin = 314,
+
+  ZkSyncEra = 324,
+
   Base = 8453,
   BaseGoerli = 84531,
   BaseSepolia = 84532,
