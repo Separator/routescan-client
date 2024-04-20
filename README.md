@@ -170,32 +170,32 @@ main();
 **You must use the API key of the corresponding block explorer!!!**  
 Just register an account on corresponding site and generate an API key.
 
-| **ID**   | **Name**                 | **Block explorer**              |
-| -------- | ------------------------ | ------------------------------- |
-| 1        | Ethereum                 | https://etherscan.io            |
-| 5        | EthereumGoerli           | https://etherscan.io            |
-| 11155111 | EthereumSepolia          | https://etherscan.io            |
-| 10       | Optimism                 | https://optimistic.etherscan.io |
-| 420      | OptimismGoerli           | https://optimistic.etherscan.io |
-| 11155420 | OptimismSepolia          | https://optimistic.etherscan.io |
-| 56       | BinanceSmartChain        | https://bscscan.com             |
-| 97       | BinanceSmartChainTestnet | https://bscscan.com             |
-| 137      | Polygon                  | https://polygonscan.com         |
-| 80002    | PolygonAmoy              | https://polygonscan.com         |
-| 204      | BinanceOpBnbMainnet      | https://opbnb.bscscan.com       |
-| 5611     | BinanceOpBnbTestnet      | https://opbnb.bscscan.com       |
-| 250      | Fantom                   | https://ftmscan.com             |
-| 4002     | FantomTestnet            | https://ftmscan.com             |
-| 8453     | Base                     | https://basescan.org            |
-| 84532    | BaseSepolia              | https://basescan.org            |
-| 42161    | Arbitrum                 | https://arbiscan.io             |
-| 42170    | ArbitrumNova             | https://arbiscan.io             |
-| 421614   | ArbitrumSepolia          | https://arbiscan.io             |
-| 43114    | AvalancheCChain          | https://routescan.io            |
-| 43113    | AvalancheCChainFuji      | https://routescan.io            |
-| 42220    | Celo                     | https://celoscan.io             |
-| 44787    | CeloAlfajores            | https://celoscan.io             |
-| 59144    | Linea                    | https://lineascan.build         |
-| 59140    | LineaGoerli              | https://lineascan.build         |
+**PS**: Client also support other etherscan-compatible block explorers, but in this case you must provide custom **url** parameter.
 
-Client also support other etherscan-compatible block explorers, but in this case you must provide custom **url** parameter.
+| **ID**   | **Name**                 | **Block explorer**              | Block explorer API url                                              |
+| -------- | ------------------------ | ------------------------------- | ------------------------------------------------------------------- |
+| 1        | Ethereum                 | https://etherscan.io            | https://api.etherscan.io/api                                        |
+| 5        | EthereumGoerli           | https://etherscan.io            | https://api-goerli.etherscan.io/api                                 |
+| 11155111 | EthereumSepolia          | https://etherscan.io            | https://api-sepolia.etherscan.io/api                                |
+| 10       | Optimism                 | https://optimistic.etherscan.io | https://api-optimistic.etherscan.io/api                             |
+| 420      | OptimismGoerli           | https://optimistic.etherscan.io | https://api-goerli-optimistic.etherscan.io/api                      |
+| 11155420 | OptimismSepolia          | https://optimistic.etherscan.io | https://api-sepolia-optimistic.etherscan.io/api                     |
+| 56       | BinanceSmartChain        | https://bscscan.com             | https://api.bscscan.com/api                                         |
+| 97       | BinanceSmartChainTestnet | https://bscscan.com             | https://api-testnet.bscscan.com/api                                 |
+| 137      | Polygon                  | https://polygonscan.com         | https://api.polygonscan.com/api                                     |
+| 80002    | PolygonAmoy              | https://polygonscan.com         | https://api-amoy.polygonscan.com/api                                |
+| 204      | BinanceOpBnbMainnet      | https://opbnb.bscscan.com       | https://api-opbnb.bscscan.com/api                                   |
+| 5611     | BinanceOpBnbTestnet      | https://opbnb.bscscan.com       | https://api-opbnb-testnet.bscscan.com/api                           |
+| 250      | Fantom                   | https://ftmscan.com             | https://api.ftmscan.com/api                                         |
+| 4002     | FantomTestnet            | https://ftmscan.com             | https://api-testnet.ftmscan.com/api                                 |
+| 8453     | Base                     | https://basescan.org            | https://api.basescan.org/api                                        |
+| 84532    | BaseSepolia              | https://basescan.org            | https://api-sepolia.basescan.org/api                                |
+| 42161    | Arbitrum                 | https://arbiscan.io             | https://api.arbiscan.io/api                                         |
+| 42170    | ArbitrumNova             | https://arbiscan.io             | https://api-nova.arbiscan.io/api                                    |
+| 421614   | ArbitrumSepolia          | https://arbiscan.io             | https://api-sepolia.arbiscan.io/api                                 |
+| 43114    | AvalancheCChain          | https://routescan.io            | https://api.routescan.io/v2/network/mainnet/evm/43114/etherscan/api |
+| 43113    | AvalancheCChainFuji      | https://routescan.io            | https://api.routescan.io/v2/network/testnet/evm/43113/etherscan/api |
+| 42220    | Celo                     | https://celoscan.io             | https://api.celoscan.io/api                                         |
+| 44787    | CeloAlfajores            | https://celoscan.io             | https://api-alfajores.celoscan.io/api                               |
+| 59144    | Linea                    | https://lineascan.build         | https://api.lineascan.build/api                                     |
+| 59140    | LineaGoerli              | https://lineascan.build         | https://api-testnet.lineascan.build/api                             |

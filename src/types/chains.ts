@@ -1,4 +1,3 @@
-import { ChainType } from './routescan';
 import { BlockExplorerType } from '../interfaces/BlockExplorer';
 
 export enum Chain {
@@ -28,6 +27,10 @@ export enum Chain {
   Fantom = 250,
   FantomTestnet = 4002,
 
+  Filecoin = 314,
+
+  ZkSyncEra = 324,
+
   Base = 8453,
   BaseGoerli = 84531,
   BaseSepolia = 84532,
@@ -52,7 +55,6 @@ export enum Chain {
 
 export interface ChainItem {
   id: Chain;
-  type: ChainType;
   blockExplorerType: BlockExplorerType;
   blockExplorerUrl: string;
 }
