@@ -180,7 +180,7 @@ export interface GetErc20TokenTransferEventsListOptions extends PaginationOption
    * @description The string representing the address to check for balance
      @example '0x77134cbC06cB00b66F4c7e623D5fdBF6777635EC'
    */
-  address: string;
+  address?: string;
   /**
    * @description The string representing the token contract address to check for balance
    * @example '0x9702230A8Ea53601f5cD2dc00fDBc13d4dF4A8c7'
