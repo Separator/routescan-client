@@ -8,9 +8,9 @@ export const chains: ChainItem[] = [
     blockExplorerUrl: 'https://api.etherscan.io/api'
   },
   {
-    id: Chain.EthereumGoerli,
+    id: Chain.EthereumHolesky,
     blockExplorerType: BlockExplorerType.Ethereum,
-    blockExplorerUrl: 'https://api-goerli.etherscan.io/api'
+    blockExplorerUrl: 'https://api-holesky.etherscan.io/api'
   },
   {
     id: Chain.EthereumSepolia,

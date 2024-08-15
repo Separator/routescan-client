@@ -178,7 +178,7 @@ Just register an account on corresponding site and generate an API key.
 | **ID**   | **Name**                 | **Block explorer**              | Block explorer API url                                              |
 | -------- | ------------------------ | ------------------------------- | ------------------------------------------------------------------- |
 | 1        | Ethereum                 | https://etherscan.io            | https://api.etherscan.io/api                                        |
-| 5        | EthereumGoerli           | https://etherscan.io            | https://api-goerli.etherscan.io/api                                 |
+| 17000    | EthereumHolesky          | https://etherscan.io            | https://api-holesky.etherscan.io/api                                |
 | 11155111 | EthereumSepolia          | https://etherscan.io            | https://api-sepolia.etherscan.io/api                                |
 | 10       | Optimism                 | https://optimistic.etherscan.io | https://api-optimistic.etherscan.io/api                             |
 | 420      | OptimismGoerli           | https://optimistic.etherscan.io | https://api-goerli-optimistic.etherscan.io/api                      |

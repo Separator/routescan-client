@@ -4,7 +4,7 @@ export enum Chain {
   NotSpecified = 0,
 
   Ethereum = 1,
-  EthereumGoerli = 5,
+  EthereumHolesky = 17000,
   EthereumSepolia = 11155111,
 
   Optimism = 10,

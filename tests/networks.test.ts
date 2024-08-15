@@ -45,8 +45,8 @@ describe('Checking access to blockchains', () => {
       TEST_TIMEOUT
     );
 
-    test('EthereumGoerli (5)', async () => {
-      const blockId = await getLastBlockchainBlock(Chain.EthereumGoerli, ETHEREUM_API_KEY);
+    test('EthereumHolesky (5)', async () => {
+      const blockId = await getLastBlockchainBlock(Chain.EthereumHolesky, ETHEREUM_API_KEY);
       expect(typeof blockId).toBe('number');
     });
 
