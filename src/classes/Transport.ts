@@ -1,15 +1,19 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 export interface Transport {
-  apiKey: string;
-
+  getApiKey(): string;
+  getUrl(): string;
   get<T>(options: any): Promise<AxiosResponse<T>>;
 }
 
 export class AxiosTransport implements Transport {
-  constructor(private readonly url: string, public readonly apiKey: string, private readonly options: AxiosRequestConfig = {}) {}
+  constructor(
+    protected readonly url: string,
+    protected readonly apiKey: string,
+    protected readonly options: AxiosRequestConfig = {}
+  ) {}
 
-  async get<T>(options: any): Promise<AxiosResponse<T>> {
+  public async get<T>(options: any): Promise<AxiosResponse<T>> {
     const { apiKey } = this;
 
     const response = await axios.get<T>(this.url, {
@@ -24,5 +28,13 @@ export class AxiosTransport implements Transport {
     });
 
     return response;
+  }
+
+  public getApiKey(): string {
+    return this.apiKey;
+  }
+
+  public getUrl(): string {
+    return this.url;
   }
 }
