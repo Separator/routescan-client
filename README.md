@@ -181,7 +181,6 @@ Just register an account on corresponding site and generate an API key.
 | 17000    | EthereumHolesky          | https://etherscan.io            | https://api-holesky.etherscan.io/api                                |
 | 11155111 | EthereumSepolia          | https://etherscan.io            | https://api-sepolia.etherscan.io/api                                |
 | 10       | Optimism                 | https://optimistic.etherscan.io | https://api-optimistic.etherscan.io/api                             |
-| 420      | OptimismGoerli           | https://optimistic.etherscan.io | https://api-goerli-optimistic.etherscan.io/api                      |
 | 11155420 | OptimismSepolia          | https://optimistic.etherscan.io | https://api-sepolia-optimistic.etherscan.io/api                     |
 | 56       | BinanceSmartChain        | https://bscscan.com             | https://api.bscscan.com/api                                         |
 | 97       | BinanceSmartChainTestnet | https://bscscan.com             | https://api-testnet.bscscan.com/api                                 |
@@ -201,4 +200,4 @@ Just register an account on corresponding site and generate an API key.
 | 42220    | Celo                     | https://celoscan.io             | https://api.celoscan.io/api                                         |
 | 44787    | CeloAlfajores            | https://celoscan.io             | https://api-alfajores.celoscan.io/api                               |
 | 59144    | Linea                    | https://lineascan.build         | https://api.lineascan.build/api                                     |
-| 59140    | LineaGoerli              | https://lineascan.build         | https://api-testnet.lineascan.build/api                             |
+| 59141    | LineaSepolia             | https://lineascan.build         | https://api-sepolia.lineascan.build/api                             |
