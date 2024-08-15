@@ -45,8 +45,8 @@ describe('Checking access to blockchains', () => {
       TEST_TIMEOUT
     );
 
-    test('EthereumGoerli (5)', async () => {
-      const blockId = await getLastBlockchainBlock(Chain.EthereumGoerli, ETHEREUM_API_KEY);
+    test('EthereumHolesky (5)', async () => {
+      const blockId = await getLastBlockchainBlock(Chain.EthereumHolesky, ETHEREUM_API_KEY);
       expect(typeof blockId).toBe('number');
     });
 
@@ -61,15 +61,6 @@ describe('Checking access to blockchains', () => {
       'Optimism (10)',
       async () => {
         const blockId = await getLastBlockchainBlock(Chain.Optimism, OPTIMISM_API_KEY);
-        expect(typeof blockId).toBe('number');
-      },
-      TEST_TIMEOUT
-    );
-
-    test(
-      'OptimismGoerli (420)',
-      async () => {
-        const blockId = await getLastBlockchainBlock(Chain.OptimismGoerli, OPTIMISM_API_KEY);
         expect(typeof blockId).toBe('number');
       },
       TEST_TIMEOUT
@@ -265,9 +256,9 @@ describe('Checking access to blockchains', () => {
     );
 
     test(
-      'LineaGoerli (59140)',
+      'LineaSepolia (59141)',
       async () => {
-        const blockId = await getLastBlockchainBlock(Chain.LineaGoerli, LINEA_API_KEY);
+        const blockId = await getLastBlockchainBlock(Chain.LineaSepolia, LINEA_API_KEY);
         expect(typeof blockId).toBe('number');
       },
       TEST_TIMEOUT

@@ -5,6 +5,7 @@ export enum Chain {
 
   Ethereum = 1,
   EthereumGoerli = 5,
+  EthereumHolesky = 17000,
   EthereumSepolia = 11155111,
 
   Optimism = 10,
@@ -48,6 +49,7 @@ export enum Chain {
 
   Linea = 59144,
   LineaGoerli = 59140,
+  LineaSepolia = 59141,
 
   Palm = 11297108109,
   PalmTestnet = 11297108099

@@ -8,9 +8,9 @@ export const chains: ChainItem[] = [
     blockExplorerUrl: 'https://api.etherscan.io/api'
   },
   {
-    id: Chain.EthereumGoerli,
+    id: Chain.EthereumHolesky,
     blockExplorerType: BlockExplorerType.Ethereum,
-    blockExplorerUrl: 'https://api-goerli.etherscan.io/api'
+    blockExplorerUrl: 'https://api-holesky.etherscan.io/api'
   },
   {
     id: Chain.EthereumSepolia,
@@ -22,11 +22,6 @@ export const chains: ChainItem[] = [
     id: Chain.Optimism,
     blockExplorerType: BlockExplorerType.Ethereum,
     blockExplorerUrl: 'https://api-optimistic.etherscan.io/api'
-  },
-  {
-    id: Chain.OptimismGoerli,
-    blockExplorerType: BlockExplorerType.Ethereum,
-    blockExplorerUrl: 'https://api-goerli-optimistic.etherscan.io/api'
   },
   {
     id: Chain.OptimismSepolia,
@@ -138,8 +133,8 @@ export const chains: ChainItem[] = [
     blockExplorerUrl: 'https://api.lineascan.build/api'
   },
   {
-    id: Chain.LineaGoerli,
+    id: Chain.LineaSepolia,
     blockExplorerType: BlockExplorerType.Ethereum,
-    blockExplorerUrl: 'https://api-testnet.lineascan.build/api'
+    blockExplorerUrl: 'https://api-sepolia.lineascan.build/api'
   }
 ];
