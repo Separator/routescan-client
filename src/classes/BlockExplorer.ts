@@ -75,7 +75,7 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
     const { apiKey = '', chain, url = '', axiosOptions = {} } = options;
 
     this.chain = chain;
-    const transportUrl = url ? url : this.getBlockExplorerUrl(chain);
+    const transportUrl = url || this.getBlockExplorerUrl(chain);
     this.transport = new AxiosTransport(transportUrl, apiKey, axiosOptions);
   }
 
@@ -120,7 +120,11 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
   }
 
   public getApiKey(): string {
-    return this.transport.apiKey;
+    return this.transport.getApiKey();
+  }
+
+  public getUrl(): string {
+    return this.transport.getUrl();
   }
 
   public static getChainOptions(chain?: Chain): ChainItem {
@@ -138,10 +142,6 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
 }
 
 export class BlockExplorerEthereum extends BlockExplorerCommon {
-  constructor(options: BlockExplorerOptions) {
-    super(options);
-  }
-
   private checkResponseStatus(response: any) {
     if (response.data.status !== BlockExplorerStatus.Success) {
       throw new Error(JSON.stringify(response.data));
