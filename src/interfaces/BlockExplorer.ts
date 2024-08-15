@@ -201,6 +201,8 @@ export interface BlockExplorer {
    */
   getApiKey: () => string;
 
+  getUrl: () => string;
+
   /**
    * Get ether balance for a single address
    * @param options
