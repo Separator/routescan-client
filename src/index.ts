@@ -5,7 +5,20 @@ import {
   BlockExplorerOptions
 } from './classes/BlockExplorer';
 import { Chain } from './types/chains';
-import { BlockExplorer } from './interfaces/BlockExplorer';
+import {
+  BlockExplorer,
+  GetBlockCountdownTimeOptions,
+  GetBlockNumberByTimestampOptions,
+  GetAccountBalanceOptions,
+  GetAccountsBalanceOptions,
+  GetNormalTxListByAddressOptions,
+  GetInternalTxListByTxHashOptions,
+  GetErc20TokenTransferEventsListOptions,
+  GetAccountTokenBalanceOptions,
+  GetEventLogsByAddressOptions,
+  GetEventLogsByTopicsOptions,
+  GetEventLogsByAddressFilteredOptions
+} from './interfaces/BlockExplorer';
 import {
   BlockExplorerModule,
   BlockExplorerAction,
@@ -32,6 +45,20 @@ import {
 } from './types/block-explorer';
 
 export {
+  // Methods options:
+  GetBlockCountdownTimeOptions,
+  GetBlockNumberByTimestampOptions,
+  GetAccountBalanceOptions,
+  GetAccountsBalanceOptions,
+  GetNormalTxListByAddressOptions,
+  GetInternalTxListByTxHashOptions,
+  GetErc20TokenTransferEventsListOptions,
+  GetAccountTokenBalanceOptions,
+  GetEventLogsByAddressOptions,
+  GetEventLogsByTopicsOptions,
+  GetEventLogsByAddressFilteredOptions,
+
+  // Parameters:
   BlockExplorerModule,
   BlockExplorerAction,
   BlockExplorerTag,
@@ -39,9 +66,17 @@ export {
   BlockExplorerSort,
   BlockExplorerClosest,
   BlockExplorerTopicOperation,
+  Chain,
+
+  // Entities:
   BlockExplorerTransaction,
   BlockExplorerTxInternal,
   BlockCountdownTime,
+  BlockExplorerErc20TokenTransferEvent,
+  BlockExplorerTxInternalByTxHash,
+  EventLog,
+
+  // Responses:
   BlockExplorerBlockCountdownTimeResponse,
   BlockExplorerBlockIdResponse,
   GetAccountBalanceResponse,
@@ -51,13 +86,11 @@ export {
   BlockExplorerTxListResponse,
   BlockExplorerInternalTxListResponse,
   BlockExplorerInternalTxListByHashResponse,
-  BlockExplorerErc20TokenTransferEvent,
-  BlockExplorerTxInternalByTxHash,
-  EventLog,
+
+  // Block explorer:
   BlockExplorer,
   BlockExplorerCommon,
   BlockExplorerEthereum,
   BlockExplorerRoutescan,
-  BlockExplorerOptions,
-  Chain
+  BlockExplorerOptions
 };
