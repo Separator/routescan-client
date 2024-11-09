@@ -19,7 +19,7 @@ import {
   BlockExplorerSort,
   BlockExplorerClosest,
   BlockExplorerTopicOperation
-} from './types/options';
+} from './types/params';
 import {
   BlockExplorer,
   GetBlockCountdownTimeOptions,

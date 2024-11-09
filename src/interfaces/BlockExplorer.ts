@@ -1,7 +1,7 @@
 import { Chain } from '../types/chains';
 import { BlockExplorerBlockItem } from '../types/block';
 import { BlockCountdownTime, EventLog } from '../types/block-explorer';
-import { BlockExplorerClosest, BlockExplorerSort, BlockExplorerTag, BlockExplorerTopicOperation } from '../types/options';
+import { BlockExplorerClosest, BlockExplorerSort, BlockExplorerTag, BlockExplorerTopicOperation } from '../types/params';
 import {
   BlockExplorerErc20TokenTransferEvent,
   BlockExplorerTransaction,

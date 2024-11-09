@@ -16,7 +16,7 @@ import {
   BlockExplorerModule,
   BlockExplorerStatus,
   BlockExplorerTag
-} from '../types/options';
+} from '../types/params';
 import {
   BlockCountdownTime,
   BlockExplorerBlockCountdownTimeResponse,

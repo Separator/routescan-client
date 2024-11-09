@@ -1,4 +1,4 @@
-import { BlockExplorerStatus } from './options';
+import { BlockExplorerStatus } from './params';
 import { BlockExplorerBlockItem } from './block';
 import {
   BlockExplorerTransaction,
