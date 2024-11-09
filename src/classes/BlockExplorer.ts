@@ -4,7 +4,7 @@ import { chains } from '../data/chains';
 import { BlockExplorerType } from '../types/type';
 import { Chain, ChainItem } from '../types/chains';
 import { AxiosTransport, Transport } from './Transport';
-import { BlockExplorerBlockItem } from '../types/block';
+import { BlockExplorerBlockItem, BlockExplorerBlockUncleItem } from '../types/block';
 import { BlockExplorer } from '../interfaces/BlockExplorer';
 import {
   BlockExplorerErc20TokenTransferEvent,
@@ -25,6 +25,7 @@ import {
   BlockExplorerBlockIdResponse,
   BlockExplorerEthBlockByNumberResponse,
   BlockExplorerEthBlockNumberResponse,
+  BlockExplorerEthBlockTransactionCountByNumberResponse,
   BlockExplorerInternalTxListByHashResponse,
   BlockExplorerInternalTxListResponse,
   BlockExplorerTxListResponse,
@@ -50,7 +51,8 @@ import {
   GetEventLogsByAddressOptions,
   GetErc20TokenTransferEventsListOptions,
   GetInternalTxListByTxHashOptions,
-  GetEthBlockByNumberOptions
+  GetEthBlockByNumberOptions,
+  GetEthUncleByBlockNumberAndIndexOptions
 } from '../types/options';
 
 const TX_NO_FOUND_MESSAGE = 'No transactions found';
@@ -104,6 +106,9 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
   public abstract getEventLogsByAddressFiltered(options: GetEventLogsByAddressFilteredOptions): Promise<EventLog[]>;
   public abstract eth_blockNumber(): Promise<string>;
   public abstract eth_getBlockByNumber(options: GetEthBlockByNumberOptions): Promise<BlockExplorerBlockItem>;
+  public abstract eth_getUncleByBlockNumberAndIndex(
+    options: GetEthUncleByBlockNumberAndIndexOptions
+  ): Promise<BlockExplorerBlockUncleItem>;
 
   protected abstract getBlockExplorerUrl(chain: Chain): string;
 
@@ -352,7 +357,7 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
     return response.data.result;
   }
 
-  public async eth_getBlockByNumber(options: GetEthBlockByNumberOptions): Promise<BlockExplorerBlockItem> {
+  public async eth_getBlockByNumber(options: GetEthBlockByNumberOptions) {
     const { chain: chainid } = this;
 
     const response = await this.transport.get<BlockExplorerEthBlockByNumberResponse>({
@@ -360,6 +365,21 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
       chainid,
       module: BlockExplorerModule.Proxy,
       action: BlockExplorerAction.eth_getBlockByNumber
+    });
+
+    this.checkResponseStatus(response);
+
+    return response.data.result;
+  }
+
+  public async eth_getUncleByBlockNumberAndIndex(options: GetEthUncleByBlockNumberAndIndexOptions) {
+    const { chain: chainid } = this;
+
+    const response = await this.transport.get<BlockExplorerEthBlockTransactionCountByNumberResponse>({
+      ...options,
+      chainid,
+      module: BlockExplorerModule.Proxy,
+      action: BlockExplorerAction.eth_getUncleByBlockNumberAndIndex
     });
 
     this.checkResponseStatus(response);

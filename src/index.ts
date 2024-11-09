@@ -33,7 +33,8 @@ import {
   GetEventLogsByAddressOptions,
   GetEventLogsByTopicsOptions,
   GetEventLogsByAddressFilteredOptions,
-  GetEthBlockByNumberOptions
+  GetEthBlockByNumberOptions,
+  GetEthUncleByBlockNumberAndIndexOptions
 } from './types/options';
 import {
   // Structures:
@@ -55,7 +56,7 @@ import {
 } from './types/block-explorer';
 
 export {
-  // Methods options:
+  // Simple methods options:
   GetBlockCountdownTimeOptions,
   GetBlockNumberByTimestampOptions,
   GetAccountBalanceOptions,
@@ -70,6 +71,7 @@ export {
 
   // Rpc methods options:
   GetEthBlockByNumberOptions,
+  GetEthUncleByBlockNumberAndIndexOptions,
 
   // Parameters:
   BlockExplorerModule,

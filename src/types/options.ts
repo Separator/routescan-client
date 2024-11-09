@@ -184,3 +184,16 @@ export interface GetEthBlockByNumberOptions {
      */
   boolean: boolean;
 }
+
+export interface GetEthUncleByBlockNumberAndIndexOptions {
+  /**
+   * The block number, in hex
+   * @example '0x10d4f'
+   */
+  tag?: string;
+  /**
+   * @description Position of the uncle's index in the block, in hex
+   * @example '0x5'
+   */
+  index?: string;
+}

@@ -23,27 +23,17 @@ export interface BlockWithdrawal {
   amount: string;
 }
 
-export interface BlockExplorerBlockItem {
+interface BlockExplorerBlockCommon {
   /**
    * @description Base fee per gas in hex
    * @example '0x1bf871922'
    */
   baseFeePerGas: string;
   /**
-   * @description Blob gas used in hex
-   * @example '0x60000'
-   */
-  blobGasUsed: string;
-  /**
    * @description Difficulty in hex
    * @example '0x0'
    */
   difficulty: string;
-  /**
-   * @description Excess blob gas in hex
-   * @example '0x2ea0000'
-   */
-  excessBlobGas: string;
   /**
    * @description Extra data
    * @example '0x546974616e2028746974616e6275696c6465722e78797a29'
@@ -90,11 +80,6 @@ export interface BlockExplorerBlockItem {
    */
   number: string;
   /**
-   * @description Parent beacon block root
-   * @example '0x1b25dae6ad3c6fe004eeac0d3385b2ac2dc68d765545c1e06f0cbf75896bad86'
-   */
-  parentBeaconBlockRoot: string;
-  /**
    * @description Parent hash
    * @example '0x62c917e120a3927690b18d7ca6e8476b964973e5cdc249b65397badf985e034d'
    */
@@ -125,13 +110,6 @@ export interface BlockExplorerBlockItem {
    */
   timestamp: string;
   /**
-   * @description Total difficulty in hex
-   * @example '0xc70d815d562d3cfa955'
-   */
-  totalDifficulty: string;
-
-  transactions: (string | BlockTransaction)[];
-  /**
    * @description Txs root
    * @example '0xaa3fbdf01f0acc26257824177ac0d0e909040608b600991781c95506d1657f81'
    */
@@ -140,6 +118,35 @@ export interface BlockExplorerBlockItem {
    * @description Uncles list
    */
   uncles: any[];
+}
+
+export interface BlockExplorerBlockUncleItem extends BlockExplorerBlockCommon {}
+
+export interface BlockExplorerBlockItem extends BlockExplorerBlockCommon {
+  /**
+   * @description Blob gas used in hex
+   * @example '0x60000'
+   */
+  blobGasUsed: string;
+  /**
+   * @description Excess blob gas in hex
+   * @example '0x2ea0000'
+   */
+  excessBlobGas: string;
+  /**
+   * @description Parent beacon block root
+   * @example '0x1b25dae6ad3c6fe004eeac0d3385b2ac2dc68d765545c1e06f0cbf75896bad86'
+   */
+  parentBeaconBlockRoot: string;
+  /**
+   * @description Total difficulty in hex
+   * @example '0xc70d815d562d3cfa955'
+   */
+  totalDifficulty: string;
+  /**
+   * @description Txs list
+   */
+  transactions: (string | BlockTransaction)[];
   /**
    * @description Block withdrawals list
    */

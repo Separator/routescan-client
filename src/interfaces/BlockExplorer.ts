@@ -1,5 +1,5 @@
 import { Chain } from '../types/chains';
-import { BlockExplorerBlockItem } from '../types/block';
+import { BlockExplorerBlockItem, BlockExplorerBlockUncleItem } from '../types/block';
 import { BlockCountdownTime, EventLog } from '../types/block-explorer';
 import {
   BlockExplorerErc20TokenTransferEvent,
@@ -15,6 +15,7 @@ import {
   GetBlockNumberByTimestampOptions,
   GetErc20TokenTransferEventsListOptions,
   GetEthBlockByNumberOptions,
+  GetEthUncleByBlockNumberAndIndexOptions,
   GetEventLogsByAddressFilteredOptions,
   GetEventLogsByAddressOptions,
   GetEventLogsByTopicsOptions,
@@ -129,4 +130,10 @@ export interface BlockExplorer {
    * @returns Block info
    */
   eth_getBlockByNumber(options: GetEthBlockByNumberOptions): Promise<BlockExplorerBlockItem>;
+  /**
+   * Returns the number of transactions in a block
+   * @param options
+   * @returns Uncle block info
+   */
+  eth_getUncleByBlockNumberAndIndex(options: GetEthUncleByBlockNumberAndIndexOptions): Promise<BlockExplorerBlockUncleItem>;
 }

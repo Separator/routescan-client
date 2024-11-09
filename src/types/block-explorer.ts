@@ -1,5 +1,5 @@
 import { BlockExplorerStatus } from './params';
-import { BlockExplorerBlockItem } from './block';
+import { BlockExplorerBlockItem, BlockExplorerBlockUncleItem } from './block';
 import {
   BlockExplorerTransaction,
   BlockExplorerTxInternal,
@@ -201,4 +201,8 @@ export interface BlockExplorerEthBlockNumberResponse extends BlockExplorerRpcRes
 
 export interface BlockExplorerEthBlockByNumberResponse extends BlockExplorerRpcResponseCommon {
   result: BlockExplorerBlockItem;
+}
+
+export interface BlockExplorerEthBlockTransactionCountByNumberResponse extends BlockExplorerRpcResponseCommon {
+  result: BlockExplorerBlockUncleItem;
 }
