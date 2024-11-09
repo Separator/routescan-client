@@ -1,14 +1,13 @@
 import { Chain } from '../types/chains';
+import { BlockExplorerBlockItem } from '../types/block';
+import { BlockCountdownTime, EventLog } from '../types/block-explorer';
 import { BlockExplorerClosest, BlockExplorerSort, BlockExplorerTag, BlockExplorerTopicOperation } from '../types/options';
 import {
-  BlockCountdownTime,
   BlockExplorerErc20TokenTransferEvent,
   BlockExplorerTransaction,
   BlockExplorerTxInternal,
-  BlockExplorerTxInternalByTxHash,
-  EventLog
-} from '../types/block-explorer';
-import { BlockExplorerBlockItem } from '../types/block';
+  BlockExplorerTxInternalByTxHash
+} from '../types/transaction';
 
 export enum BlockExplorerType {
   Routescan = 'routescan',

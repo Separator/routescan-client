@@ -5,6 +5,12 @@ import { Chain, ChainItem } from '../types/chains';
 import { AxiosTransport, Transport } from './Transport';
 import { BlockExplorerBlockItem } from '../types/block';
 import {
+  BlockExplorerErc20TokenTransferEvent,
+  BlockExplorerTransaction,
+  BlockExplorerTxInternal,
+  BlockExplorerTxInternalByTxHash
+} from '../types/transaction';
+import {
   BlockExplorerAction,
   BlockExplorerClosest,
   BlockExplorerModule,
@@ -15,14 +21,10 @@ import {
   BlockCountdownTime,
   BlockExplorerBlockCountdownTimeResponse,
   BlockExplorerBlockIdResponse,
-  BlockExplorerErc20TokenTransferEvent,
   BlockExplorerEthBlockByNumberResponse,
   BlockExplorerEthBlockNumberResponse,
   BlockExplorerInternalTxListByHashResponse,
   BlockExplorerInternalTxListResponse,
-  BlockExplorerTransaction,
-  BlockExplorerTxInternal,
-  BlockExplorerTxInternalByTxHash,
   BlockExplorerTxListResponse,
   EventLog,
   GetAccountBalanceResponse,

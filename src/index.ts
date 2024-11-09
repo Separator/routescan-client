@@ -1,5 +1,11 @@
 import { Chain } from './types/chains';
 import {
+  BlockExplorerTransaction,
+  BlockExplorerTxInternal,
+  BlockExplorerErc20TokenTransferEvent,
+  BlockExplorerTxInternalByTxHash
+} from './types/transaction';
+import {
   BlockExplorerCommon,
   BlockExplorerEthereum,
   BlockExplorerRoutescan,
@@ -31,11 +37,7 @@ import {
 } from './interfaces/BlockExplorer';
 import {
   // Structures:
-  BlockExplorerTransaction,
-  BlockExplorerTxInternal,
   BlockCountdownTime,
-  BlockExplorerErc20TokenTransferEvent,
-  BlockExplorerTxInternalByTxHash,
   EventLog,
 
   // Responses:

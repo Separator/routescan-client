@@ -75,3 +75,191 @@ export interface BlockTransaction {
    */
   s: string;
 }
+
+export interface BlockExplorerTxBase {
+  /**
+   * @description Block number string
+   * @example '47884'
+   */
+  blockNumber: string;
+  /**
+   * @description Block generation timestamp in seconds
+   * @example '1438947953'
+   */
+  timeStamp: string;
+  /**
+   * @description From address (transaction initiator)
+   * @example '0xddbd2b932c763ba5b1b7ae3b362eac3e8d40121a'
+   */
+  from: string;
+  /**
+   * @description To address
+   * @example '0x2910543af39aba0cd09dbb2d50200b3e800a63d2'
+   */
+  to: string;
+  /**
+   * @description Value in wei
+   * @example '5000000000000000000'
+   */
+  value: string;
+  /**
+   * @description Contract address
+   * @example ''
+   */
+  contractAddress: string;
+  /**
+   * @description Input
+   * @example '0x454e34354139455138'
+   */
+  input: string;
+  /**
+   * @description Gas restriction
+   * @example '23000'
+   */
+  gas: string;
+  /**
+   * @description Used gas amount
+   * @example '21612'
+   */
+  gasUsed: string;
+  /**
+   * @description Error code ("0" if all ok)
+   * @example '0'
+   */
+  isError?: string;
+}
+
+export interface BlockExplorerTxCommon extends BlockExplorerTxBase {
+  /**
+   * @description Transaction hash
+   * @example '0xad1c27dd8d0329dbc400021d7477b34ac41e84365bd54b45a4019a15deb10c0d'
+   */
+  hash: string;
+}
+
+export interface BlockExplorerTransaction extends BlockExplorerTxCommon {
+  /**
+   * @description From address nonce
+   * @example '0'
+   */
+  nonce: string;
+  /**
+   * @description Block hash string
+   * @example '0xf2988b9870e092f2898662ccdbc06e0e320a08139e9c6be98d0ce372f8611f22'
+   */
+  blockHash: string;
+  /**
+   * @description Transaction index
+   * @example '0'
+   */
+  transactionIndex: string;
+  /**
+   * @description Gas price in wei
+   * @example '400000000000'
+   */
+  gasPrice: string;
+  /**
+   * @description Tx receipt status
+   * @example '1'
+   */
+  txreceipt_status: string;
+  /**
+   * @description Cumulative gas used
+   * @example '21612'
+   */
+  cumulativeGasUsed: string;
+  /**
+   * @description Block confirmations count
+   * @example '19292464'
+   */
+  confirmations: string;
+  /**
+   * @description Method id
+   * @example '0x454e3435'
+   */
+  methodId: string;
+  /**
+   * @description Function name
+   * @example ''
+   */
+  functionName: string;
+}
+
+export interface BlockExplorerTxInternal extends BlockExplorerTxCommon {
+  /**
+   * @description Tx type
+   * @example 'call'
+   */
+  type: string;
+  /**
+   * @description Trace id
+   * @example '1'
+   */
+  traceId: string;
+  /**
+   * @description Error code
+   * @example ''
+   */
+  errCode: string;
+}
+
+export interface BlockExplorerTxInternalByTxHash extends BlockExplorerTxBase {
+  /**
+   * @description Tx type
+   * @example 'call'
+   */
+  type: string;
+  /**
+   * @description Error code
+   * @example ''
+   */
+  errCode: string;
+}
+
+export interface BlockExplorerErc20TokenTransferEvent extends BlockExplorerTxCommon {
+  /**
+   * @description From address nonce
+   * @example '0'
+   */
+  nonce: string;
+  /**
+   * @description Block hash string
+   * @example '0xf2988b9870e092f2898662ccdbc06e0e320a08139e9c6be98d0ce372f8611f22'
+   */
+  blockHash: string;
+  /**
+   * @description Transaction index
+   * @example '0'
+   */
+  transactionIndex: string;
+  /**
+   * @description Cumulative gas used
+   * @example '21612'
+   */
+  cumulativeGasUsed: string;
+  /**
+   * @description Gas price in wei
+   * @example '400000000000'
+   */
+  gasPrice: string;
+  /**
+   * @description Block confirmations count
+   * @example '19292464'
+   */
+  confirmations: string;
+  /**
+   * @description Token name
+   * @example 'TetherToken'
+   */
+  tokenName: string;
+  /**
+   * @description Token symbol
+   * @example 'USDt'
+   */
+  tokenSymbol: string;
+  /**
+   * @description Token decimal count
+   * @example '6'
+   */
+  tokenDecimal: string;
+}
