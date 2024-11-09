@@ -1,10 +1,19 @@
+import { Chain } from './types/chains';
 import {
   BlockExplorerCommon,
   BlockExplorerEthereum,
   BlockExplorerRoutescan,
   BlockExplorerOptions
 } from './classes/BlockExplorer';
-import { Chain } from './types/chains';
+import {
+  BlockExplorerModule,
+  BlockExplorerAction,
+  BlockExplorerTag,
+  BlockExplorerStatus,
+  BlockExplorerSort,
+  BlockExplorerClosest,
+  BlockExplorerTopicOperation
+} from './types/options';
 import {
   BlockExplorer,
   GetBlockCountdownTimeOptions,
@@ -21,13 +30,7 @@ import {
   GetEthBlockByNumberOptions
 } from './interfaces/BlockExplorer';
 import {
-  BlockExplorerModule,
-  BlockExplorerAction,
-  BlockExplorerTag,
-  BlockExplorerStatus,
-  BlockExplorerSort,
-  BlockExplorerClosest,
-  BlockExplorerTopicOperation,
+  // Structures:
   BlockExplorerTransaction,
   BlockExplorerTxInternal,
   BlockCountdownTime,

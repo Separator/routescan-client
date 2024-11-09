@@ -3,20 +3,23 @@ import { AxiosRequestConfig } from 'axios';
 import { chains } from '../data/chains';
 import { Chain, ChainItem } from '../types/chains';
 import { AxiosTransport, Transport } from './Transport';
+import { BlockExplorerBlockItem } from '../types/block';
+import {
+  BlockExplorerAction,
+  BlockExplorerClosest,
+  BlockExplorerModule,
+  BlockExplorerStatus,
+  BlockExplorerTag
+} from '../types/options';
 import {
   BlockCountdownTime,
-  BlockExplorerAction,
   BlockExplorerBlockCountdownTimeResponse,
   BlockExplorerBlockIdResponse,
-  BlockExplorerClosest,
   BlockExplorerErc20TokenTransferEvent,
   BlockExplorerEthBlockByNumberResponse,
   BlockExplorerEthBlockNumberResponse,
   BlockExplorerInternalTxListByHashResponse,
   BlockExplorerInternalTxListResponse,
-  BlockExplorerModule,
-  BlockExplorerStatus,
-  BlockExplorerTag,
   BlockExplorerTransaction,
   BlockExplorerTxInternal,
   BlockExplorerTxInternalByTxHash,
@@ -47,7 +50,6 @@ import {
   GetInternalTxListByTxHashOptions,
   GetEthBlockByNumberOptions
 } from '../interfaces/BlockExplorer';
-import { BlockExplorerBlockItem } from '../types/block';
 
 const TX_NO_FOUND_MESSAGE = 'No transactions found';
 

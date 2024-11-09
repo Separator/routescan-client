@@ -1,11 +1,8 @@
 import { Chain } from '../types/chains';
+import { BlockExplorerClosest, BlockExplorerSort, BlockExplorerTag, BlockExplorerTopicOperation } from '../types/options';
 import {
   BlockCountdownTime,
-  BlockExplorerClosest,
   BlockExplorerErc20TokenTransferEvent,
-  BlockExplorerSort,
-  BlockExplorerTag,
-  BlockExplorerTopicOperation,
   BlockExplorerTransaction,
   BlockExplorerTxInternal,
   BlockExplorerTxInternalByTxHash,
