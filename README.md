@@ -12,7 +12,7 @@ To support this project, you can send crypto to:
 - **0x3F2f0098310e654040f7794AB7E44Ac48E0eaF7B**
 - **TLPh66vQ2QMb64rG3WEBV5qnAhefh2kcdw**
 
-## Accounts section
+## [Accounts section](https://routescan.io/documentation/etherscan-compatibility/accounts)
 
 ```javascript
 import { BlockExplorerCommon, BlockExplorerTag, BlockExplorerTopicOperation, Chain, BlockExplorerSort } from 'routescan-client';
@@ -83,7 +83,7 @@ async function main() {
 main();
 ```
 
-## Blocks section
+## [Blocks section](https://routescan.io/documentation/etherscan-compatibility/blocks)
 
 ```javascript
 import { BlockExplorerClosest, BlockExplorerCommon, Chain } from 'routescan-client';
@@ -115,7 +115,49 @@ async function main() {
 main();
 ```
 
-## Logs section
+## [Geth/Parity Proxy section](https://routescan.io/documentation/etherscan-compatibility/geth-parity-proxy)
+
+```javascript
+import { BlockExplorerCommon, BlockExplorerTopicOperation, Chain } from 'routescan-client';
+
+const ROUTESCAN_API_KEY = 'YourApiKey';
+const WALLET = '0x285f5F8Cd290Cff6596337C4eEC14e1a62235854';
+
+async function main() {
+  const blockExplorer = BlockExplorerCommon.build({
+    chain: Chain.AvalancheCChainFuji,
+    apiKey: ROUTESCAN_API_KEY
+  });
+
+  // Get number of most recent block:
+  const blockNumber = await blockExplorer.eth_blockNumber();
+  console.log(blockNumber);
+
+  // Get information about a block by block number:
+  const block = await blockExplorer.eth_getBlockByNumber({
+    boolean: true,
+    tag: '0x10d4f'
+  });
+  console.log(block);
+
+  // Get information about a uncle by block number:
+  const uncleBlock = await blockExplorer.eth_getUncleByBlockNumberAndIndex({
+    tag: '0xC63276',
+    index: '0x0'
+  });
+  console.log(uncleBlock);
+
+  // Get the number of transactions in a block:
+  const blockTxCount = await blockExplorer.eth_getBlockTransactionCountByNumber({
+    tag: '0x10FB78'
+  });
+  console.log(blockTxCount);
+}
+
+main();
+```
+
+## [Logs section](https://routescan.io/documentation/etherscan-compatibility/logs)
 
 ```javascript
 import { BlockExplorerCommon, BlockExplorerTopicOperation, Chain } from 'routescan-client';

@@ -1,4 +1,4 @@
-import { BlockExplorerType } from '../interfaces/BlockExplorer';
+import { BlockExplorerType } from '../types/type';
 
 export enum Chain {
   NotSpecified = 0,
