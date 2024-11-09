@@ -1,4 +1,5 @@
 import { Chain } from './types/chains';
+import { BlockExplorer } from './interfaces/BlockExplorer';
 import {
   BlockExplorerTransaction,
   BlockExplorerTxInternal,
@@ -21,7 +22,6 @@ import {
   BlockExplorerTopicOperation
 } from './types/params';
 import {
-  BlockExplorer,
   GetBlockCountdownTimeOptions,
   GetBlockNumberByTimestampOptions,
   GetAccountBalanceOptions,
@@ -34,7 +34,7 @@ import {
   GetEventLogsByTopicsOptions,
   GetEventLogsByAddressFilteredOptions,
   GetEthBlockByNumberOptions
-} from './interfaces/BlockExplorer';
+} from './types/options';
 import {
   // Structures:
   BlockCountdownTime,

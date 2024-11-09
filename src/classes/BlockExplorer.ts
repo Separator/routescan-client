@@ -5,6 +5,7 @@ import { BlockExplorerType } from '../types/type';
 import { Chain, ChainItem } from '../types/chains';
 import { AxiosTransport, Transport } from './Transport';
 import { BlockExplorerBlockItem } from '../types/block';
+import { BlockExplorer } from '../interfaces/BlockExplorer';
 import {
   BlockExplorerErc20TokenTransferEvent,
   BlockExplorerTransaction,
@@ -37,7 +38,6 @@ import {
   GetEventLogsByTopicsResponse
 } from '../types/block-explorer';
 import {
-  BlockExplorer,
   GetAccountBalanceOptions,
   GetAccountTokenBalanceOptions,
   GetAccountsBalanceOptions,
@@ -51,7 +51,7 @@ import {
   GetErc20TokenTransferEventsListOptions,
   GetInternalTxListByTxHashOptions,
   GetEthBlockByNumberOptions
-} from '../interfaces/BlockExplorer';
+} from '../types/options';
 
 const TX_NO_FOUND_MESSAGE = 'No transactions found';
 
