@@ -1,5 +1,5 @@
+import { BlockExplorerType } from '../types/type';
 import { Chain, ChainItem } from '../types/chains';
-import { BlockExplorerType } from '../interfaces/BlockExplorer';
 
 export const chains: ChainItem[] = [
   {

@@ -9,11 +9,6 @@ import {
   BlockExplorerTxInternalByTxHash
 } from '../types/transaction';
 
-export enum BlockExplorerType {
-  Routescan = 'routescan',
-  Ethereum = 'ethereum'
-}
-
 interface PaginationOptions {
   /**
    * @description The integer page number, if pagination is enabled
