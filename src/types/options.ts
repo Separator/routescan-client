@@ -197,3 +197,11 @@ export interface GetEthUncleByBlockNumberAndIndexOptions {
    */
   index?: string;
 }
+
+export interface GetEthBlockTransactionCountByNumberOptions {
+  /**
+   * The block number, in hex
+   * @example '0x10d4f'
+   */
+  tag?: string;
+}

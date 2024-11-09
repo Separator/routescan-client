@@ -26,6 +26,7 @@ import {
   BlockExplorerEthBlockByNumberResponse,
   BlockExplorerEthBlockNumberResponse,
   BlockExplorerEthBlockTransactionCountByNumberResponse,
+  BlockExplorerEthUncleByBlockNumberAndIndexResponse,
   BlockExplorerInternalTxListByHashResponse,
   BlockExplorerInternalTxListResponse,
   BlockExplorerTxListResponse,
@@ -52,7 +53,8 @@ import {
   GetErc20TokenTransferEventsListOptions,
   GetInternalTxListByTxHashOptions,
   GetEthBlockByNumberOptions,
-  GetEthUncleByBlockNumberAndIndexOptions
+  GetEthUncleByBlockNumberAndIndexOptions,
+  GetEthBlockTransactionCountByNumberOptions
 } from '../types/options';
 
 const TX_NO_FOUND_MESSAGE = 'No transactions found';
@@ -109,6 +111,7 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
   public abstract eth_getUncleByBlockNumberAndIndex(
     options: GetEthUncleByBlockNumberAndIndexOptions
   ): Promise<BlockExplorerBlockUncleItem>;
+  public abstract eth_getBlockTransactionCountByNumber(options: GetEthBlockTransactionCountByNumberOptions): Promise<string>;
 
   protected abstract getBlockExplorerUrl(chain: Chain): string;
 
@@ -375,11 +378,26 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
   public async eth_getUncleByBlockNumberAndIndex(options: GetEthUncleByBlockNumberAndIndexOptions) {
     const { chain: chainid } = this;
 
-    const response = await this.transport.get<BlockExplorerEthBlockTransactionCountByNumberResponse>({
+    const response = await this.transport.get<BlockExplorerEthUncleByBlockNumberAndIndexResponse>({
       ...options,
       chainid,
       module: BlockExplorerModule.Proxy,
       action: BlockExplorerAction.eth_getUncleByBlockNumberAndIndex
+    });
+
+    this.checkResponseStatus(response);
+
+    return response.data.result;
+  }
+
+  public async eth_getBlockTransactionCountByNumber(options: GetEthBlockTransactionCountByNumberOptions) {
+    const { chain: chainid } = this;
+
+    const response = await this.transport.get<BlockExplorerEthBlockTransactionCountByNumberResponse>({
+      ...options,
+      chainid,
+      module: BlockExplorerModule.Proxy,
+      action: BlockExplorerAction.eth_getBlockTransactionCountByNumber
     });
 
     this.checkResponseStatus(response);

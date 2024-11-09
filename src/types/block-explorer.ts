@@ -203,6 +203,10 @@ export interface BlockExplorerEthBlockByNumberResponse extends BlockExplorerRpcR
   result: BlockExplorerBlockItem;
 }
 
-export interface BlockExplorerEthBlockTransactionCountByNumberResponse extends BlockExplorerRpcResponseCommon {
+export interface BlockExplorerEthUncleByBlockNumberAndIndexResponse extends BlockExplorerRpcResponseCommon {
   result: BlockExplorerBlockUncleItem;
+}
+
+export interface BlockExplorerEthBlockTransactionCountByNumberResponse extends BlockExplorerRpcResponseCommon {
+  result: string;
 }

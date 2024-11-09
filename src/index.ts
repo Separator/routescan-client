@@ -34,7 +34,8 @@ import {
   GetEventLogsByTopicsOptions,
   GetEventLogsByAddressFilteredOptions,
   GetEthBlockByNumberOptions,
-  GetEthUncleByBlockNumberAndIndexOptions
+  GetEthUncleByBlockNumberAndIndexOptions,
+  GetEthBlockTransactionCountByNumberOptions
 } from './types/options';
 import {
   // Structures:
@@ -52,7 +53,9 @@ import {
   BlockExplorerInternalTxListResponse,
   BlockExplorerInternalTxListByHashResponse,
   BlockExplorerEthBlockNumberResponse,
-  BlockExplorerEthBlockByNumberResponse
+  BlockExplorerEthBlockByNumberResponse,
+  BlockExplorerEthUncleByBlockNumberAndIndexResponse,
+  BlockExplorerEthBlockTransactionCountByNumberResponse
 } from './types/block-explorer';
 
 export {
@@ -72,6 +75,7 @@ export {
   // Rpc methods options:
   GetEthBlockByNumberOptions,
   GetEthUncleByBlockNumberAndIndexOptions,
+  GetEthBlockTransactionCountByNumberOptions,
 
   // Parameters:
   BlockExplorerModule,
@@ -101,8 +105,12 @@ export {
   BlockExplorerTxListResponse,
   BlockExplorerInternalTxListResponse,
   BlockExplorerInternalTxListByHashResponse,
+
+  // Rpc responses:
   BlockExplorerEthBlockNumberResponse,
   BlockExplorerEthBlockByNumberResponse,
+  BlockExplorerEthUncleByBlockNumberAndIndexResponse,
+  BlockExplorerEthBlockTransactionCountByNumberResponse,
 
   // Block explorer:
   BlockExplorer,

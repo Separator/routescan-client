@@ -32,13 +32,24 @@ describe('Check Geth/Parity/Proxy functions', () => {
   );
 
   test(
-    'Returns information about a uncle by block number',
+    'Get information about a uncle by block number',
     async () => {
       const block = await blockExplorerEth.eth_getUncleByBlockNumberAndIndex({
         tag: '0xC63276',
         index: '0x0'
       });
       expect(block.hash).toEqual('0x1da88e3581315d009f1cb600bf06f509cd27a68cb3d6437bda8698d04089f14a');
+    },
+    TEST_TIMEOUT
+  );
+
+  test(
+    'Get the number of transactions in a block',
+    async () => {
+      const txCount = await blockExplorerEth.eth_getBlockTransactionCountByNumber({
+        tag: '0x10FB78'
+      });
+      expect(txCount).toEqual('0x3');
     },
     TEST_TIMEOUT
   );
