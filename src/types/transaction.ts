@@ -1,4 +1,22 @@
-export interface BlockTransaction {
+interface BlockExplorerTxCore {
+  /**
+   * @description Tx initiator address
+   * @example '0x4458f86353b4740fe9e09071c23a7437640063c9'
+   */
+  from: string;
+  /**
+   * @description To address
+   * @example '0xbf3403210f9802205f426759947a80a9fda71b1e'
+   */
+  to: string;
+  /**
+   * @description Input data
+   * @example '0x'
+   */
+  input: string;
+}
+
+export interface BlockTransaction extends BlockExplorerTxCore {
   /**
    * @description Block hash
    * @example '0x7eb7c23a5ac2f2d70aa1ba4e5c56d89de5ac993590e5f6e79c394e290d998ba8'
@@ -9,11 +27,6 @@ export interface BlockTransaction {
    * @example '0x10d4f'
    */
   blockNumber: string;
-  /**
-   * @description Tx initiator address
-   * @example '0x4458f86353b4740fe9e09071c23a7437640063c9'
-   */
-  from: string;
   /**
    * @description Gas count in hex
    * @example '0x5208'
@@ -30,20 +43,10 @@ export interface BlockTransaction {
    */
   hash: string;
   /**
-   * @description Input data
-   * @example '0x'
-   */
-  input: string;
-  /**
    * @description Nonce in hex
    * @example '0x1'
    */
   nonce: string;
-  /**
-   * @description To address
-   * @example '0xbf3403210f9802205f426759947a80a9fda71b1e'
-   */
-  to: string;
   /**
    * @description Tx index
    * @example '0x0'
@@ -76,7 +79,7 @@ export interface BlockTransaction {
   s: string;
 }
 
-export interface BlockExplorerTxBase {
+export interface BlockExplorerTxBase extends BlockExplorerTxCore {
   /**
    * @description Block number string
    * @example '47884'
@@ -88,16 +91,6 @@ export interface BlockExplorerTxBase {
    */
   timeStamp: string;
   /**
-   * @description From address (transaction initiator)
-   * @example '0xddbd2b932c763ba5b1b7ae3b362eac3e8d40121a'
-   */
-  from: string;
-  /**
-   * @description To address
-   * @example '0x2910543af39aba0cd09dbb2d50200b3e800a63d2'
-   */
-  to: string;
-  /**
    * @description Value in wei
    * @example '5000000000000000000'
    */
@@ -107,11 +100,6 @@ export interface BlockExplorerTxBase {
    * @example ''
    */
   contractAddress: string;
-  /**
-   * @description Input
-   * @example '0x454e34354139455138'
-   */
-  input: string;
   /**
    * @description Gas restriction
    * @example '23000'
