@@ -4,7 +4,8 @@ import {
   BlockExplorerTransaction,
   BlockExplorerTxInternal,
   BlockExplorerErc20TokenTransferEvent,
-  BlockExplorerTxInternalByTxHash
+  BlockExplorerTxInternalByTxHash,
+  BlockExplorerTxRpc
 } from './types/transaction';
 import {
   BlockExplorerCommon,
@@ -33,9 +34,11 @@ import {
   GetEventLogsByAddressOptions,
   GetEventLogsByTopicsOptions,
   GetEventLogsByAddressFilteredOptions,
+  GetInternalTxListByAddressOptions,
   GetEthBlockByNumberOptions,
   GetEthUncleByBlockNumberAndIndexOptions,
-  GetEthBlockTransactionCountByNumberOptions
+  GetEthBlockTransactionCountByNumberOptions,
+  GetEthTransactionByHashOptions
 } from './types/options';
 import {
   // Structures:
@@ -52,10 +55,14 @@ import {
   BlockExplorerTxListResponse,
   BlockExplorerInternalTxListResponse,
   BlockExplorerInternalTxListByHashResponse,
+  GetErc20TokenTransferEventsListResponse,
+  GetEventLogsByAddressResponse,
+  GetEventLogsByTopicsResponse,
   BlockExplorerEthBlockNumberResponse,
   BlockExplorerEthBlockByNumberResponse,
   BlockExplorerEthUncleByBlockNumberAndIndexResponse,
-  BlockExplorerEthBlockTransactionCountByNumberResponse
+  BlockExplorerEthBlockTransactionCountByNumberResponse,
+  BlockExplorerEthTransactionByHashResponse
 } from './types/block-explorer';
 
 export {
@@ -71,11 +78,13 @@ export {
   GetEventLogsByAddressOptions,
   GetEventLogsByTopicsOptions,
   GetEventLogsByAddressFilteredOptions,
+  GetInternalTxListByAddressOptions,
 
   // Rpc methods options:
   GetEthBlockByNumberOptions,
   GetEthUncleByBlockNumberAndIndexOptions,
   GetEthBlockTransactionCountByNumberOptions,
+  GetEthTransactionByHashOptions,
 
   // Parameters:
   BlockExplorerModule,
@@ -93,6 +102,7 @@ export {
   BlockCountdownTime,
   BlockExplorerErc20TokenTransferEvent,
   BlockExplorerTxInternalByTxHash,
+  BlockExplorerTxRpc,
   EventLog,
 
   // Responses:
@@ -105,12 +115,16 @@ export {
   BlockExplorerTxListResponse,
   BlockExplorerInternalTxListResponse,
   BlockExplorerInternalTxListByHashResponse,
+  GetErc20TokenTransferEventsListResponse,
+  GetEventLogsByAddressResponse,
+  GetEventLogsByTopicsResponse,
 
   // Rpc responses:
   BlockExplorerEthBlockNumberResponse,
   BlockExplorerEthBlockByNumberResponse,
   BlockExplorerEthUncleByBlockNumberAndIndexResponse,
   BlockExplorerEthBlockTransactionCountByNumberResponse,
+  BlockExplorerEthTransactionByHashResponse,
 
   // Block explorer:
   BlockExplorer,

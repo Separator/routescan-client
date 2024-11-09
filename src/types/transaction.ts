@@ -251,3 +251,30 @@ export interface BlockExplorerErc20TokenTransferEvent extends BlockExplorerTxCom
    */
   tokenDecimal: string;
 }
+
+export interface BlockExplorerTxRpc extends BlockTransaction {
+  /**
+   * @description Max fee per gas
+   * @example '0x1f6ea08600'
+   */
+  maxFeePerGas: string;
+  /**
+   * @description Max priority fee per gas
+   * @example '0x3b9aca00'
+   */
+  maxPriorityFeePerGas: string;
+  /**
+   * @description Access list
+   */
+  accessList: any[];
+  /**
+   * @description Chain id
+   * @example '0x1'
+   */
+  chainId: string;
+  /**
+   * @description Y parity
+   * @example '0x0'
+   */
+  yParity: string;
+}

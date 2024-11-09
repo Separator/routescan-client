@@ -53,4 +53,15 @@ describe('Check Geth/Parity/Proxy functions', () => {
     },
     TEST_TIMEOUT
   );
+
+  test(
+    'Get the information about a transaction requested by transaction hash',
+    async () => {
+      const tx = await blockExplorerEth.eth_getTransactionByHash({
+        txhash: '0xbc78ab8a9e9a0bca7d0321a27b2c03addeae08ba81ea98b03cd3dd237eabed44'
+      });
+      expect(tx.hash).toEqual('0xbc78ab8a9e9a0bca7d0321a27b2c03addeae08ba81ea98b03cd3dd237eabed44');
+    },
+    TEST_TIMEOUT
+  );
 });

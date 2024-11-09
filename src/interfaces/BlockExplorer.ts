@@ -5,7 +5,8 @@ import {
   BlockExplorerErc20TokenTransferEvent,
   BlockExplorerTransaction,
   BlockExplorerTxInternal,
-  BlockExplorerTxInternalByTxHash
+  BlockExplorerTxInternalByTxHash,
+  BlockExplorerTxRpc
 } from '../types/transaction';
 import {
   GetAccountBalanceOptions,
@@ -16,6 +17,7 @@ import {
   GetErc20TokenTransferEventsListOptions,
   GetEthBlockByNumberOptions,
   GetEthBlockTransactionCountByNumberOptions,
+  GetEthTransactionByHashOptions,
   GetEthUncleByBlockNumberAndIndexOptions,
   GetEventLogsByAddressFilteredOptions,
   GetEventLogsByAddressOptions,
@@ -143,4 +145,10 @@ export interface BlockExplorer {
    * @returns Tx count in hex
    */
   eth_getBlockTransactionCountByNumber(options: GetEthBlockTransactionCountByNumberOptions): Promise<string>;
+  /**
+   * Returns the information about a transaction requested by transaction hash
+   * @param options
+   * @returns Tx info
+   */
+  eth_getTransactionByHash(options: GetEthTransactionByHashOptions): Promise<BlockExplorerTxRpc>;
 }

@@ -205,3 +205,7 @@ export interface GetEthBlockTransactionCountByNumberOptions {
    */
   tag?: string;
 }
+
+export interface GetEthTransactionByHashOptions {
+  txhash: string;
+}

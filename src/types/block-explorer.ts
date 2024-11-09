@@ -4,7 +4,8 @@ import {
   BlockExplorerTransaction,
   BlockExplorerTxInternal,
   BlockExplorerTxInternalByTxHash,
-  BlockExplorerErc20TokenTransferEvent
+  BlockExplorerErc20TokenTransferEvent,
+  BlockExplorerTxRpc
 } from './transaction';
 
 export interface BlockCountdownTime {
@@ -209,4 +210,8 @@ export interface BlockExplorerEthUncleByBlockNumberAndIndexResponse extends Bloc
 
 export interface BlockExplorerEthBlockTransactionCountByNumberResponse extends BlockExplorerRpcResponseCommon {
   result: string;
+}
+
+export interface BlockExplorerEthTransactionByHashResponse extends BlockExplorerRpcResponseCommon {
+  result: BlockExplorerTxRpc;
 }
