@@ -1,5 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
 
+import { chains } from '../data/chains';
+import { Chain, ChainItem } from '../types/chains';
+import { AxiosTransport, Transport } from './Transport';
 import {
   BlockCountdownTime,
   BlockExplorerAction,
@@ -7,6 +10,8 @@ import {
   BlockExplorerBlockIdResponse,
   BlockExplorerClosest,
   BlockExplorerErc20TokenTransferEvent,
+  BlockExplorerEthBlockByNumberResponse,
+  BlockExplorerEthBlockNumberResponse,
   BlockExplorerInternalTxListByHashResponse,
   BlockExplorerInternalTxListResponse,
   BlockExplorerModule,
@@ -39,12 +44,10 @@ import {
   GetEventLogsByTopicsOptions,
   GetEventLogsByAddressOptions,
   GetErc20TokenTransferEventsListOptions,
-  GetInternalTxListByTxHashOptions
+  GetInternalTxListByTxHashOptions,
+  GetEthBlockByNumberOptions
 } from '../interfaces/BlockExplorer';
-import { Chain, ChainItem } from '../types/chains';
-
-import { chains } from '../data/chains';
-import { AxiosTransport, Transport } from './Transport';
+import { BlockExplorerBlockItem } from '../types/block';
 
 const TX_NO_FOUND_MESSAGE = 'No transactions found';
 
@@ -95,6 +98,8 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
   public abstract getEventLogsByAddress(options: GetEventLogsByAddressOptions): Promise<EventLog[]>;
   public abstract getEventLogsByTopics(options: GetEventLogsByTopicsOptions): Promise<EventLog[]>;
   public abstract getEventLogsByAddressFiltered(options: GetEventLogsByAddressFilteredOptions): Promise<EventLog[]>;
+  public abstract eth_blockNumber(): Promise<string>;
+  public abstract eth_getBlockByNumber(options: GetEthBlockByNumberOptions): Promise<BlockExplorerBlockItem>;
 
   protected abstract getBlockExplorerUrl(chain: Chain): string;
 
@@ -143,7 +148,7 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
 
 export class BlockExplorerEthereum extends BlockExplorerCommon {
   private checkResponseStatus(response: any) {
-    if (response.data.status !== BlockExplorerStatus.Success) {
+    if (response.data.status && response.data.status !== BlockExplorerStatus.Success) {
       throw new Error(JSON.stringify(response.data));
     }
   }
@@ -323,6 +328,39 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
     const chainOptions = BlockExplorerCommon.getChainOptions(chain);
     const { blockExplorerUrl } = chainOptions;
     return blockExplorerUrl;
+  }
+
+  /**
+   * Geth/Parity Proxy
+   */
+
+  public async eth_blockNumber() {
+    const { chain: chainid } = this;
+
+    const response = await this.transport.get<BlockExplorerEthBlockNumberResponse>({
+      chainid,
+      module: BlockExplorerModule.Proxy,
+      action: BlockExplorerAction.eth_blockNumber
+    });
+
+    this.checkResponseStatus(response);
+
+    return response.data.result;
+  }
+
+  public async eth_getBlockByNumber(options: GetEthBlockByNumberOptions): Promise<BlockExplorerBlockItem> {
+    const { chain: chainid } = this;
+
+    const response = await this.transport.get<BlockExplorerEthBlockByNumberResponse>({
+      ...options,
+      chainid,
+      module: BlockExplorerModule.Proxy,
+      action: BlockExplorerAction.eth_getBlockByNumber
+    });
+
+    this.checkResponseStatus(response);
+
+    return response.data.result;
   }
 }
 

@@ -1,7 +1,10 @@
+import { BlockExplorerBlockItem } from './block';
+
 export enum BlockExplorerModule {
   Account = 'account',
   Block = 'block',
-  Logs = 'logs'
+  Logs = 'logs',
+  Proxy = 'proxy'
 }
 
 export enum BlockExplorerAction {
@@ -13,7 +16,21 @@ export enum BlockExplorerAction {
   TokenBalance = 'tokenbalance',
   TxList = 'txlist',
   TokenTxList = 'tokentx',
-  TxListInternal = 'txlistinternal'
+  TxListInternal = 'txlistinternal',
+  eth_blockNumber = 'eth_blockNumber',
+  eth_getBlockByNumber = 'eth_getBlockByNumber',
+  eth_getUncleByBlockNumberAndIndex = 'eth_getUncleByBlockNumberAndIndex',
+  eth_getBlockTransactionCountByNumber = 'eth_getBlockTransactionCountByNumber',
+  eth_getTransactionByHash = 'eth_getTransactionByHash',
+  eth_getTransactionByBlockNumberAndIndex = 'eth_getTransactionByBlockNumberAndIndex',
+  eth_getTransactionCount = 'eth_getTransactionCount',
+  eth_sendRawTransaction = 'eth_sendRawTransaction',
+  eth_getTransactionReceipt = 'eth_getTransactionReceipt',
+  eth_call = 'eth_call',
+  eth_getCode = 'eth_getCode',
+  eth_getStorageAt = 'eth_getStorageAt',
+  eth_gasPrice = 'eth_gasPrice',
+  eth_estimateGas = 'eth_estimateGas'
 }
 
 export enum BlockExplorerTag {
@@ -399,4 +416,29 @@ export interface BlockExplorerInternalTxListByHashResponse extends BlockExplorer
 
 export interface GetErc20TokenTransferEventsListResponse extends BlockExplorerResponseCommon {
   result: BlockExplorerErc20TokenTransferEvent[];
+}
+
+interface BlockExplorerRpcResponseCommon {
+  /**
+   * @description RPC version
+   * @example '2.0'
+   */
+  jsonrpc: string;
+  /**
+   * @description ???
+   * @example 83
+   */
+  id: number;
+}
+
+export interface BlockExplorerEthBlockNumberResponse extends BlockExplorerRpcResponseCommon {
+  /**
+   * @description Recent block number in hex
+   * @example '0x1427a5f'
+   */
+  result: string;
+}
+
+export interface BlockExplorerEthBlockByNumberResponse extends BlockExplorerRpcResponseCommon {
+  result: BlockExplorerBlockItem;
 }

@@ -11,6 +11,7 @@ import {
   BlockExplorerTxInternalByTxHash,
   EventLog
 } from '../types/block-explorer';
+import { BlockExplorerBlockItem } from '../types/block';
 
 export enum BlockExplorerType {
   Routescan = 'routescan',
@@ -188,6 +189,20 @@ export interface GetErc20TokenTransferEventsListOptions extends PaginationOption
   contractaddress: string;
 }
 
+export interface GetEthBlockByNumberOptions {
+  /**
+   * The block number, in hex
+   * @example '0x10d4f'
+   */
+  tag?: string;
+  /**
+   * @description The boolean value to show full transaction objects.  
+      when **true**, returns full transaction objects and their information,  
+      when **false** only returns a list of transactions.
+   */
+  boolean: boolean;
+}
+
 export interface BlockExplorer {
   /**
    *
@@ -277,4 +292,21 @@ export interface BlockExplorer {
    * @returns Event logs array
    */
   getEventLogsByAddressFiltered(options: GetEventLogsByAddressFilteredOptions): Promise<EventLog[]>;
+
+  /**
+   * Geth/Parity Proxy chapter
+   * https://routescan.io/documentation/etherscan-compatibility/geth-parity-proxy
+   */
+
+  /**
+   * Returns the number of most recent block
+   * @returns Recent block number in hex
+   */
+  eth_blockNumber(): Promise<string>;
+  /**
+   * Returns information about a block by block number
+   * @param options
+   * @returns Block info
+   */
+  eth_getBlockByNumber(options: GetEthBlockByNumberOptions): Promise<BlockExplorerBlockItem>;
 }

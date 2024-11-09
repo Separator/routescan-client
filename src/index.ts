@@ -17,7 +17,8 @@ import {
   GetAccountTokenBalanceOptions,
   GetEventLogsByAddressOptions,
   GetEventLogsByTopicsOptions,
-  GetEventLogsByAddressFilteredOptions
+  GetEventLogsByAddressFilteredOptions,
+  GetEthBlockByNumberOptions
 } from './interfaces/BlockExplorer';
 import {
   BlockExplorerModule,
@@ -30,6 +31,11 @@ import {
   BlockExplorerTransaction,
   BlockExplorerTxInternal,
   BlockCountdownTime,
+  BlockExplorerErc20TokenTransferEvent,
+  BlockExplorerTxInternalByTxHash,
+  EventLog,
+
+  // Responses:
   BlockExplorerBlockCountdownTimeResponse,
   BlockExplorerBlockIdResponse,
   GetAccountBalanceResponse,
@@ -39,9 +45,8 @@ import {
   BlockExplorerTxListResponse,
   BlockExplorerInternalTxListResponse,
   BlockExplorerInternalTxListByHashResponse,
-  BlockExplorerErc20TokenTransferEvent,
-  BlockExplorerTxInternalByTxHash,
-  EventLog
+  BlockExplorerEthBlockNumberResponse,
+  BlockExplorerEthBlockByNumberResponse
 } from './types/block-explorer';
 
 export {
@@ -57,6 +62,9 @@ export {
   GetEventLogsByAddressOptions,
   GetEventLogsByTopicsOptions,
   GetEventLogsByAddressFilteredOptions,
+
+  // Rpc methods options:
+  GetEthBlockByNumberOptions,
 
   // Parameters:
   BlockExplorerModule,
@@ -86,6 +94,8 @@ export {
   BlockExplorerTxListResponse,
   BlockExplorerInternalTxListResponse,
   BlockExplorerInternalTxListByHashResponse,
+  BlockExplorerEthBlockNumberResponse,
+  BlockExplorerEthBlockByNumberResponse,
 
   // Block explorer:
   BlockExplorer,
