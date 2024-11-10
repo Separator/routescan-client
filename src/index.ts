@@ -39,11 +39,11 @@ import {
   GetEthBlockByNumberOptions,
   GetEthUncleByBlockNumberAndIndexOptions,
   GetEthBlockTransactionCountByNumberOptions,
-  GetEthTransactionByHashOptions
+  GetEthTransactionByHashOptions,
+  GetEthTransactionByBlockNumberAndIndexOptions
 } from './types/options';
 import {
   // Structures:
-
   EventLog,
 
   // Responses:
@@ -63,7 +63,8 @@ import {
   BlockExplorerEthBlockByNumberResponse,
   BlockExplorerEthUncleByBlockNumberAndIndexResponse,
   BlockExplorerEthBlockTransactionCountByNumberResponse,
-  BlockExplorerEthTransactionByHashResponse
+  BlockExplorerEthTransactionByHashResponse,
+  BlockExplorerEthTransactionByBlockNumberAndIndexResponse
 } from './types/block-explorer';
 
 export {
@@ -86,6 +87,7 @@ export {
   GetEthUncleByBlockNumberAndIndexOptions,
   GetEthBlockTransactionCountByNumberOptions,
   GetEthTransactionByHashOptions,
+  GetEthTransactionByBlockNumberAndIndexOptions,
 
   // Parameters:
   BlockExplorerModule,
@@ -126,6 +128,7 @@ export {
   BlockExplorerEthUncleByBlockNumberAndIndexResponse,
   BlockExplorerEthBlockTransactionCountByNumberResponse,
   BlockExplorerEthTransactionByHashResponse,
+  BlockExplorerEthTransactionByBlockNumberAndIndexResponse,
 
   // Block explorer:
   BlockExplorer,

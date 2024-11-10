@@ -64,4 +64,16 @@ describe('Check Geth/Parity/Proxy functions', () => {
     },
     TEST_TIMEOUT
   );
+
+  test(
+    'Get information about a transaction by block number and transaction index position',
+    async () => {
+      const tx = await blockExplorerEth.eth_getTransactionByBlockNumberAndIndex({
+        tag: '0xC6331D',
+        index: '0x11A'
+      });
+      expect(tx.hash).toEqual('0xc7ef51f0bfe85eefbb1d4d88f5a39e82fbfc94987d8cbcb515f74d80b6e44902');
+    },
+    TEST_TIMEOUT
+  );
 });

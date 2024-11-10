@@ -158,6 +158,13 @@ async function main() {
     txhash: '0xbc78ab8a9e9a0bca7d0321a27b2c03addeae08ba81ea98b03cd3dd237eabed44'
   });
   console.log(tx);
+
+  // Get information about a transaction by block number and transaction index position:
+  const txSecond = await blockExplorer.eth_getTransactionByBlockNumberAndIndex({
+    tag: '0xC6331D',
+    index: '0x11A'
+  });
+  console.log(txSecond);
 }
 
 main();

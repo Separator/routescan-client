@@ -209,3 +209,16 @@ export interface GetEthBlockTransactionCountByNumberOptions {
 export interface GetEthTransactionByHashOptions {
   txhash: string;
 }
+
+export interface GetEthTransactionByBlockNumberAndIndexOptions {
+  /**
+   * @description The block number, in hex
+   * @example '0x10FB78'
+   */
+  tag: string;
+  /**
+   * @description The position of the uncle's index in the block, in hex
+   * @example '0x0'
+   */
+  index?: string;
+}
