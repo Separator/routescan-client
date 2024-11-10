@@ -346,4 +346,24 @@ describe('Checking access to blockchains', () => {
       TEST_TIMEOUT
     );
   });
+
+  describe('Mint', () => {
+    test(
+      'Mint (185)',
+      async () => {
+        const blockId = await getLastBlockchainBlock(Chain.Mint, ROUTESCAN_API_KEY);
+        expect(typeof blockId).toBe('number');
+      },
+      TEST_TIMEOUT
+    );
+
+    test(
+      'MintSepolia (1687)',
+      async () => {
+        const blockId = await getLastBlockchainBlock(Chain.MintSepolia, ROUTESCAN_API_KEY);
+        expect(typeof blockId).toBe('number');
+      },
+      TEST_TIMEOUT
+    );
+  });
 });

@@ -236,6 +236,8 @@ Just register an account on corresponding site and generate an API key.
 | 97       | BinanceSmartChainTestnet | https://bscscan.com             | https://api-testnet.bscscan.com/api                                  |
 | 137      | Polygon                  | https://polygonscan.com         | https://api.polygonscan.com/api                                      |
 | 80002    | PolygonAmoy              | https://polygonscan.com         | https://api-amoy.polygonscan.com/api                                 |
+| 185      | Mint                     | https://routescan.io            | https://api.routescan.io/v2/network/mainnet/evm/185/etherscan/api    |
+| 1687     | MintSepolia              | https://routescan.io            | https://api.routescan.io/v2/network/testnet/evm/1687/etherscan/api   |
 | 204      | BinanceOpBnbMainnet      | https://opbnb.bscscan.com       | https://api-opbnb.bscscan.com/api                                    |
 | 5611     | BinanceOpBnbTestnet      | https://opbnb.bscscan.com       | https://api-opbnb-testnet.bscscan.com/api                            |
 | 250      | Fantom                   | https://ftmscan.com             | https://api.ftmscan.com/api                                          |

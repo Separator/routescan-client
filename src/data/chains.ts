@@ -180,5 +180,16 @@ export const chains: ChainItem[] = [
     id: Chain.MantleSepolia,
     blockExplorerType: BlockExplorerType.Ethereum,
     blockExplorerUrl: 'https://api-sepolia.mantlescan.xyz/api'
+  },
+
+  {
+    id: Chain.Mint,
+    blockExplorerType: BlockExplorerType.Routescan,
+    blockExplorerUrl: 'https://api.routescan.io/v2/network/mainnet/evm/185/etherscan/api'
+  },
+  {
+    id: Chain.MintSepolia,
+    blockExplorerType: BlockExplorerType.Routescan,
+    blockExplorerUrl: 'https://api.routescan.io/v2/network/testnet/evm/1687/etherscan/api'
   }
 ];

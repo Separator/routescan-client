@@ -28,6 +28,9 @@ export enum Chain {
   PolygonMumbai = 80001,
   PolygonAmoy = 80002,
 
+  Mint = 185,
+  MintSepolia = 1687,
+
   Fantom = 250,
   FantomTestnet = 4002,
 
