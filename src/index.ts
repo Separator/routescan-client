@@ -1,4 +1,5 @@
 import { Chain } from './types/chains';
+import { BlockCountdownTime } from './types/block';
 import { BlockExplorer } from './interfaces/BlockExplorer';
 import {
   BlockExplorerTransaction,
@@ -42,7 +43,7 @@ import {
 } from './types/options';
 import {
   // Structures:
-  BlockCountdownTime,
+
   EventLog,
 
   // Responses:

@@ -157,3 +157,26 @@ export interface BlockExplorerBlockItem extends BlockExplorerBlockCommon {
    */
   withdrawalsRoot: string;
 }
+
+export interface BlockCountdownTime {
+  /**
+   * @description Current block id
+   * @example '19419956'
+   */
+  CurrentBlock: string;
+  /**
+   * @description Countdown block
+   * @example '167015880000'
+   */
+  CountdownBlock: string;
+  /**
+   * @description Remaining block
+   * @example '166996460044'
+   */
+  RemainingBlock: string;
+  /**
+   * @description Estimate time in sec
+   * @example 2003957520528
+   */
+  EstimateTimeInSec: string;
+}
