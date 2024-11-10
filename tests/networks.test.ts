@@ -285,4 +285,24 @@ describe('Checking access to blockchains', () => {
       TEST_TIMEOUT
     );
   });
+
+  describe('Dexalot', () => {
+    test(
+      'Dexalot (432204)',
+      async () => {
+        const blockId = await getLastBlockchainBlock(Chain.Dexalot, ROUTESCAN_API_KEY);
+        expect(typeof blockId).toBe('number');
+      },
+      TEST_TIMEOUT
+    );
+
+    test(
+      'DexalotTestnet (432201)',
+      async () => {
+        const blockId = await getLastBlockchainBlock(Chain.DexalotTestnet, ROUTESCAN_API_KEY);
+        expect(typeof blockId).toBe('number');
+      },
+      TEST_TIMEOUT
+    );
+  });
 });

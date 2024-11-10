@@ -54,6 +54,9 @@ export enum Chain {
   Taiko = 167000,
   TaikoHeklaL2 = 167009,
 
+  Dexalot = 432204,
+  DexalotTestnet = 432201,
+
   Palm = 11297108109,
   PalmTestnet = 11297108099
 }

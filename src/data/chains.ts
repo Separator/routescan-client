@@ -147,5 +147,16 @@ export const chains: ChainItem[] = [
     id: Chain.TaikoHeklaL2,
     blockExplorerType: BlockExplorerType.Ethereum,
     blockExplorerUrl: 'https://api-hekla.taikoscan.io/api'
+  },
+
+  {
+    id: Chain.Dexalot,
+    blockExplorerType: BlockExplorerType.Routescan,
+    blockExplorerUrl: 'https://api.routescan.io/v2/network/mainnet/evm/432204/etherscan/api'
+  },
+  {
+    id: Chain.DexalotTestnet,
+    blockExplorerType: BlockExplorerType.Routescan,
+    blockExplorerUrl: 'https://api.routescan.io/v2/network/testnet/evm/432201/etherscan/api'
   }
 ];
