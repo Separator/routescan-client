@@ -196,3 +196,7 @@ export interface BlockExplorerEthTransactionByHashResponse extends BlockExplorer
 export interface BlockExplorerEthTransactionByBlockNumberAndIndexResponse extends BlockExplorerRpcResponseCommon {
   result: BlockExplorerTxRpc;
 }
+
+export interface BlockExplorerEthTransactionCountResponse extends BlockExplorerRpcResponseCommon {
+  result: string;
+}

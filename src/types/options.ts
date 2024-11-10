@@ -222,3 +222,16 @@ export interface GetEthTransactionByBlockNumberAndIndexOptions {
    */
   index?: string;
 }
+
+export interface GetEthTransactionCountOptions {
+  /**
+   * @description The string representing the address to get transaction count
+   * @example '0x4bd5900Cb274ef15b153066D736bf3e83A9ba44e'
+   */
+  address: string;
+  /**
+   * @description The string pre-defined block parameter, either **earliest**, **pending** or **latest**
+   * @example 'latest'
+   */
+  tag?: BlockExplorerTag;
+}

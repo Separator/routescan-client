@@ -165,6 +165,12 @@ async function main() {
     index: '0x11A'
   });
   console.log(txSecond);
+
+  // Get the number of transactions performed by an address:
+  const txCount = await blockExplorer.eth_getTransactionCount({
+    address: '0x4bd5900Cb274ef15b153066D736bf3e83A9ba44e'
+  });
+  console.log(txCount);
 }
 
 main();

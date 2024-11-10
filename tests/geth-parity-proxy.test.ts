@@ -76,4 +76,15 @@ describe('Check Geth/Parity/Proxy functions', () => {
     },
     TEST_TIMEOUT
   );
+
+  test(
+    'Get the number of transactions performed by an address',
+    async () => {
+      const txCount = await blockExplorerEth.eth_getTransactionCount({
+        address: '0x4bd5900Cb274ef15b153066D736bf3e83A9ba44e'
+      });
+      expect(txCount).toEqual('0x73');
+    },
+    TEST_TIMEOUT
+  );
 });

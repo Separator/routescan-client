@@ -4,8 +4,8 @@ import { chains } from '../data/chains';
 import { BlockExplorerType } from '../types/type';
 import { Chain, ChainItem } from '../types/chains';
 import { AxiosTransport, Transport } from './Transport';
-import { BlockExplorerBlockItem, BlockExplorerBlockUncleItem, BlockCountdownTime } from '../types/block';
 import { BlockExplorer } from '../interfaces/BlockExplorer';
+import { BlockExplorerBlockItem, BlockExplorerBlockUncleItem, BlockCountdownTime } from '../types/block';
 import {
   BlockExplorerErc20TokenTransferEvent,
   BlockExplorerTransaction,
@@ -28,6 +28,7 @@ import {
   BlockExplorerEthBlockTransactionCountByNumberResponse,
   BlockExplorerEthTransactionByBlockNumberAndIndexResponse,
   BlockExplorerEthTransactionByHashResponse,
+  BlockExplorerEthTransactionCountResponse,
   BlockExplorerEthUncleByBlockNumberAndIndexResponse,
   BlockExplorerInternalTxListByHashResponse,
   BlockExplorerInternalTxListResponse,
@@ -58,7 +59,8 @@ import {
   GetEthUncleByBlockNumberAndIndexOptions,
   GetEthBlockTransactionCountByNumberOptions,
   GetEthTransactionByHashOptions,
-  GetEthTransactionByBlockNumberAndIndexOptions
+  GetEthTransactionByBlockNumberAndIndexOptions,
+  GetEthTransactionCountOptions
 } from '../types/options';
 
 const TX_NO_FOUND_MESSAGE = 'No transactions found';
@@ -120,6 +122,7 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
   public abstract eth_getTransactionByBlockNumberAndIndex(
     options: GetEthTransactionByBlockNumberAndIndexOptions
   ): Promise<BlockExplorerTxRpc>;
+  public abstract eth_getTransactionCount(options: GetEthTransactionCountOptions): Promise<string>;
 
   protected abstract getBlockExplorerUrl(chain: Chain): string;
 
@@ -436,6 +439,21 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
       chainid,
       module: BlockExplorerModule.Proxy,
       action: BlockExplorerAction.eth_getTransactionByBlockNumberAndIndex
+    });
+
+    this.checkResponseStatus(response);
+
+    return response.data.result;
+  }
+
+  public async eth_getTransactionCount(options: GetEthTransactionCountOptions) {
+    const { chain: chainid } = this;
+
+    const response = await this.transport.get<BlockExplorerEthTransactionCountResponse>({
+      ...options,
+      chainid,
+      module: BlockExplorerModule.Proxy,
+      action: BlockExplorerAction.eth_getTransactionCount
     });
 
     this.checkResponseStatus(response);
