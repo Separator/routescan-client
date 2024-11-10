@@ -35,6 +35,9 @@ export enum Chain {
 
   ZkSyncEra = 324,
 
+  Mantle = 5000,
+  MantleSepolia = 5003,
+
   Base = 8453,
   BaseGoerli = 84531,
   BaseSepolia = 84532,

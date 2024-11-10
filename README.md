@@ -240,6 +240,8 @@ Just register an account on corresponding site and generate an API key.
 | 5611     | BinanceOpBnbTestnet      | https://opbnb.bscscan.com       | https://api-opbnb-testnet.bscscan.com/api                            |
 | 250      | Fantom                   | https://ftmscan.com             | https://api.ftmscan.com/api                                          |
 | 4002     | FantomTestnet            | https://ftmscan.com             | https://api-testnet.ftmscan.com/api                                  |
+| 5000     | Mantle                   | https://mantlescan.xyz          | https://api.mantlescan.xyz/api                                       |
+| 5003     | MantleSepolia            | https://mantlescan.xyz          | https://api-sepolia.mantlescan.xyz/api                               |
 | 8453     | Base                     | https://basescan.org            | https://api.basescan.org/api                                         |
 | 84532    | BaseSepolia              | https://basescan.org            | https://api-sepolia.basescan.org/api                                 |
 | 42161    | Arbitrum                 | https://arbiscan.io             | https://api.arbiscan.io/api                                          |

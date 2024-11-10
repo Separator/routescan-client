@@ -169,5 +169,16 @@ export const chains: ChainItem[] = [
     id: Chain.FlareTestnet,
     blockExplorerType: BlockExplorerType.Routescan,
     blockExplorerUrl: 'https://api.routescan.io/v2/network/testnet/evm/114/etherscan/api'
+  },
+
+  {
+    id: Chain.Mantle,
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api.mantlescan.xyz/api'
+  },
+  {
+    id: Chain.MantleSepolia,
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api-sepolia.mantlescan.xyz/api'
   }
 ];

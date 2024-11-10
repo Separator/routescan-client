@@ -16,7 +16,8 @@ const {
   CELO_API_KEY = '',
   LINEA_API_KEY = '',
   FTM_SCAN_API_KEY = '',
-  TAIKO_API_KEY = ''
+  TAIKO_API_KEY = '',
+  MANTLE_API_KEY = ''
 } = process.env;
 const TEST_TIMEOUT = 60000;
 
@@ -320,6 +321,26 @@ describe('Checking access to blockchains', () => {
       'FlareTestnet (114)',
       async () => {
         const blockId = await getLastBlockchainBlock(Chain.FlareTestnet, ROUTESCAN_API_KEY);
+        expect(typeof blockId).toBe('number');
+      },
+      TEST_TIMEOUT
+    );
+  });
+
+  describe('Mantle', () => {
+    test(
+      'Mantle (5000)',
+      async () => {
+        const blockId = await getLastBlockchainBlock(Chain.Mantle, MANTLE_API_KEY);
+        expect(typeof blockId).toBe('number');
+      },
+      TEST_TIMEOUT
+    );
+
+    test(
+      'MantleSepolia (5003)',
+      async () => {
+        const blockId = await getLastBlockchainBlock(Chain.MantleSepolia, MANTLE_API_KEY);
         expect(typeof blockId).toBe('number');
       },
       TEST_TIMEOUT
