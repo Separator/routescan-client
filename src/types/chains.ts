@@ -51,6 +51,9 @@ export enum Chain {
   LineaGoerli = 59140,
   LineaSepolia = 59141,
 
+  Taiko = 167000,
+  TaikoHeklaL2 = 167009,
+
   Palm = 11297108109,
   PalmTestnet = 11297108099
 }

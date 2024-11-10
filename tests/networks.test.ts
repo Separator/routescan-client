@@ -15,7 +15,8 @@ const {
   ROUTESCAN_API_KEY = '',
   CELO_API_KEY = '',
   LINEA_API_KEY = '',
-  FTM_SCAN_API_KEY = ''
+  FTM_SCAN_API_KEY = '',
+  TAIKO_API_KEY = ''
 } = process.env;
 const TEST_TIMEOUT = 60000;
 
@@ -259,6 +260,26 @@ describe('Checking access to blockchains', () => {
       'LineaSepolia (59141)',
       async () => {
         const blockId = await getLastBlockchainBlock(Chain.LineaSepolia, LINEA_API_KEY);
+        expect(typeof blockId).toBe('number');
+      },
+      TEST_TIMEOUT
+    );
+  });
+
+  describe('Taiko', () => {
+    test(
+      'Taiko (167000)',
+      async () => {
+        const blockId = await getLastBlockchainBlock(Chain.Taiko, TAIKO_API_KEY);
+        expect(typeof blockId).toBe('number');
+      },
+      TEST_TIMEOUT
+    );
+
+    test(
+      'Taiko Hekla L2 (167009)',
+      async () => {
+        const blockId = await getLastBlockchainBlock(Chain.TaikoHeklaL2, TAIKO_API_KEY);
         expect(typeof blockId).toBe('number');
       },
       TEST_TIMEOUT

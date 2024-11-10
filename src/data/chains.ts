@@ -136,5 +136,16 @@ export const chains: ChainItem[] = [
     id: Chain.LineaSepolia,
     blockExplorerType: BlockExplorerType.Ethereum,
     blockExplorerUrl: 'https://api-sepolia.lineascan.build/api'
+  },
+
+  {
+    id: Chain.Taiko,
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api.taikoscan.io/api'
+  },
+  {
+    id: Chain.TaikoHeklaL2,
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api-hekla.taikoscan.io/api'
   }
 ];

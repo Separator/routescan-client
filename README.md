@@ -249,3 +249,5 @@ Just register an account on corresponding site and generate an API key.
 | 44787    | CeloAlfajores            | https://celoscan.io             | https://api-alfajores.celoscan.io/api                               |
 | 59144    | Linea                    | https://lineascan.build         | https://api.lineascan.build/api                                     |
 | 59141    | LineaSepolia             | https://lineascan.build         | https://api-sepolia.lineascan.build/api                             |
+| 167000   | Taiko                    | https://taikoscan.io            | https://api.taikoscan.io/api                                        |
+| 167000   | TaikoHeklaL2             | https://taikoscan.io            | https://api-hekla.taikoscan.io/api                                  |
