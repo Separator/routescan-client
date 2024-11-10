@@ -17,7 +17,9 @@ import {
   GetErc20TokenTransferEventsListOptions,
   GetEthBlockByNumberOptions,
   GetEthBlockTransactionCountByNumberOptions,
+  GetEthTransactionByBlockNumberAndIndexOptions,
   GetEthTransactionByHashOptions,
+  GetEthTransactionCountOptions,
   GetEthUncleByBlockNumberAndIndexOptions,
   GetEventLogsByAddressFilteredOptions,
   GetEventLogsByAddressOptions,
@@ -151,4 +153,16 @@ export interface BlockExplorer {
    * @returns Tx info
    */
   eth_getTransactionByHash(options: GetEthTransactionByHashOptions): Promise<BlockExplorerTxRpc>;
+  /**
+   * Returns information about a transaction by block number and transaction index position
+   * @param options
+   * @returns Tx info
+   */
+  eth_getTransactionByBlockNumberAndIndex(options: GetEthTransactionByBlockNumberAndIndexOptions): Promise<BlockExplorerTxRpc>;
+  /**
+   * Returns the number of transactions performed by an address
+   * @param options
+   * @returns Output tx count in hex
+   */
+  eth_getTransactionCount(options: GetEthTransactionCountOptions): Promise<string>;
 }

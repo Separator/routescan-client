@@ -158,6 +158,19 @@ async function main() {
     txhash: '0xbc78ab8a9e9a0bca7d0321a27b2c03addeae08ba81ea98b03cd3dd237eabed44'
   });
   console.log(tx);
+
+  // Get information about a transaction by block number and transaction index position:
+  const txSecond = await blockExplorer.eth_getTransactionByBlockNumberAndIndex({
+    tag: '0xC6331D',
+    index: '0x11A'
+  });
+  console.log(txSecond);
+
+  // Get the number of transactions performed by an address:
+  const txCount = await blockExplorer.eth_getTransactionCount({
+    address: '0x4bd5900Cb274ef15b153066D736bf3e83A9ba44e'
+  });
+  console.log(txCount);
 }
 
 main();

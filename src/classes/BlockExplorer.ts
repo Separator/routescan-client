@@ -4,8 +4,8 @@ import { chains } from '../data/chains';
 import { BlockExplorerType } from '../types/type';
 import { Chain, ChainItem } from '../types/chains';
 import { AxiosTransport, Transport } from './Transport';
-import { BlockExplorerBlockItem, BlockExplorerBlockUncleItem, BlockCountdownTime } from '../types/block';
 import { BlockExplorer } from '../interfaces/BlockExplorer';
+import { BlockExplorerBlockItem, BlockExplorerBlockUncleItem, BlockCountdownTime } from '../types/block';
 import {
   BlockExplorerErc20TokenTransferEvent,
   BlockExplorerTransaction,
@@ -26,7 +26,9 @@ import {
   BlockExplorerEthBlockByNumberResponse,
   BlockExplorerEthBlockNumberResponse,
   BlockExplorerEthBlockTransactionCountByNumberResponse,
+  BlockExplorerEthTransactionByBlockNumberAndIndexResponse,
   BlockExplorerEthTransactionByHashResponse,
+  BlockExplorerEthTransactionCountResponse,
   BlockExplorerEthUncleByBlockNumberAndIndexResponse,
   BlockExplorerInternalTxListByHashResponse,
   BlockExplorerInternalTxListResponse,
@@ -56,7 +58,9 @@ import {
   GetEthBlockByNumberOptions,
   GetEthUncleByBlockNumberAndIndexOptions,
   GetEthBlockTransactionCountByNumberOptions,
-  GetEthTransactionByHashOptions
+  GetEthTransactionByHashOptions,
+  GetEthTransactionByBlockNumberAndIndexOptions,
+  GetEthTransactionCountOptions
 } from '../types/options';
 
 const TX_NO_FOUND_MESSAGE = 'No transactions found';
@@ -115,6 +119,10 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
   ): Promise<BlockExplorerBlockUncleItem>;
   public abstract eth_getBlockTransactionCountByNumber(options: GetEthBlockTransactionCountByNumberOptions): Promise<string>;
   public abstract eth_getTransactionByHash(options: GetEthTransactionByHashOptions): Promise<BlockExplorerTxRpc>;
+  public abstract eth_getTransactionByBlockNumberAndIndex(
+    options: GetEthTransactionByBlockNumberAndIndexOptions
+  ): Promise<BlockExplorerTxRpc>;
+  public abstract eth_getTransactionCount(options: GetEthTransactionCountOptions): Promise<string>;
 
   protected abstract getBlockExplorerUrl(chain: Chain): string;
 
@@ -416,6 +424,36 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
       chainid,
       module: BlockExplorerModule.Proxy,
       action: BlockExplorerAction.eth_getTransactionByHash
+    });
+
+    this.checkResponseStatus(response);
+
+    return response.data.result;
+  }
+
+  public async eth_getTransactionByBlockNumberAndIndex(options: GetEthTransactionByBlockNumberAndIndexOptions) {
+    const { chain: chainid } = this;
+
+    const response = await this.transport.get<BlockExplorerEthTransactionByBlockNumberAndIndexResponse>({
+      ...options,
+      chainid,
+      module: BlockExplorerModule.Proxy,
+      action: BlockExplorerAction.eth_getTransactionByBlockNumberAndIndex
+    });
+
+    this.checkResponseStatus(response);
+
+    return response.data.result;
+  }
+
+  public async eth_getTransactionCount(options: GetEthTransactionCountOptions) {
+    const { chain: chainid } = this;
+
+    const response = await this.transport.get<BlockExplorerEthTransactionCountResponse>({
+      ...options,
+      chainid,
+      module: BlockExplorerModule.Proxy,
+      action: BlockExplorerAction.eth_getTransactionCount
     });
 
     this.checkResponseStatus(response);
