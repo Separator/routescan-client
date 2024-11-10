@@ -305,4 +305,24 @@ describe('Checking access to blockchains', () => {
       TEST_TIMEOUT
     );
   });
+
+  describe('Flare', () => {
+    test(
+      'FlareMainnet (14)',
+      async () => {
+        const blockId = await getLastBlockchainBlock(Chain.FlareMainnet, ROUTESCAN_API_KEY);
+        expect(typeof blockId).toBe('number');
+      },
+      TEST_TIMEOUT
+    );
+
+    test(
+      'FlareTestnet (114)',
+      async () => {
+        const blockId = await getLastBlockchainBlock(Chain.FlareTestnet, ROUTESCAN_API_KEY);
+        expect(typeof blockId).toBe('number');
+      },
+      TEST_TIMEOUT
+    );
+  });
 });

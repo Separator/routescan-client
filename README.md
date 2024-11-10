@@ -230,6 +230,8 @@ Just register an account on corresponding site and generate an API key.
 | 11155111 | EthereumSepolia          | https://etherscan.io            | https://api-sepolia.etherscan.io/api                                 |
 | 10       | Optimism                 | https://optimistic.etherscan.io | https://api-optimistic.etherscan.io/api                              |
 | 11155420 | OptimismSepolia          | https://optimistic.etherscan.io | https://api-sepolia-optimistic.etherscan.io/api                      |
+| 14       | FlareMainnet             | https://routescan.io            | https://api.routescan.io/v2/network/mainnet/evm/14/etherscan/api     |
+| 114      | FlareTestnet             | https://routescan.io            | https://api.routescan.io/v2/network/testnet/evm/114/etherscan/api    |
 | 56       | BinanceSmartChain        | https://bscscan.com             | https://api.bscscan.com/api                                          |
 | 97       | BinanceSmartChainTestnet | https://bscscan.com             | https://api-testnet.bscscan.com/api                                  |
 | 137      | Polygon                  | https://polygonscan.com         | https://api.polygonscan.com/api                                      |

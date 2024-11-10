@@ -12,6 +12,9 @@ export enum Chain {
   OptimismGoerli = 420,
   OptimismSepolia = 11155420,
 
+  FlareMainnet = 14,
+  FlareTestnet = 114,
+
   Cronos = 25,
   CronosTestnet = 338,
 

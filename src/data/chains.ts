@@ -158,5 +158,16 @@ export const chains: ChainItem[] = [
     id: Chain.DexalotTestnet,
     blockExplorerType: BlockExplorerType.Routescan,
     blockExplorerUrl: 'https://api.routescan.io/v2/network/testnet/evm/432201/etherscan/api'
+  },
+
+  {
+    id: Chain.FlareMainnet,
+    blockExplorerType: BlockExplorerType.Routescan,
+    blockExplorerUrl: 'https://api.routescan.io/v2/network/mainnet/evm/14/etherscan/api'
+  },
+  {
+    id: Chain.FlareTestnet,
+    blockExplorerType: BlockExplorerType.Routescan,
+    blockExplorerUrl: 'https://api.routescan.io/v2/network/testnet/evm/114/etherscan/api'
   }
 ];
