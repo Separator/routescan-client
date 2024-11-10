@@ -1,5 +1,5 @@
 import { BlockExplorerStatus } from './params';
-import { BlockExplorerBlockItem, BlockExplorerBlockUncleItem } from './block';
+import { BlockCountdownTime, BlockExplorerBlockItem, BlockExplorerBlockUncleItem } from './block';
 import {
   BlockExplorerTransaction,
   BlockExplorerTxInternal,
@@ -7,29 +7,6 @@ import {
   BlockExplorerErc20TokenTransferEvent,
   BlockExplorerTxRpc
 } from './transaction';
-
-export interface BlockCountdownTime {
-  /**
-   * @description Current block id
-   * @example '19419956'
-   */
-  CurrentBlock: string;
-  /**
-   * @description Countdown block
-   * @example '167015880000'
-   */
-  CountdownBlock: string;
-  /**
-   * @description Remaining block
-   * @example '166996460044'
-   */
-  RemainingBlock: string;
-  /**
-   * @description Estimate time in sec
-   * @example 2003957520528
-   */
-  EstimateTimeInSec: string;
-}
 
 export interface BlockExplorerResponseCommon {
   /**

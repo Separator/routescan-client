@@ -12,6 +12,9 @@ export enum Chain {
   OptimismGoerli = 420,
   OptimismSepolia = 11155420,
 
+  FlareMainnet = 14,
+  FlareTestnet = 114,
+
   Cronos = 25,
   CronosTestnet = 338,
 
@@ -25,12 +28,18 @@ export enum Chain {
   PolygonMumbai = 80001,
   PolygonAmoy = 80002,
 
+  Mint = 185,
+  MintSepolia = 1687,
+
   Fantom = 250,
   FantomTestnet = 4002,
 
   Filecoin = 314,
 
   ZkSyncEra = 324,
+
+  Mantle = 5000,
+  MantleSepolia = 5003,
 
   Base = 8453,
   BaseGoerli = 84531,
@@ -50,6 +59,12 @@ export enum Chain {
   Linea = 59144,
   LineaGoerli = 59140,
   LineaSepolia = 59141,
+
+  Taiko = 167000,
+  TaikoHeklaL2 = 167009,
+
+  Dexalot = 432204,
+  DexalotTestnet = 432201,
 
   Palm = 11297108109,
   PalmTestnet = 11297108099

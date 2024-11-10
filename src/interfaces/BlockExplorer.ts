@@ -1,6 +1,6 @@
 import { Chain } from '../types/chains';
-import { BlockExplorerBlockItem, BlockExplorerBlockUncleItem } from '../types/block';
-import { BlockCountdownTime, EventLog } from '../types/block-explorer';
+import { EventLog } from '../types/block-explorer';
+import { BlockCountdownTime, BlockExplorerBlockItem, BlockExplorerBlockUncleItem } from '../types/block';
 import {
   BlockExplorerErc20TokenTransferEvent,
   BlockExplorerTransaction,

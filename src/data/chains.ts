@@ -136,5 +136,60 @@ export const chains: ChainItem[] = [
     id: Chain.LineaSepolia,
     blockExplorerType: BlockExplorerType.Ethereum,
     blockExplorerUrl: 'https://api-sepolia.lineascan.build/api'
+  },
+
+  {
+    id: Chain.Taiko,
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api.taikoscan.io/api'
+  },
+  {
+    id: Chain.TaikoHeklaL2,
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api-hekla.taikoscan.io/api'
+  },
+
+  {
+    id: Chain.Dexalot,
+    blockExplorerType: BlockExplorerType.Routescan,
+    blockExplorerUrl: 'https://api.routescan.io/v2/network/mainnet/evm/432204/etherscan/api'
+  },
+  {
+    id: Chain.DexalotTestnet,
+    blockExplorerType: BlockExplorerType.Routescan,
+    blockExplorerUrl: 'https://api.routescan.io/v2/network/testnet/evm/432201/etherscan/api'
+  },
+
+  {
+    id: Chain.FlareMainnet,
+    blockExplorerType: BlockExplorerType.Routescan,
+    blockExplorerUrl: 'https://api.routescan.io/v2/network/mainnet/evm/14/etherscan/api'
+  },
+  {
+    id: Chain.FlareTestnet,
+    blockExplorerType: BlockExplorerType.Routescan,
+    blockExplorerUrl: 'https://api.routescan.io/v2/network/testnet/evm/114/etherscan/api'
+  },
+
+  {
+    id: Chain.Mantle,
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api.mantlescan.xyz/api'
+  },
+  {
+    id: Chain.MantleSepolia,
+    blockExplorerType: BlockExplorerType.Ethereum,
+    blockExplorerUrl: 'https://api-sepolia.mantlescan.xyz/api'
+  },
+
+  {
+    id: Chain.Mint,
+    blockExplorerType: BlockExplorerType.Routescan,
+    blockExplorerUrl: 'https://api.routescan.io/v2/network/mainnet/evm/185/etherscan/api'
+  },
+  {
+    id: Chain.MintSepolia,
+    blockExplorerType: BlockExplorerType.Routescan,
+    blockExplorerUrl: 'https://api.routescan.io/v2/network/testnet/evm/1687/etherscan/api'
   }
 ];

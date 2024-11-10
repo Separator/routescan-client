@@ -4,7 +4,7 @@ import { chains } from '../data/chains';
 import { BlockExplorerType } from '../types/type';
 import { Chain, ChainItem } from '../types/chains';
 import { AxiosTransport, Transport } from './Transport';
-import { BlockExplorerBlockItem, BlockExplorerBlockUncleItem } from '../types/block';
+import { BlockExplorerBlockItem, BlockExplorerBlockUncleItem, BlockCountdownTime } from '../types/block';
 import { BlockExplorer } from '../interfaces/BlockExplorer';
 import {
   BlockExplorerErc20TokenTransferEvent,
@@ -21,7 +21,6 @@ import {
   BlockExplorerTag
 } from '../types/params';
 import {
-  BlockCountdownTime,
   BlockExplorerBlockCountdownTimeResponse,
   BlockExplorerBlockIdResponse,
   BlockExplorerEthBlockByNumberResponse,
