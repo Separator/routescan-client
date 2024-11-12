@@ -28,6 +28,7 @@ import {
   BlockExplorerEthBlockNumberResponse,
   BlockExplorerEthBlockTransactionCountByNumberResponse,
   BlockExplorerEthCallResponse,
+  BlockExplorerEthGetCodeResponse,
   BlockExplorerEthGetTransactionReceiptResponse,
   BlockExplorerEthSendRawTransactionResponse,
   BlockExplorerEthTransactionByBlockNumberAndIndexResponse,
@@ -67,7 +68,8 @@ import {
   GetEthTransactionCountOptions,
   GetEthSendRawTransactionOptions,
   GetEthTransactionReceiptOptions,
-  GetEthCallOptions
+  GetEthCallOptions,
+  GetEthCodeOptions
 } from '../types/options';
 
 const TX_NO_FOUND_MESSAGE = 'No transactions found';
@@ -133,6 +135,7 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
   public abstract eth_sendRawTransaction(options: GetEthSendRawTransactionOptions): Promise<string>;
   public abstract eth_getTransactionReceipt(options: GetEthTransactionReceiptOptions): Promise<BlockExplorerTxReceipt>;
   public abstract eth_call(options: GetEthCallOptions): Promise<string>;
+  public abstract eth_getCode(options: GetEthCodeOptions): Promise<string>;
 
   protected abstract getBlockExplorerUrl(chain: Chain): string;
 
@@ -494,6 +497,20 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
       chainid,
       module: BlockExplorerModule.Proxy,
       action: BlockExplorerAction.eth_call
+    });
+
+    this.checkResponseStatus(response);
+    return response.data.result as string;
+  }
+
+  public async eth_getCode(options: GetEthCodeOptions) {
+    const { chain: chainid } = this;
+
+    const response = await this.transport.get<BlockExplorerEthGetCodeResponse>({
+      ...options,
+      chainid,
+      module: BlockExplorerModule.Proxy,
+      action: BlockExplorerAction.eth_getCode
     });
 
     this.checkResponseStatus(response);

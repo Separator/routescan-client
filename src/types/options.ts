@@ -268,3 +268,15 @@ export interface GetEthCallOptions {
    */
   tag?: BlockExplorerTag;
 }
+
+export interface GetEthCodeOptions {
+  /**
+   * @description The string representing the address to get code
+   * @example '0xf75e354c5edc8efed9b59ee9f67a80845ade7d0c'
+   */
+  address: string;
+  /**
+   * @description The string pre-defined block parameter, either **earliest**, **pending** or **latest**
+   */
+  tag?: BlockExplorerTag;
+}

@@ -226,3 +226,7 @@ export interface BlockExplorerEthGetTransactionReceiptResponse extends BlockExpl
 export interface BlockExplorerEthCallResponse extends BlockExplorerRpcResponseCommon {
   result?: string;
 }
+
+export interface BlockExplorerEthGetCodeResponse extends BlockExplorerRpcResponseCommon {
+  result?: string;
+}

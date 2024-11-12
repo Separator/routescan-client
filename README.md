@@ -244,6 +244,13 @@ async function main() {
     offset: 1000
   });
   console.log(addressLogs.length);
+
+  // Returns code at a given address:
+  const codeInHex = await blockExplorer.eth_getCode({
+    address: '0xf75e354c5edc8efed9b59ee9f67a80845ade7d0c',
+    tag: BlockExplorerTag.Latest
+  });
+  console.log(codeInHex);
 }
 
 main();
