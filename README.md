@@ -176,6 +176,11 @@ async function main() {
     hex: '0xf904808000831cfde080'
   });
   console.log(txHash);
+
+  const txReceipt = await blockExplorer.eth_getTransactionReceipt({
+    txhash: '0xadb8aec59e80db99811ac4a0235efa3e45da32928bcff557998552250fa672eb'
+  });
+  console.log(txReceipt);
 }
 
 main();

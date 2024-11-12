@@ -6,6 +6,7 @@ import {
   BlockExplorerTransaction,
   BlockExplorerTxInternal,
   BlockExplorerTxInternalByTxHash,
+  BlockExplorerTxReceipt,
   BlockExplorerTxRpc
 } from '../types/transaction';
 import {
@@ -21,6 +22,7 @@ import {
   GetEthTransactionByBlockNumberAndIndexOptions,
   GetEthTransactionByHashOptions,
   GetEthTransactionCountOptions,
+  GetEthTransactionReceiptOptions,
   GetEthUncleByBlockNumberAndIndexOptions,
   GetEventLogsByAddressFilteredOptions,
   GetEventLogsByAddressOptions,
@@ -172,4 +174,10 @@ export interface BlockExplorer {
    * @returns Submitted tx hash
    */
   eth_sendRawTransaction(options: GetEthSendRawTransactionOptions): Promise<string>;
+  /**
+   * Returns the receipt of a transaction by transaction hash
+   * @param options
+   * @returns Tx receipt info
+   */
+  eth_getTransactionReceipt(options: GetEthTransactionReceiptOptions): Promise<BlockExplorerTxReceipt>;
 }

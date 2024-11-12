@@ -243,3 +243,11 @@ export interface GetEthSendRawTransactionOptions {
    */
   hex: string;
 }
+
+export interface GetEthTransactionReceiptOptions {
+  /**
+   * @description The string representing the hash of the transaction
+   * @example '0xadb8aec59e80db99811ac4a0235efa3e45da32928bcff557998552250fa672eb'
+   */
+  txhash: string;
+}

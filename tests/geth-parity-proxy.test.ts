@@ -14,7 +14,7 @@ describe('Check Geth/Parity/Proxy functions', () => {
     'Get number of most recent block',
     async () => {
       const blockNumber = await blockExplorerAvax.eth_blockNumber();
-      expect(typeof blockNumber).toEqual('string');
+      expect(typeof blockNumber).toEqual('bigint');
     },
     TEST_TIMEOUT
   );
@@ -49,7 +49,7 @@ describe('Check Geth/Parity/Proxy functions', () => {
       const txCount = await blockExplorerEth.eth_getBlockTransactionCountByNumber({
         tag: '0x10FB78'
       });
-      expect(txCount).toEqual('0x3');
+      expect(txCount.toString()).toEqual('3');
     },
     TEST_TIMEOUT
   );
@@ -83,7 +83,18 @@ describe('Check Geth/Parity/Proxy functions', () => {
       const txCount = await blockExplorerEth.eth_getTransactionCount({
         address: '0x4bd5900Cb274ef15b153066D736bf3e83A9ba44e'
       });
-      expect(txCount).toEqual('0x73');
+      expect(txCount.toString()).toEqual('115');
+    },
+    TEST_TIMEOUT
+  );
+
+  test(
+    'Get the receipt of a transaction by transaction hash',
+    async () => {
+      const txReceipt = await blockExplorerEth.eth_getTransactionReceipt({
+        txhash: '0xadb8aec59e80db99811ac4a0235efa3e45da32928bcff557998552250fa672eb'
+      });
+      expect(txReceipt.blockHash).toEqual('0x07c17710dbb7514e92341c9f83b4aab700c5dba7c4fb98caadd7926a32e47799');
     },
     TEST_TIMEOUT
   );

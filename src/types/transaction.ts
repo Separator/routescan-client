@@ -278,3 +278,123 @@ export interface BlockExplorerTxRpc extends BlockTransaction {
    */
   yParity: string;
 }
+
+interface BlockExplorerTxReceiptLog {
+  /**
+   * @description Address
+   * @example '0xdac17f958d2ee523a2206206994597c13d831ec7'
+   */
+  address: string;
+  /**
+   * @description Topics list
+   * @example ['0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef']
+   */
+  topics: string[];
+  /**
+   * @description Log data
+   * @example '0x00000000000000000000000000000000000000000000000000000000013f81a6'
+   */
+  data: string;
+  /**
+   * @description Block number
+   * @example '0xcf2427'
+   */
+  blockNumber: string;
+  /**
+   * @description Transaction hash
+   * @example '0xadb8aec59e80db99811ac4a0235efa3e45da32928bcff557998552250fa672eb'
+   */
+  transactionHash: string;
+  /**
+   * @description Transaction index
+   * @example '0x122'
+   */
+  transactionIndex: string;
+  /**
+   * @description Block hash
+   * @example '0x07c17710dbb7514e92341c9f83b4aab700c5dba7c4fb98caadd7926a32e47799'
+   */
+  blockHash: string;
+  /**
+   * @description Log index
+   * @example '0xdb'
+   */
+  logIndex: string;
+  /**
+   * @description Removed status
+   * @example false
+   */
+  removed: boolean;
+}
+
+export interface BlockExplorerTxReceipt {
+  /**
+   * @description From address
+   * @example '0x292f04a44506c2fd49bac032e1ca148c35a478c8'
+   */
+  from: string;
+  /**
+   * @description To address
+   * @example '0xdac17f958d2ee523a2206206994597c13d831ec7'
+   */
+  to: string;
+  /**
+   * @description Block hash
+   * @example '0x07c17710dbb7514e92341c9f83b4aab700c5dba7c4fb98caadd7926a32e47799'
+   */
+  blockHash: string;
+  /**
+   * @description Block number
+   * @example '0xcf2427'
+   */
+  blockNumber: string;
+  /**
+   * @description Contract address
+   * @example null
+   */
+  contractAddress: string | null;
+  /**
+   * @description Cumulative gas used in hex
+   * @example '0xeb67d5'
+   */
+  cumulativeGasUsed: string;
+  /**
+   * @description Effective gas price in hex
+   * @example '0x1a96b24c26'
+   */
+  effectiveGasPrice: string;
+  /**
+   * @description Gas used in hex
+   * @example '0xb41d'
+   */
+  gasUsed: string;
+  /**
+   * @description Receipt logs
+   */
+  logs: BlockExplorerTxReceiptLog[];
+  /**
+   * @description Logs bloom
+   * @example '0x00000000000000000000000000000000000000000000000000000000000004000000000004000000000000000000010000000000000000000000000000000000000000000000000000000008000000000000000000000000800000000000000000000000000000000000000000000000000000000000000000000010000000001100000000000000000000000000000000000000000000000000000200100000000000000000000000000080000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
+   */
+  logsBloom: string;
+  /**
+   * @description Status
+   * @example '0x1'
+   */
+  status: string;
+  /**
+   * @description Transaction hash
+   * @example '0xadb8aec59e80db99811ac4a0235efa3e45da32928bcff557998552250fa672eb'
+   */
+  transactionHash: string;
+  /**
+   * @description Transaction index
+   * @example '0x122'
+   */
+  transactionIndex: string;
+  /**
+   * @description Tx type
+   * @example '0x2'
+   */
+  type: string;
+}

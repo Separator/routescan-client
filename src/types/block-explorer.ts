@@ -5,7 +5,8 @@ import {
   BlockExplorerTxInternal,
   BlockExplorerTxInternalByTxHash,
   BlockExplorerErc20TokenTransferEvent,
-  BlockExplorerTxRpc
+  BlockExplorerTxRpc,
+  BlockExplorerTxReceipt
 } from './transaction';
 
 export interface BlockExplorerResponseCommon {
@@ -216,4 +217,8 @@ export interface BlockExplorerEthTransactionCountResponse extends BlockExplorerR
 
 export interface BlockExplorerEthSendRawTransactionResponse extends BlockExplorerRpcResponseCommon {
   result?: string;
+}
+
+export interface BlockExplorerEthGetTransactionReceiptResponse extends BlockExplorerRpcResponseCommon {
+  result?: BlockExplorerTxReceipt;
 }

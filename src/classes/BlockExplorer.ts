@@ -11,6 +11,7 @@ import {
   BlockExplorerTransaction,
   BlockExplorerTxInternal,
   BlockExplorerTxInternalByTxHash,
+  BlockExplorerTxReceipt,
   BlockExplorerTxRpc
 } from '../types/transaction';
 import {
@@ -26,6 +27,7 @@ import {
   BlockExplorerEthBlockByNumberResponse,
   BlockExplorerEthBlockNumberResponse,
   BlockExplorerEthBlockTransactionCountByNumberResponse,
+  BlockExplorerEthGetTransactionReceiptResponse,
   BlockExplorerEthSendRawTransactionResponse,
   BlockExplorerEthTransactionByBlockNumberAndIndexResponse,
   BlockExplorerEthTransactionByHashResponse,
@@ -62,7 +64,8 @@ import {
   GetEthTransactionByHashOptions,
   GetEthTransactionByBlockNumberAndIndexOptions,
   GetEthTransactionCountOptions,
-  GetEthSendRawTransactionOptions
+  GetEthSendRawTransactionOptions,
+  GetEthTransactionReceiptOptions
 } from '../types/options';
 
 const TX_NO_FOUND_MESSAGE = 'No transactions found';
@@ -126,6 +129,7 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
   ): Promise<BlockExplorerTxRpc>;
   public abstract eth_getTransactionCount(options: GetEthTransactionCountOptions): Promise<bigint>;
   public abstract eth_sendRawTransaction(options: GetEthSendRawTransactionOptions): Promise<string>;
+  public abstract eth_getTransactionReceipt(options: GetEthTransactionReceiptOptions): Promise<BlockExplorerTxReceipt>;
 
   protected abstract getBlockExplorerUrl(chain: Chain): string;
 
@@ -374,7 +378,6 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
     });
 
     this.checkResponseStatus(response);
-
     return BigInt(response.data.result as string);
   }
 
@@ -389,7 +392,6 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
     });
 
     this.checkResponseStatus(response);
-
     return response.data.result as BlockExplorerBlockItem;
   }
 
@@ -404,7 +406,6 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
     });
 
     this.checkResponseStatus(response);
-
     return response.data.result as BlockExplorerBlockUncleItem;
   }
 
@@ -419,7 +420,6 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
     });
 
     this.checkResponseStatus(response);
-
     return BigInt(response.data.result as string);
   }
 
@@ -434,7 +434,6 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
     });
 
     this.checkResponseStatus(response);
-
     return response.data.result as BlockExplorerTxRpc;
   }
 
@@ -449,7 +448,6 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
     });
 
     this.checkResponseStatus(response);
-
     return response.data.result as BlockExplorerTxRpc;
   }
 
@@ -464,7 +462,6 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
     });
 
     this.checkResponseStatus(response);
-
     return BigInt(response.data.result as string);
   }
 
@@ -479,8 +476,21 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
     });
 
     this.checkResponseStatus(response);
-
     return response.data.result as string;
+  }
+
+  public async eth_getTransactionReceipt(options: GetEthTransactionReceiptOptions) {
+    const { chain: chainid } = this;
+
+    const response = await this.transport.get<BlockExplorerEthGetTransactionReceiptResponse>({
+      ...options,
+      chainid,
+      module: BlockExplorerModule.Proxy,
+      action: BlockExplorerAction.eth_getTransactionReceipt
+    });
+
+    this.checkResponseStatus(response);
+    return response.data.result as BlockExplorerTxReceipt;
   }
 }
 
