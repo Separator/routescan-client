@@ -167,6 +167,19 @@ interface BlockExplorerRpcResponseCommon {
    * @example 83
    */
   id: number;
+
+  error?: {
+    /**
+     * @description Error code
+     * @example -32000
+     */
+    code: number;
+    /**
+     * @description Error message
+     * @example 'rlp: value size exceeds available input length'
+     */
+    message: string;
+  };
 }
 
 export interface BlockExplorerEthBlockNumberResponse extends BlockExplorerRpcResponseCommon {
@@ -174,29 +187,33 @@ export interface BlockExplorerEthBlockNumberResponse extends BlockExplorerRpcRes
    * @description Recent block number in hex
    * @example '0x1427a5f'
    */
-  result: string;
+  result?: string;
 }
 
 export interface BlockExplorerEthBlockByNumberResponse extends BlockExplorerRpcResponseCommon {
-  result: BlockExplorerBlockItem;
+  result?: BlockExplorerBlockItem;
 }
 
 export interface BlockExplorerEthUncleByBlockNumberAndIndexResponse extends BlockExplorerRpcResponseCommon {
-  result: BlockExplorerBlockUncleItem;
+  result?: BlockExplorerBlockUncleItem;
 }
 
 export interface BlockExplorerEthBlockTransactionCountByNumberResponse extends BlockExplorerRpcResponseCommon {
-  result: string;
+  result?: string;
 }
 
 export interface BlockExplorerEthTransactionByHashResponse extends BlockExplorerRpcResponseCommon {
-  result: BlockExplorerTxRpc;
+  result?: BlockExplorerTxRpc;
 }
 
 export interface BlockExplorerEthTransactionByBlockNumberAndIndexResponse extends BlockExplorerRpcResponseCommon {
-  result: BlockExplorerTxRpc;
+  result?: BlockExplorerTxRpc;
 }
 
 export interface BlockExplorerEthTransactionCountResponse extends BlockExplorerRpcResponseCommon {
-  result: string;
+  result?: string;
+}
+
+export interface BlockExplorerEthSendRawTransactionResponse extends BlockExplorerRpcResponseCommon {
+  result?: string;
 }

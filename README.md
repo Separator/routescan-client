@@ -171,6 +171,11 @@ async function main() {
     address: '0x4bd5900Cb274ef15b153066D736bf3e83A9ba44e'
   });
   console.log(txCount);
+
+  const txHash = await blockExplorer.eth_sendRawTransaction({
+    hex: '0xf904808000831cfde080'
+  });
+  console.log(txHash);
 }
 
 main();

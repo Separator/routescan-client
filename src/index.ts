@@ -41,7 +41,8 @@ import {
   GetEthBlockTransactionCountByNumberOptions,
   GetEthTransactionByHashOptions,
   GetEthTransactionByBlockNumberAndIndexOptions,
-  GetEthTransactionCountOptions
+  GetEthTransactionCountOptions,
+  GetEthSendRawTransactionOptions
 } from './types/options';
 import {
   // Structures:
@@ -66,7 +67,8 @@ import {
   BlockExplorerEthBlockTransactionCountByNumberResponse,
   BlockExplorerEthTransactionByHashResponse,
   BlockExplorerEthTransactionByBlockNumberAndIndexResponse,
-  BlockExplorerEthTransactionCountResponse
+  BlockExplorerEthTransactionCountResponse,
+  BlockExplorerEthSendRawTransactionResponse
 } from './types/block-explorer';
 
 export {
@@ -91,6 +93,7 @@ export {
   GetEthTransactionByHashOptions,
   GetEthTransactionByBlockNumberAndIndexOptions,
   GetEthTransactionCountOptions,
+  GetEthSendRawTransactionOptions,
 
   // Parameters:
   BlockExplorerModule,
@@ -133,6 +136,7 @@ export {
   BlockExplorerEthTransactionByHashResponse,
   BlockExplorerEthTransactionByBlockNumberAndIndexResponse,
   BlockExplorerEthTransactionCountResponse,
+  BlockExplorerEthSendRawTransactionResponse,
 
   // Block explorer:
   BlockExplorer,

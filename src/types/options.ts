@@ -235,3 +235,11 @@ export interface GetEthTransactionCountOptions {
    */
   tag?: BlockExplorerTag;
 }
+
+export interface GetEthSendRawTransactionOptions {
+  /**
+   * @description The string representing the signed raw transaction data to broadcast
+   * @example '0xf904808000831cfde080'
+   */
+  hex: string;
+}

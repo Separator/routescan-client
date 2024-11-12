@@ -17,6 +17,7 @@ import {
   GetErc20TokenTransferEventsListOptions,
   GetEthBlockByNumberOptions,
   GetEthBlockTransactionCountByNumberOptions,
+  GetEthSendRawTransactionOptions,
   GetEthTransactionByBlockNumberAndIndexOptions,
   GetEthTransactionByHashOptions,
   GetEthTransactionCountOptions,
@@ -126,9 +127,9 @@ export interface BlockExplorer {
 
   /**
    * Returns the number of most recent block
-   * @returns Recent block number in hex
+   * @returns Recent block number
    */
-  eth_blockNumber(): Promise<string>;
+  eth_blockNumber(): Promise<bigint>;
   /**
    * Returns information about a block by block number
    * @param options
@@ -144,9 +145,9 @@ export interface BlockExplorer {
   /**
    * Returns the number of transactions in a block
    * @param options
-   * @returns Tx count in hex
+   * @returns Tx count
    */
-  eth_getBlockTransactionCountByNumber(options: GetEthBlockTransactionCountByNumberOptions): Promise<string>;
+  eth_getBlockTransactionCountByNumber(options: GetEthBlockTransactionCountByNumberOptions): Promise<bigint>;
   /**
    * Returns the information about a transaction requested by transaction hash
    * @param options
@@ -164,5 +165,11 @@ export interface BlockExplorer {
    * @param options
    * @returns Output tx count in hex
    */
-  eth_getTransactionCount(options: GetEthTransactionCountOptions): Promise<string>;
+  eth_getTransactionCount(options: GetEthTransactionCountOptions): Promise<bigint>;
+  /**
+   * Submits a pre-signed transaction for broadcast to the Ethereum network
+   * @param options
+   * @returns Submitted tx hash
+   */
+  eth_sendRawTransaction(options: GetEthSendRawTransactionOptions): Promise<string>;
 }
