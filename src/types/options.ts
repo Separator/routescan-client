@@ -251,3 +251,20 @@ export interface GetEthTransactionReceiptOptions {
    */
   txhash: string;
 }
+
+export interface GetEthCallOptions {
+  /**
+   * @description The string representing the address to interact with
+   * @example '0xAEEF46DB4855E25702F8237E8f403FddcaF931C0'
+   */
+  to: string;
+  /**
+   * @description The hash of the method signature and encoded parameters
+   * @example '0x70a08231000000000000000000000000e16359506c028e51f16be38986ec5746251e9724'
+   */
+  data?: string;
+  /**
+   * @description The string pre-defined block parameter, either **earliest**, **pending** or **latest**
+   */
+  tag?: BlockExplorerTag;
+}

@@ -222,3 +222,7 @@ export interface BlockExplorerEthSendRawTransactionResponse extends BlockExplore
 export interface BlockExplorerEthGetTransactionReceiptResponse extends BlockExplorerRpcResponseCommon {
   result?: BlockExplorerTxReceipt;
 }
+
+export interface BlockExplorerEthCallResponse extends BlockExplorerRpcResponseCommon {
+  result?: string;
+}

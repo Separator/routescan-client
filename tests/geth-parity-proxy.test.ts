@@ -1,6 +1,6 @@
 import { config } from 'dotenv';
 
-import { BlockExplorerCommon, Chain } from '../src';
+import { BlockExplorerCommon, BlockExplorerTag, Chain } from '../src';
 
 config();
 
@@ -95,6 +95,19 @@ describe('Check Geth/Parity/Proxy functions', () => {
         txhash: '0xadb8aec59e80db99811ac4a0235efa3e45da32928bcff557998552250fa672eb'
       });
       expect(txReceipt.blockHash).toEqual('0x07c17710dbb7514e92341c9f83b4aab700c5dba7c4fb98caadd7926a32e47799');
+    },
+    TEST_TIMEOUT
+  );
+
+  test(
+    'Executes a new message call immediately without creating a transaction on the block chain',
+    async () => {
+      const result = await blockExplorerEth.eth_call({
+        to: '0xAEEF46DB4855E25702F8237E8f403FddcaF931C0',
+        data: '0x70a08231000000000000000000000000e16359506c028e51f16be38986ec5746251e9724',
+        tag: BlockExplorerTag.Latest
+      });
+      expect(typeof result).toEqual('string');
     },
     TEST_TIMEOUT
   );

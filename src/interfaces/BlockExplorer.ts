@@ -18,6 +18,7 @@ import {
   GetErc20TokenTransferEventsListOptions,
   GetEthBlockByNumberOptions,
   GetEthBlockTransactionCountByNumberOptions,
+  GetEthCallOptions,
   GetEthSendRawTransactionOptions,
   GetEthTransactionByBlockNumberAndIndexOptions,
   GetEthTransactionByHashOptions,
@@ -180,4 +181,10 @@ export interface BlockExplorer {
    * @returns Tx receipt info
    */
   eth_getTransactionReceipt(options: GetEthTransactionReceiptOptions): Promise<BlockExplorerTxReceipt>;
+  /**
+   * Executes a new message call immediately without creating a transaction on the block chain
+   * @param options
+   * @returns result string
+   */
+  eth_call(options: GetEthCallOptions): Promise<string>;
 }
