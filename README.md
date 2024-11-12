@@ -171,6 +171,26 @@ async function main() {
     address: '0x4bd5900Cb274ef15b153066D736bf3e83A9ba44e'
   });
   console.log(txCount);
+
+  // Submits a pre-signed transaction for broadcast to the Ethereum network:
+  const txHash = await blockExplorer.eth_sendRawTransaction({
+    hex: '0xf904808000831cfde080'
+  });
+  console.log(txHash);
+
+  // Get the receipt of a transaction by transaction hash:
+  const txReceipt = await blockExplorer.eth_getTransactionReceipt({
+    txhash: '0xadb8aec59e80db99811ac4a0235efa3e45da32928bcff557998552250fa672eb'
+  });
+  console.log(txReceipt);
+
+  // Executes a new message call immediately without creating a transaction on the block chain:
+  const callResult = await blockExplorer.eth_call({
+    to: '0xAEEF46DB4855E25702F8237E8f403FddcaF931C0',
+    data: '0x70a08231000000000000000000000000e16359506c028e51f16be38986ec5746251e9724',
+    tag: BlockExplorerTag.Latest
+  });
+  console.log(callResult);
 }
 
 main();
@@ -224,6 +244,13 @@ async function main() {
     offset: 1000
   });
   console.log(addressLogs.length);
+
+  // Returns code at a given address:
+  const codeInHex = await blockExplorer.eth_getCode({
+    address: '0xf75e354c5edc8efed9b59ee9f67a80845ade7d0c',
+    tag: BlockExplorerTag.Latest
+  });
+  console.log(codeInHex);
 }
 
 main();

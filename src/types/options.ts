@@ -235,3 +235,48 @@ export interface GetEthTransactionCountOptions {
    */
   tag?: BlockExplorerTag;
 }
+
+export interface GetEthSendRawTransactionOptions {
+  /**
+   * @description The string representing the signed raw transaction data to broadcast
+   * @example '0xf904808000831cfde080'
+   */
+  hex: string;
+}
+
+export interface GetEthTransactionReceiptOptions {
+  /**
+   * @description The string representing the hash of the transaction
+   * @example '0xadb8aec59e80db99811ac4a0235efa3e45da32928bcff557998552250fa672eb'
+   */
+  txhash: string;
+}
+
+export interface GetEthCallOptions {
+  /**
+   * @description The string representing the address to interact with
+   * @example '0xAEEF46DB4855E25702F8237E8f403FddcaF931C0'
+   */
+  to: string;
+  /**
+   * @description The hash of the method signature and encoded parameters
+   * @example '0x70a08231000000000000000000000000e16359506c028e51f16be38986ec5746251e9724'
+   */
+  data?: string;
+  /**
+   * @description The string pre-defined block parameter, either **earliest**, **pending** or **latest**
+   */
+  tag?: BlockExplorerTag;
+}
+
+export interface GetEthCodeOptions {
+  /**
+   * @description The string representing the address to get code
+   * @example '0xf75e354c5edc8efed9b59ee9f67a80845ade7d0c'
+   */
+  address: string;
+  /**
+   * @description The string pre-defined block parameter, either **earliest**, **pending** or **latest**
+   */
+  tag?: BlockExplorerTag;
+}
