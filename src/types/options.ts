@@ -280,3 +280,20 @@ export interface GetEthCodeOptions {
    */
   tag?: BlockExplorerTag;
 }
+
+export interface GetEthStorageAtOptions {
+  /**
+   * @description The string representing the address to get code
+   * @example '0x6e03d9cce9d60f3e9f2597e13cd4c54c55330cfd'
+   */
+  address: string;
+  /**
+   * @description The hex code of the position in storage
+   * @example '0x0'
+   */
+  position?: string;
+  /**
+   * @description The string pre-defined block parameter, either **earliest**, **pending** or **latest**
+   */
+  tag?: BlockExplorerTag;
+}

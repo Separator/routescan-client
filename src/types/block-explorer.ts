@@ -230,3 +230,7 @@ export interface BlockExplorerEthCallResponse extends BlockExplorerRpcResponseCo
 export interface BlockExplorerEthGetCodeResponse extends BlockExplorerRpcResponseCommon {
   result?: string;
 }
+
+export interface BlockExplorerEthGetStorageAtResponse extends BlockExplorerRpcResponseCommon {
+  result?: string;
+}

@@ -45,7 +45,8 @@ import {
   GetEthSendRawTransactionOptions,
   GetEthTransactionReceiptOptions,
   GetEthCallOptions,
-  GetEthCodeOptions
+  GetEthCodeOptions,
+  GetEthStorageAtOptions
 } from './types/options';
 import {
   // Structures:
@@ -74,7 +75,8 @@ import {
   BlockExplorerEthSendRawTransactionResponse,
   BlockExplorerEthGetTransactionReceiptResponse,
   BlockExplorerEthCallResponse,
-  BlockExplorerEthGetCodeResponse
+  BlockExplorerEthGetCodeResponse,
+  BlockExplorerEthGetStorageAtResponse
 } from './types/block-explorer';
 
 export {
@@ -103,6 +105,7 @@ export {
   GetEthTransactionReceiptOptions,
   GetEthCallOptions,
   GetEthCodeOptions,
+  GetEthStorageAtOptions,
 
   // Parameters:
   BlockExplorerModule,
@@ -149,6 +152,7 @@ export {
   BlockExplorerEthGetTransactionReceiptResponse,
   BlockExplorerEthCallResponse,
   BlockExplorerEthGetCodeResponse,
+  BlockExplorerEthGetStorageAtResponse,
 
   // Block explorer:
   BlockExplorer,

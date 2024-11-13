@@ -125,4 +125,17 @@ describe('Check Geth/Parity/Proxy functions', () => {
     },
     TEST_TIMEOUT
   );
+
+  test(
+    'Returns the value from a storage position at a given address',
+    async () => {
+      const storageValue = await blockExplorerEth.eth_getStorageAt({
+        address: '0x6e03d9cce9d60f3e9f2597e13cd4c54c55330cfd',
+        position: '0x0',
+        tag: BlockExplorerTag.Latest
+      });
+      expect(storageValue).toEqual('0x0000000000000000000000000000000000000000000000000000000000000000');
+    },
+    TEST_TIMEOUT
+  );
 });

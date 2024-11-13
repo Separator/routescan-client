@@ -191,6 +191,21 @@ async function main() {
     tag: BlockExplorerTag.Latest
   });
   console.log(callResult);
+
+  // Returns code at a given address:
+  const codeInHex = await blockExplorer.eth_getCode({
+    address: '0xf75e354c5edc8efed9b59ee9f67a80845ade7d0c',
+    tag: BlockExplorerTag.Latest
+  });
+  console.log(codeIndex);
+
+  // Returns the value from a storage position at a given address:
+  const storageValue = await blockExplorer.eth_getStorageAt({
+    address: '0x6e03d9cce9d60f3e9f2597e13cd4c54c55330cfd',
+    position: '0x0',
+    tag: BlockExplorerTag.Latest
+  });
+  console.log(storageValue);
 }
 
 main();

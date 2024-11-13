@@ -21,6 +21,7 @@ import {
   GetEthCallOptions,
   GetEthCodeOptions,
   GetEthSendRawTransactionOptions,
+  GetEthStorageAtOptions,
   GetEthTransactionByBlockNumberAndIndexOptions,
   GetEthTransactionByHashOptions,
   GetEthTransactionCountOptions,
@@ -191,7 +192,13 @@ export interface BlockExplorer {
   /**
    * Returns code at a given address
    * @param options
-   * @returns Code string
+   * @returns code string
    */
   eth_getCode(options: GetEthCodeOptions): Promise<string>;
+  /**
+   * Returns the value from a storage position at a given address
+   * @param options
+   * @returns storage string
+   */
+  eth_getStorageAt(options: GetEthStorageAtOptions): Promise<string>;
 }
