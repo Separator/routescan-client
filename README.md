@@ -1,8 +1,8 @@
-# ![https://routescan.io/](https://raw.githubusercontent.com/Separator/routescan-client/main/img/logo.svg) Routescan client
+# ![https://routescan.io/](https://raw.githubusercontent.com/Separator/routescan-client/main/img/logo.svg) Routescan/Etherscan client
 
 [![routescan-client](https://snyk.io/advisor/npm-package/routescan-client/badge.svg)](https://snyk.io/advisor/npm-package/routescan-client)
 
-Client for receiving blockchain data through block explorers (in particular, routescan).  
+Client for receiving blockchain data through block explorers (**etherscan**, **routescan**, etc.).  
 At the moment, the number of available methods is limited to those indicated in the examples below:
 
 ## Donation
@@ -258,10 +258,10 @@ main();
 
 ## Supported networks table
 
+### <span style="color:red;">Client also support other etherscan-compatible block explorers, but in this case you must provide custom **url** parameter.</span>
+
 **You must use the API key of the corresponding block explorer!!!**  
 Just register an account on corresponding site and generate an API key.
-
-**PS**: Client also support other etherscan-compatible block explorers, but in this case you must provide custom **url** parameter.
 
 | **ID**   | **Name**                 | **Block explorer**              | Block explorer API url                                               |
 | -------- | ------------------------ | ------------------------------- | -------------------------------------------------------------------- |

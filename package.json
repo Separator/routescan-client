@@ -1,14 +1,20 @@
 {
   "name": "routescan-client",
-  "version": "2.13.0",
+  "version": "2.13.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Separator/routescan-client.git"
   },
   "description": "A set of classes to  work with evm-compatible blockchain observers",
   "keywords": [
-    "routescan",
     "etherscan",
+    "etherscan api",
+    "etherscan.io",
+    "ethereum",
+    "ethereum api",
+    "smart-contracts",
+    "blockchain",
+    "routescan",
     "bscscan",
     "polygonscan",
     "ftmscan",
@@ -22,7 +28,9 @@
     "celo",
     "linea",
     "base",
-    "ftm"
+    "ftm",
+    "rest",
+    "verify"
   ],
   "author": "Separator",
   "license": "MIT",
