@@ -1,6 +1,6 @@
 {
   "name": "routescan-client",
-  "version": "2.13.1",
+  "version": "2.14.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Separator/routescan-client.git"
@@ -22,7 +22,6 @@
     "arbiscan",
     "celoscan",
     "lineascan",
-    "ethereum",
     "polygon",
     "arbitrum",
     "celo",
