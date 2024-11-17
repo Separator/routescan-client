@@ -28,6 +28,8 @@ import {
   BlockExplorerEthBlockNumberResponse,
   BlockExplorerEthBlockTransactionCountByNumberResponse,
   BlockExplorerEthCallResponse,
+  BlockExplorerEthEstimateGasResponse,
+  BlockExplorerEthGasPriceResponse,
   BlockExplorerEthGetCodeResponse,
   BlockExplorerEthGetStorageAtResponse,
   BlockExplorerEthGetTransactionReceiptResponse,
@@ -71,7 +73,8 @@ import {
   GetEthTransactionReceiptOptions,
   GetEthCallOptions,
   GetEthCodeOptions,
-  GetEthStorageAtOptions
+  GetEthStorageAtOptions,
+  GetEthEstimateGasOptions
 } from '../types/options';
 
 const TX_NO_FOUND_MESSAGE = 'No transactions found';
@@ -139,6 +142,8 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
   public abstract eth_call(options: GetEthCallOptions): Promise<string>;
   public abstract eth_getCode(options: GetEthCodeOptions): Promise<string>;
   public abstract eth_getStorageAt(options: GetEthStorageAtOptions): Promise<string>;
+  public abstract eth_gasPrice(): Promise<string>;
+  public abstract eth_estimateGas(options: GetEthEstimateGasOptions): Promise<string>;
 
   protected abstract getBlockExplorerUrl(chain: Chain): string;
 
@@ -528,6 +533,33 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
       chainid,
       module: BlockExplorerModule.Proxy,
       action: BlockExplorerAction.eth_getStorageAt
+    });
+
+    this.checkResponseStatus(response);
+    return response.data.result as string;
+  }
+
+  public async eth_gasPrice(): Promise<string> {
+    const { chain: chainid } = this;
+
+    const response = await this.transport.get<BlockExplorerEthGasPriceResponse>({
+      chainid,
+      module: BlockExplorerModule.Proxy,
+      action: BlockExplorerAction.eth_gasPrice
+    });
+
+    this.checkResponseStatus(response);
+    return response.data.result as string;
+  }
+
+  public async eth_estimateGas(options: GetEthEstimateGasOptions) {
+    const { chain: chainid } = this;
+
+    const response = await this.transport.get<BlockExplorerEthEstimateGasResponse>({
+      ...options,
+      chainid,
+      module: BlockExplorerModule.Proxy,
+      action: BlockExplorerAction.eth_estimateGas
     });
 
     this.checkResponseStatus(response);

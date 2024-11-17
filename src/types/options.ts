@@ -297,3 +297,31 @@ export interface GetEthStorageAtOptions {
    */
   tag?: BlockExplorerTag;
 }
+
+export interface GetEthEstimateGasOptions {
+  /**
+   * @description The hash of the method signature and encoded parameters
+   * @example '0x4e71d92d'
+   */
+  data: string;
+  /**
+   * @description The string representing the address to interact with
+   * @example '0xf0160428a8552ac9bb7e050d90eeade4ddd52843'
+   */
+  to: string;
+  /**
+   * @description The value sent in this transaction, in hex
+   * @example '0xff22'
+   */
+  value?: string;
+  /**
+   * @description The gas price paid for each unit of gas, in wei  
+    post **EIP-1559**, the **gasPrice** has to be higher than the block's **baseFeePerGas**
+   */
+  gasPrice?: string;
+  /**
+   * @description The amount of gas provided for the transaction, in hex
+   * @example '0x5f5e0ff'
+   */
+  gas?: string;
+}
