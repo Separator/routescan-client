@@ -234,3 +234,11 @@ export interface BlockExplorerEthGetCodeResponse extends BlockExplorerRpcRespons
 export interface BlockExplorerEthGetStorageAtResponse extends BlockExplorerRpcResponseCommon {
   result?: string;
 }
+
+export interface BlockExplorerEthGasPriceResponse extends BlockExplorerRpcResponseCommon {
+  result?: string;
+}
+
+export interface BlockExplorerEthEstimateGasResponse extends BlockExplorerRpcResponseCommon {
+  result?: string;
+}

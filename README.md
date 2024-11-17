@@ -206,6 +206,20 @@ async function main() {
     tag: BlockExplorerTag.Latest
   });
   console.log(storageValue);
+
+  // Returns the current price per gas in wei:
+  const gasPrice = await blockExplorer.eth_gasPrice();
+  console.log(gasPrice);
+
+  // Makes a call or transaction, which won't be added to the blockchain and returns the used gas:
+  const gas = await blockExplorerEth.eth_estimateGas({
+    data: '0x4e71d92d',
+    to: '0xf0160428a8552ac9bb7e050d90eeade4ddd52843',
+    value: '0xff22',
+    gasPrice: '0x51da038cc',
+    gas: '0x5f5e0ff'
+  });
+  console.log(gas);
 }
 
 main();

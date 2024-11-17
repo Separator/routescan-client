@@ -20,6 +20,7 @@ import {
   GetEthBlockTransactionCountByNumberOptions,
   GetEthCallOptions,
   GetEthCodeOptions,
+  GetEthEstimateGasOptions,
   GetEthSendRawTransactionOptions,
   GetEthStorageAtOptions,
   GetEthTransactionByBlockNumberAndIndexOptions,
@@ -201,4 +202,15 @@ export interface BlockExplorer {
    * @returns storage string
    */
   eth_getStorageAt(options: GetEthStorageAtOptions): Promise<string>;
+  /**
+   * Returns the current price per gas in wei
+   * @returns Gas price in wei (in hex)
+   */
+  eth_gasPrice(): Promise<string>;
+  /**
+   * Makes a call or transaction, which won't be added to the blockchain and returns the used gas
+   * @param options
+   * @returns Used gas
+   */
+  eth_estimateGas(options: GetEthEstimateGasOptions): Promise<string>;
 }
