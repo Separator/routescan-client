@@ -47,7 +47,8 @@ import {
   GetEthCallOptions,
   GetEthCodeOptions,
   GetEthStorageAtOptions,
-  GetEthEstimateGasOptions
+  GetEthEstimateGasOptions,
+  GetContractExecutionStatusOptions
 } from './types/options';
 import {
   // Structures:
@@ -79,7 +80,9 @@ import {
   BlockExplorerEthGetCodeResponse,
   BlockExplorerEthGetStorageAtResponse,
   BlockExplorerEthGasPriceResponse,
-  BlockExplorerEthEstimateGasResponse
+  BlockExplorerEthEstimateGasResponse,
+  BlockExplorerContractExecutionStatusResponse,
+  BlockExplorerTransactionReceiptStatusResponse
 } from './types/block-explorer';
 
 export {
@@ -110,6 +113,9 @@ export {
   GetEthCodeOptions,
   GetEthStorageAtOptions,
   GetEthEstimateGasOptions,
+
+  // Transactions options:
+  GetContractExecutionStatusOptions,
 
   // Parameters:
   BlockExplorerModule,
@@ -143,6 +149,8 @@ export {
   GetErc20TokenTransferEventsListResponse,
   GetEventLogsByAddressResponse,
   GetEventLogsByTopicsResponse,
+  BlockExplorerContractExecutionStatusResponse,
+  BlockExplorerTransactionReceiptStatusResponse,
 
   // Rpc responses:
   BlockExplorerEthBlockNumberResponse,

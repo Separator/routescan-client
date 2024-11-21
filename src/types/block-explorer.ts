@@ -6,7 +6,9 @@ import {
   BlockExplorerTxInternalByTxHash,
   BlockExplorerErc20TokenTransferEvent,
   BlockExplorerTxRpc,
-  BlockExplorerTxReceipt
+  BlockExplorerTxReceipt,
+  BlockExplorerTxStatus,
+  BlockExplorerReceiptStatus
 } from './transaction';
 
 export interface BlockExplorerResponseCommon {
@@ -241,4 +243,12 @@ export interface BlockExplorerEthGasPriceResponse extends BlockExplorerRpcRespon
 
 export interface BlockExplorerEthEstimateGasResponse extends BlockExplorerRpcResponseCommon {
   result?: string;
+}
+
+export interface BlockExplorerContractExecutionStatusResponse extends BlockExplorerResponseCommon {
+  result: BlockExplorerTxStatus;
+}
+
+export interface BlockExplorerTransactionReceiptStatusResponse extends BlockExplorerResponseCommon {
+  result: BlockExplorerReceiptStatus;
 }

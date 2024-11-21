@@ -325,3 +325,11 @@ export interface GetEthEstimateGasOptions {
    */
   gas?: string;
 }
+
+export interface GetContractExecutionStatusOptions {
+  /**
+   * @description The string representing the transaction hash to check the execution status
+   * @example '0x513c1ba0bebf66436b5fed86ab668452b7805593c05073eb2d51d3a52f480a76'
+   */
+  txhash: string;
+}

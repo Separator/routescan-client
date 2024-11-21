@@ -1,3 +1,5 @@
+import { BlockExplorerStatus } from './params';
+
 interface BlockExplorerTxCore {
   /**
    * @description Tx initiator address
@@ -397,4 +399,13 @@ export interface BlockExplorerTxReceipt {
    * @example '0x2'
    */
   type: string;
+}
+
+export interface BlockExplorerTxStatus {
+  isError?: string;
+  errDescription?: string;
+}
+
+export interface BlockExplorerReceiptStatus {
+  status: BlockExplorerStatus;
 }

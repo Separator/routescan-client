@@ -7,14 +7,6 @@ import { AxiosTransport, Transport } from './Transport';
 import { BlockExplorer } from '../interfaces/BlockExplorer';
 import { BlockExplorerBlockItem, BlockExplorerBlockUncleItem, BlockCountdownTime } from '../types/block';
 import {
-  BlockExplorerErc20TokenTransferEvent,
-  BlockExplorerTransaction,
-  BlockExplorerTxInternal,
-  BlockExplorerTxInternalByTxHash,
-  BlockExplorerTxReceipt,
-  BlockExplorerTxRpc
-} from '../types/transaction';
-import {
   BlockExplorerAction,
   BlockExplorerClosest,
   BlockExplorerModule,
@@ -22,8 +14,19 @@ import {
   BlockExplorerTag
 } from '../types/params';
 import {
+  BlockExplorerErc20TokenTransferEvent,
+  BlockExplorerReceiptStatus,
+  BlockExplorerTransaction,
+  BlockExplorerTxInternal,
+  BlockExplorerTxInternalByTxHash,
+  BlockExplorerTxReceipt,
+  BlockExplorerTxRpc,
+  BlockExplorerTxStatus
+} from '../types/transaction';
+import {
   BlockExplorerBlockCountdownTimeResponse,
   BlockExplorerBlockIdResponse,
+  BlockExplorerContractExecutionStatusResponse,
   BlockExplorerEthBlockByNumberResponse,
   BlockExplorerEthBlockNumberResponse,
   BlockExplorerEthBlockTransactionCountByNumberResponse,
@@ -40,6 +43,7 @@ import {
   BlockExplorerEthUncleByBlockNumberAndIndexResponse,
   BlockExplorerInternalTxListByHashResponse,
   BlockExplorerInternalTxListResponse,
+  BlockExplorerTransactionReceiptStatusResponse,
   BlockExplorerTxListResponse,
   EventLog,
   GetAccountBalanceResponse,
@@ -74,7 +78,8 @@ import {
   GetEthCallOptions,
   GetEthCodeOptions,
   GetEthStorageAtOptions,
-  GetEthEstimateGasOptions
+  GetEthEstimateGasOptions,
+  GetContractExecutionStatusOptions
 } from '../types/options';
 
 const TX_NO_FOUND_MESSAGE = 'No transactions found';
@@ -144,6 +149,8 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
   public abstract eth_getStorageAt(options: GetEthStorageAtOptions): Promise<string>;
   public abstract eth_gasPrice(): Promise<string>;
   public abstract eth_estimateGas(options: GetEthEstimateGasOptions): Promise<string>;
+  public abstract getContractExecutionStatus(options: GetContractExecutionStatusOptions): Promise<BlockExplorerTxStatus>;
+  public abstract checkTransactionReceiptStatus(options: GetContractExecutionStatusOptions): Promise<BlockExplorerReceiptStatus>;
 
   protected abstract getBlockExplorerUrl(chain: Chain): string;
 
@@ -564,6 +571,34 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
 
     this.checkResponseStatus(response);
     return response.data.result as string;
+  }
+
+  public async getContractExecutionStatus(options: GetContractExecutionStatusOptions) {
+    const { chain: chainid } = this;
+
+    const response = await this.transport.get<BlockExplorerContractExecutionStatusResponse>({
+      ...options,
+      chainid,
+      module: BlockExplorerModule.Transaction,
+      action: BlockExplorerAction.GetStatus
+    });
+
+    this.checkResponseStatus(response);
+    return response.data.result;
+  }
+
+  public async checkTransactionReceiptStatus(options: GetContractExecutionStatusOptions) {
+    const { chain: chainid } = this;
+
+    const response = await this.transport.get<BlockExplorerTransactionReceiptStatusResponse>({
+      ...options,
+      chainid,
+      module: BlockExplorerModule.Transaction,
+      action: BlockExplorerAction.GetTexReceiptStatus
+    });
+
+    this.checkResponseStatus(response);
+    return response.data.result;
   }
 }
 

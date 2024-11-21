@@ -2,7 +2,8 @@ export enum BlockExplorerModule {
   Account = 'account',
   Block = 'block',
   Logs = 'logs',
-  Proxy = 'proxy'
+  Proxy = 'proxy',
+  Transaction = 'transaction'
 }
 
 export enum BlockExplorerAction {
@@ -28,7 +29,9 @@ export enum BlockExplorerAction {
   eth_getCode = 'eth_getCode',
   eth_getStorageAt = 'eth_getStorageAt',
   eth_gasPrice = 'eth_gasPrice',
-  eth_estimateGas = 'eth_estimateGas'
+  eth_estimateGas = 'eth_estimateGas',
+  GetStatus = 'getstatus',
+  GetTexReceiptStatus = 'gettxreceiptstatus'
 }
 
 export enum BlockExplorerTag {
