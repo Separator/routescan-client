@@ -7,7 +7,8 @@ import {
   BlockExplorerTxInternal,
   BlockExplorerTxInternalByTxHash,
   BlockExplorerTxReceipt,
-  BlockExplorerTxRpc
+  BlockExplorerTxRpc,
+  BlockExplorerTxStatus
 } from '../types/transaction';
 import {
   GetAccountBalanceOptions,
@@ -15,6 +16,7 @@ import {
   GetAccountTokenBalanceOptions,
   GetBlockCountdownTimeOptions,
   GetBlockNumberByTimestampOptions,
+  GetContractExecutionStatusOptions,
   GetErc20TokenTransferEventsListOptions,
   GetEthBlockByNumberOptions,
   GetEthBlockTransactionCountByNumberOptions,
@@ -213,4 +215,16 @@ export interface BlockExplorer {
    * @returns Used gas
    */
   eth_estimateGas(options: GetEthEstimateGasOptions): Promise<string>;
+
+  /**
+   * Transactions chapter
+   * https://routescan.io/documentation/etherscan-compatibility/transactions
+   */
+
+  /**
+   * Returns the status code of a contract execution
+   * @param options
+   * @returns Tx status code
+   */
+  getContractExecutionStatus(options: GetContractExecutionStatusOptions): Promise<BlockExplorerTxStatus>;
 }
