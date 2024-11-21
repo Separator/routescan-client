@@ -30,7 +30,8 @@ export enum BlockExplorerAction {
   eth_getStorageAt = 'eth_getStorageAt',
   eth_gasPrice = 'eth_gasPrice',
   eth_estimateGas = 'eth_estimateGas',
-  GetStatus = 'getstatus'
+  GetStatus = 'getstatus',
+  GetTexReceiptStatus = 'gettxreceiptstatus'
 }
 
 export enum BlockExplorerTag {

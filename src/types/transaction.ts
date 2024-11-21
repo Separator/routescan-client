@@ -402,7 +402,10 @@ export interface BlockExplorerTxReceipt {
 }
 
 export interface BlockExplorerTxStatus {
-  status?: BlockExplorerStatus;
   isError?: string;
   errDescription?: string;
+}
+
+export interface BlockExplorerReceiptStatus {
+  status: BlockExplorerStatus;
 }

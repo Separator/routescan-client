@@ -3,6 +3,7 @@ import { EventLog } from '../types/block-explorer';
 import { BlockCountdownTime, BlockExplorerBlockItem, BlockExplorerBlockUncleItem } from '../types/block';
 import {
   BlockExplorerErc20TokenTransferEvent,
+  BlockExplorerReceiptStatus,
   BlockExplorerTransaction,
   BlockExplorerTxInternal,
   BlockExplorerTxInternalByTxHash,
@@ -227,4 +228,10 @@ export interface BlockExplorer {
    * @returns Tx status code
    */
   getContractExecutionStatus(options: GetContractExecutionStatusOptions): Promise<BlockExplorerTxStatus>;
+  /**
+   * Check Transaction Receipt Status
+   * @param options
+   * @returns Tx receipt status code
+   */
+  checkTransactionReceiptStatus(options: GetContractExecutionStatusOptions): Promise<BlockExplorerReceiptStatus>;
 }

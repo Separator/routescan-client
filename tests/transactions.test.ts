@@ -19,4 +19,15 @@ describe('Check Transactions functions', () => {
     },
     TEST_TIMEOUT
   );
+
+  test(
+    'Check Transaction Receipt Status',
+    async () => {
+      const receiptStatus = await blockExplorer.checkTransactionReceiptStatus({
+        txhash: '0x513c1ba0bebf66436b5fed86ab668452b7805593c05073eb2d51d3a52f480a76'
+      });
+      expect(receiptStatus.status).toEqual('1');
+    },
+    TEST_TIMEOUT
+  );
 });

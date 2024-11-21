@@ -15,6 +15,7 @@ import {
 } from '../types/params';
 import {
   BlockExplorerErc20TokenTransferEvent,
+  BlockExplorerReceiptStatus,
   BlockExplorerTransaction,
   BlockExplorerTxInternal,
   BlockExplorerTxInternalByTxHash,
@@ -42,6 +43,7 @@ import {
   BlockExplorerEthUncleByBlockNumberAndIndexResponse,
   BlockExplorerInternalTxListByHashResponse,
   BlockExplorerInternalTxListResponse,
+  BlockExplorerTransactionReceiptStatusResponse,
   BlockExplorerTxListResponse,
   EventLog,
   GetAccountBalanceResponse,
@@ -148,6 +150,7 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
   public abstract eth_gasPrice(): Promise<string>;
   public abstract eth_estimateGas(options: GetEthEstimateGasOptions): Promise<string>;
   public abstract getContractExecutionStatus(options: GetContractExecutionStatusOptions): Promise<BlockExplorerTxStatus>;
+  public abstract checkTransactionReceiptStatus(options: GetContractExecutionStatusOptions): Promise<BlockExplorerReceiptStatus>;
 
   protected abstract getBlockExplorerUrl(chain: Chain): string;
 
@@ -578,6 +581,20 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
       chainid,
       module: BlockExplorerModule.Transaction,
       action: BlockExplorerAction.GetStatus
+    });
+
+    this.checkResponseStatus(response);
+    return response.data.result;
+  }
+
+  public async checkTransactionReceiptStatus(options: GetContractExecutionStatusOptions) {
+    const { chain: chainid } = this;
+
+    const response = await this.transport.get<BlockExplorerTransactionReceiptStatusResponse>({
+      ...options,
+      chainid,
+      module: BlockExplorerModule.Transaction,
+      action: BlockExplorerAction.GetTexReceiptStatus
     });
 
     this.checkResponseStatus(response);
