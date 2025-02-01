@@ -12,6 +12,7 @@ const {
   POLYGON_API_KEY = '',
   BASE_API_KEY = '',
   ARBITRUM_API_KEY = '',
+  ARBITRUM_NOVA_API_KEY = '',
   ROUTESCAN_API_KEY = '',
   CELO_API_KEY = '',
   LINEA_API_KEY = '',
@@ -191,7 +192,7 @@ describe('Checking access to blockchains', () => {
     test(
       'ArbitrumNova (42170)',
       async () => {
-        const blockId = await getLastBlockchainBlock(Chain.ArbitrumNova, ARBITRUM_API_KEY);
+        const blockId = await getLastBlockchainBlock(Chain.ArbitrumNova, ARBITRUM_NOVA_API_KEY);
         expect(typeof blockId).toBe('number');
       },
       TEST_TIMEOUT

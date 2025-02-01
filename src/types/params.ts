@@ -1,6 +1,7 @@
 export enum BlockExplorerModule {
   Account = 'account',
   Block = 'block',
+  Contract = 'contract',
   Logs = 'logs',
   Proxy = 'proxy',
   Transaction = 'transaction'
@@ -31,7 +32,8 @@ export enum BlockExplorerAction {
   eth_gasPrice = 'eth_gasPrice',
   eth_estimateGas = 'eth_estimateGas',
   GetStatus = 'getstatus',
-  GetTexReceiptStatus = 'gettxreceiptstatus'
+  GetTexReceiptStatus = 'gettxreceiptstatus',
+  VerifySourceCode = 'verifysourcecode'
 }
 
 export enum BlockExplorerTag {
@@ -58,4 +60,9 @@ export enum BlockExplorerClosest {
 export enum BlockExplorerTopicOperation {
   And = 'and',
   Or = 'or'
+}
+
+export enum BlockExplorerCodeFormat {
+  SoliditySingleFile = 'solidity-single-file',
+  SolidityStandardJsonInput = 'solidity-standard-json-input'
 }
