@@ -21,7 +21,8 @@ import {
   BlockExplorerStatus,
   BlockExplorerSort,
   BlockExplorerClosest,
-  BlockExplorerTopicOperation
+  BlockExplorerTopicOperation,
+  BlockExplorerCodeFormat
 } from './types/params';
 import {
   GetBlockCountdownTimeOptions,
@@ -48,7 +49,8 @@ import {
   GetEthCodeOptions,
   GetEthStorageAtOptions,
   GetEthEstimateGasOptions,
-  GetContractExecutionStatusOptions
+  GetContractExecutionStatusOptions,
+  VerifySoliditySourceCodeOptions
 } from './types/options';
 import {
   // Structures:
@@ -82,7 +84,8 @@ import {
   BlockExplorerEthGasPriceResponse,
   BlockExplorerEthEstimateGasResponse,
   BlockExplorerContractExecutionStatusResponse,
-  BlockExplorerTransactionReceiptStatusResponse
+  BlockExplorerTransactionReceiptStatusResponse,
+  BlockExplorerVerifySoliditySourceCodeResponse
 } from './types/block-explorer';
 
 export {
@@ -117,6 +120,9 @@ export {
   // Transactions options:
   GetContractExecutionStatusOptions,
 
+  // Contract options:
+  VerifySoliditySourceCodeOptions,
+
   // Parameters:
   BlockExplorerModule,
   BlockExplorerAction,
@@ -126,6 +132,7 @@ export {
   BlockExplorerClosest,
   BlockExplorerTopicOperation,
   Chain,
+  BlockExplorerCodeFormat,
 
   // Entities:
   BlockExplorerTransaction,
@@ -151,6 +158,7 @@ export {
   GetEventLogsByTopicsResponse,
   BlockExplorerContractExecutionStatusResponse,
   BlockExplorerTransactionReceiptStatusResponse,
+  BlockExplorerVerifySoliditySourceCodeResponse,
 
   // Rpc responses:
   BlockExplorerEthBlockNumberResponse,

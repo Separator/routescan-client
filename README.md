@@ -83,6 +83,35 @@ async function main() {
 main();
 ```
 
+## [Contracts section](https://routescan.io/documentation/etherscan-compatibility/contracts)
+
+```javascript
+import { BlockExplorerCodeFormat, BlockExplorerCommon, Chain } from 'routescan-client';
+
+const ROUTESCAN_API_KEY = 'YourApiKey';
+const CONTRACT_ADDRESS = '0x2A1D1C87d18dd13d7a1e91A42C9fFEc486EB6433';
+const CONTRACT_NAME = 'HelloWorld';
+const CONTRACT_SOURCE_CODE = 'contract source code string...';
+const COMPILER_VERSION = 'v0.8.10+commit.fc410830';
+
+async function main() {
+  const blockExplorer = BlockExplorerCommon.build({
+    chain: Chain.AvalancheCChainFuji,
+    apiKey: ROUTESCAN_API_KEY
+  });
+
+  // Verify Source Code:
+  const verified = await blockExplorer.verifySoliditySourceCode({
+    codeformat: BlockExplorerCodeFormat.SoliditySingleFile,
+    sourceCode: CONTRACT_SOURCE_CODE,
+    contractaddress: CONTRACT_ADDRESS,
+    contractname: CONTRACT_NAME,
+    compilerversion: COMPILER_VERSION
+  });
+  console.log(verified);
+}
+```
+
 ## [Blocks section](https://routescan.io/documentation/etherscan-compatibility/blocks)
 
 ```javascript
@@ -117,7 +146,7 @@ main();
 ## [Geth/Parity Proxy section](https://routescan.io/documentation/etherscan-compatibility/geth-parity-proxy)
 
 ```javascript
-import { BlockExplorerCommon, BlockExplorerTopicOperation, Chain } from 'routescan-client';
+import { BlockExplorerCommon, Chain } from 'routescan-client';
 
 const ROUTESCAN_API_KEY = 'YourApiKey';
 

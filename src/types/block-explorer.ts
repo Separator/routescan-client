@@ -252,3 +252,11 @@ export interface BlockExplorerContractExecutionStatusResponse extends BlockExplo
 export interface BlockExplorerTransactionReceiptStatusResponse extends BlockExplorerResponseCommon {
   result: BlockExplorerReceiptStatus;
 }
+
+export interface BlockExplorerVerifySoliditySourceCodeResponse extends BlockExplorerResponseCommon {
+  /**
+   * @description Verify result
+   * @example 'a7lpxkm9kpcpicx7daftmjifrfhiuhf5vqqnawhkfhzfrcpnxj'
+   */
+  result: string;
+}

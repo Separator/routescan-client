@@ -45,6 +45,7 @@ import {
   BlockExplorerInternalTxListResponse,
   BlockExplorerTransactionReceiptStatusResponse,
   BlockExplorerTxListResponse,
+  BlockExplorerVerifySoliditySourceCodeResponse,
   EventLog,
   GetAccountBalanceResponse,
   GetAccountTokenBalanceResponse,
@@ -79,7 +80,8 @@ import {
   GetEthCodeOptions,
   GetEthStorageAtOptions,
   GetEthEstimateGasOptions,
-  GetContractExecutionStatusOptions
+  GetContractExecutionStatusOptions,
+  VerifySoliditySourceCodeOptions
 } from '../types/options';
 
 const TX_NO_FOUND_MESSAGE = 'No transactions found';
@@ -376,7 +378,24 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
   }
 
   /**
+   * Contracts
+   * https://docs.etherscan.io/api-endpoints/contracts
+   */
+
+  public async verifySoliditySourceCode(options: VerifySoliditySourceCodeOptions): Promise<string> {
+    const response = await this.transport.get<BlockExplorerVerifySoliditySourceCodeResponse>({
+      ...options,
+      module: BlockExplorerModule.Contract,
+      action: BlockExplorerAction.VerifySourceCode
+    });
+
+    this.checkResponseStatus(response);
+    return response.data.result;
+  }
+
+  /**
    * Geth/Parity Proxy
+   * https://docs.etherscan.io/api-endpoints/geth-parity-proxy
    */
 
   public async eth_blockNumber(): Promise<bigint> {

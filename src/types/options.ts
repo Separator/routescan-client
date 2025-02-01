@@ -1,4 +1,10 @@
-import { BlockExplorerClosest, BlockExplorerSort, BlockExplorerTag, BlockExplorerTopicOperation } from './params';
+import {
+  BlockExplorerClosest,
+  BlockExplorerCodeFormat,
+  BlockExplorerSort,
+  BlockExplorerTag,
+  BlockExplorerTopicOperation
+} from './params';
 
 interface PaginationOptions {
   /**
@@ -332,4 +338,67 @@ export interface GetContractExecutionStatusOptions {
    * @example '0x513c1ba0bebf66436b5fed86ab668452b7805593c05073eb2d51d3a52f480a76'
    */
   txhash: string;
+}
+
+/**
+ * Contracts options
+ * https://docs.etherscan.io/api-endpoints/contracts
+ */
+
+export interface VerifySoliditySourceCodeOptions {
+  /**
+   * @description Code format
+   *   - **solidity-single-file** single file;
+   *   - **solidity-standard-json-input** JSON file ( recommended ).
+   */
+  codeformat: BlockExplorerCodeFormat;
+  /**
+   * @description The Solidity source code
+   * @example `// SPDX-License-Identifier: MIT
+// compiler version must be greater than or equal to 0.8.10 and less than 0.9.0
+pragma solidity ^0.8.10;
+contract HelloWorld {
+    string public greet = "Hello World!";
+}`
+   */
+  sourceCode: string;
+  /**
+   * @description Optional, include if your contract uses constructor arguments
+   * @example '000000000000000000000000285f5f8cd290cff6596337c4eec14e1a62235854'
+   */
+  constructorArguments?: string;
+  /**
+   * @description The address your contract is deployed at
+   * @example '0x2A1D1C87d18dd13d7a1e91A42C9fFEc486EB6433'
+   */
+  contractaddress: string;
+  /**
+   * @description The name of your contract
+   * @example 'HelloWorld'
+   */
+  contractname: string;
+  /**
+   * @description Compiler version used
+   * @example 'v0.8.10+commit.fc410830'
+   */
+  compilerversion: string;
+  /**
+   * @description shangai for the latest version, otherwise choose from the older versions
+   */
+  evmversion?: string;
+  /**
+   * @description use 0 for no optimization, and 1 if optimization was used
+   * @example 1
+   */
+  optimizationUsed?: 0 | 1;
+  /**
+   * @description Otimization runs
+   * @example 200
+   */
+  runs?: number;
+  /**
+   * @description License type
+   * @example '1'
+   */
+  licenseType?: string;
 }
