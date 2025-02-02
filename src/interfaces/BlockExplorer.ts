@@ -36,7 +36,8 @@ import {
   GetEventLogsByTopicsOptions,
   GetInternalTxListByAddressOptions,
   GetInternalTxListByTxHashOptions,
-  GetNormalTxListByAddressOptions
+  GetNormalTxListByAddressOptions,
+  VerifySoliditySourceCodeOptions
 } from '../types/options';
 
 export interface BlockExplorer {
@@ -128,6 +129,18 @@ export interface BlockExplorer {
    * @returns Event logs array
    */
   getEventLogsByAddressFiltered(options: GetEventLogsByAddressFilteredOptions): Promise<EventLog[]>;
+
+  /**
+   * Contracts chapter
+   * https://routescan.io/documentation/etherscan-compatibility/contracts
+   */
+
+  /**
+   * Verify Source Code
+   * @param options VerifySoliditySourceCodeOptions
+   * @returns Verification status
+   */
+  verifySoliditySourceCode(options: VerifySoliditySourceCodeOptions): Promise<string>;
 
   /**
    * Geth/Parity Proxy chapter

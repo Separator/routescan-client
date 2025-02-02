@@ -153,6 +153,7 @@ export abstract class BlockExplorerCommon implements BlockExplorer {
   public abstract eth_estimateGas(options: GetEthEstimateGasOptions): Promise<string>;
   public abstract getContractExecutionStatus(options: GetContractExecutionStatusOptions): Promise<BlockExplorerTxStatus>;
   public abstract checkTransactionReceiptStatus(options: GetContractExecutionStatusOptions): Promise<BlockExplorerReceiptStatus>;
+  public abstract verifySoliditySourceCode(options: VerifySoliditySourceCodeOptions): Promise<string>;
 
   protected abstract getBlockExplorerUrl(chain: Chain): string;
 
@@ -379,7 +380,7 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
 
   /**
    * Contracts
-   * https://docs.etherscan.io/api-endpoints/contracts
+   * https://routescan.io/documentation/etherscan-compatibility/contracts
    */
 
   public async verifySoliditySourceCode(options: VerifySoliditySourceCodeOptions): Promise<string> {
