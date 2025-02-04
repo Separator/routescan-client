@@ -384,11 +384,15 @@ export class BlockExplorerEthereum extends BlockExplorerCommon {
    */
 
   public async verifySoliditySourceCode(options: VerifySoliditySourceCodeOptions): Promise<string> {
-    const response = await this.transport.post<BlockExplorerVerifySoliditySourceCodeResponse>({
-      ...options,
-      module: BlockExplorerModule.Contract,
-      action: BlockExplorerAction.VerifySourceCode
-    });
+    const response = await this.transport.post<BlockExplorerVerifySoliditySourceCodeResponse>(
+      {
+        ...options
+      },
+      {
+        module: BlockExplorerModule.Contract,
+        action: BlockExplorerAction.VerifySourceCode
+      }
+    );
 
     this.checkResponseStatus(response);
     return response.data.result;
